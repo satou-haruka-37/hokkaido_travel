@@ -55,3 +55,6 @@ RUNTEQに入ってから、道外の人と話すことが多く、北海道で�
 - 画像投稿時、Cloud Vision API による不適切な画像のフィルタリング
 - 道内の移動を道外の移動に例えて、距離感をイメージしやすくなるような機能
 - 北海道民にしか通じないもの投稿コーナー（オマケ）
+
+# 画面遷移図
+https://www.figma.com/file/1bu9uJrkJA8C3co6Cy6M6S/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0%3A1&mode=design&t=OwQoE9KWkLR1Z7BS-1
