@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: hokkaido_travel
+  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: hokkaido_travel_development
+
+test:
+  <<: *default
+  database: hokkaido_travel_test
+
+production:
+  <<: *default
+  password: <%= ENV["HOKKAIDO_TRAVEL_DATABASE_PASSWORD"] %>
