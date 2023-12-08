@@ -10,7 +10,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="flex flex-col min-h-screen" data-theme="cupcake">
+    <%= render 'shared/header' %>
+    <div class="flex-grow">
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
