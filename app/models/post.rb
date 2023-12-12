@@ -3,5 +3,5 @@ class Post < ApplicationRecord
   after_validation :geocode
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :body, presence: true, length: { maximum: 65_535 }
+  validates :body, length: { maximum: 65_535 }
 end
