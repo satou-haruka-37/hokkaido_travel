@@ -3,16 +3,16 @@
 
     <%= form_with(model: post, local: true) do |f| %>
       <div>
-        <%= f.label :title %>
-        <%= f.text_field :title, id: "Title", autofocus: true, placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs" %>
+        <%= f.label :title, for: "Title" %>
+        <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
       </div>
       <div>
-        <%= f.label :address %>
-        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs" %>
+        <%= f.label :address, for: "Address" %>
+        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
       </div>
       <div>
-        <%= f.label :body %>
-        <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full max-w-xs" %>
+        <%= f.label :body, for: "Body" %>
+        <%= f.text_field :body, id: "Body", placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
       </div>
 
       <%= f.submit class: "btn btn-info" %>
@@ -20,7 +20,6 @@
 
   </div>
 </div>
-
 
 <script type="text/javascript">
   function initialize() {
@@ -60,6 +59,10 @@
   }
 
   // ページのロードが完了したら initialize 関数を実行
-  document.addEventListener('DOMContentLoaded', initialize);
+  document.addEventListener('DOMContentLoaded', function() {
+    // Google Maps APIの読み込みスクリプト
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&libraries=places&callback=initialize';
+    document.body.appendChild(script);
+  });
 </script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&libraries=places&sensor=false&language=ja"></script>
