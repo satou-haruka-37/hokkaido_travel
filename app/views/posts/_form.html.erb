@@ -1,0 +1,22 @@
+<div class="card w-96 bg-base-100 shadow-xl">
+  <div class="card-body">
+
+    <%= form_with(model: post, local: true) do |f| %>
+      <div>
+        <%= f.label :title %>
+        <%= f.text_field :title, autofocus: true, placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs" %>
+      </div>
+      <div>
+        <%= f.label :address %>
+        <%= f.text_field :address, placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs" %>
+      </div>
+      <div>
+        <%= f.label :body %>
+        <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full max-w-xs" %>
+      </div>
+
+      <%= f.submit class: "btn btn-info" %>
+    <% end %>
+
+  </div>
+</div>

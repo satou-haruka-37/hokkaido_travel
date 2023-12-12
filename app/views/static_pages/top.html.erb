@@ -1,32 +1,3 @@
-<title>Simple Map</title>
-<!-- Tailwind CSSのCDNを追加 -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<style>
-  /* 地図を表示するための要素のサイズを指定 */
-  #map {
-    height: 400px;
-  }
-</style>
-<div class="bg-gray-100">
-  <!-- 地図を表示するための要素 -->
-  <div id="map" class="w-full bg-gray-300" style="height: 600px;"></div>
-
-  <script>
-    // 地図を初期化する関数
-    function initMap() {
-      // 地図を表示するためのオプションを設定
-      const mapOptions = {
-        center: { lat: 43.534001, lng: 142.774103 }, // 地図の中心座標
-        zoom: 7 // ズームレベル
-      };
-
-      // 地図を指定した要素に表示
-      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    }
-  </script>
-</div>
-
-
 <div class="flex flex-col m-20">
   <div class="mb-20">
     <div class="divider">北海道のいいところ、おすすめしあおう</div>

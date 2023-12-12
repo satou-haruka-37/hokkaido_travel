@@ -2,17 +2,21 @@
 <div id="map" class="w-full h-screen"></div>
 
 <script>
+  // 地図を初期化する関数
   function initMap() {
-    // 地図を表示する要素を取得
+    // 地図要素を取得する（マーカーを表示させるために必要）
     const mapElement = document.getElementById('map');
 
-    // 地図を表示
-    const map = new google.maps.Map(mapElement, {
+    // 地図のオプション
+    const mapOptions = {
       center: { lat: 43.534001, lng: 142.774103 }, // 地図の初期表示位置
       zoom: 7 // ズームレベル
-    });
+    };
 
-    // マーカーを追加（Postの情報からループしてマーカーを追加する例）
+    // 地図を指定した要素に表示
+    const map = new google.maps.Map(mapElement, mapOptions);
+
+    // マーカーを追加（Postの情報からマーカーを追加する）
     <% @posts.each do |post| %>
       new google.maps.Marker({
         position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
