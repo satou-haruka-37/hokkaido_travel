@@ -4,11 +4,11 @@
     <%= form_with(model: post, local: true) do |f| %>
       <div>
         <%= f.label :title %>
-        <%= f.text_field :title, autofocus: true, placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs" %>
+        <%= f.text_field :title, id: "Title", autofocus: true, placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs" %>
       </div>
       <div>
         <%= f.label :address %>
-        <%= f.text_field :address, placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs" %>
+        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs" %>
       </div>
       <div>
         <%= f.label :body %>
@@ -20,3 +20,46 @@
 
   </div>
 </div>
+
+
+<script type="text/javascript">
+  function initialize() {
+    // タイトルの入力フィールドを取得
+    var inputTitle = document.getElementById('Title');
+    // 住所の入力フィールドを取得
+    var inputAddress = document.getElementById('Address');
+    //オートコンプリートで表示される情報の設定（都市名のみ、スポットなど）
+    var options = {
+      types: ['establishment'],
+    };
+
+    // タイトルの入力フィールドにオートコンプリートを適用
+    var autocompleteTitle = new google.maps.places.Autocomplete(inputTitle, options);
+    // 住所の入力フィールドにオートコンプリートを適用
+    var autocompleteAddress = new google.maps.places.Autocomplete(inputAddress, options);
+
+    // タイトルのオートコンプリートの選択が変更されたときのリスナーを追加
+    autocompleteTitle.addListener('place_changed', function() {
+      // 選択された場所の情報を取得
+      var place = autocompleteTitle.getPlace();
+      // タイトルのフィールドに選択された場所の名称を入力
+      inputTitle.value = place.name;
+      // 住所のフィールドに選択された場所の住所を入力
+      inputAddress.value = place.formatted_address;
+    });
+
+    // 住所のオートコンプリートの選択が変更されたときのリスナーを追加
+    autocompleteAddress.addListener('place_changed', function() {
+      // 選択された場所の情報を取得
+      var place = autocompleteAddress.getPlace();
+      // タイトルのフィールドに選択された場所の名称を入力
+      inputTitle.value = place.name;
+      // 住所のフィールドに選択された場所の住所を入力
+      inputAddress.value = place.formatted_address;
+    });
+  }
+
+  // ページのロードが完了したら initialize 関数を実行
+  document.addEventListener('DOMContentLoaded', initialize);
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&libraries=places&sensor=false&language=ja"></script>
