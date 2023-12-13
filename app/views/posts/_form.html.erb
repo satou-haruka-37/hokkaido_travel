@@ -1,7 +1,7 @@
 <div class="card w-96 bg-base-100 shadow-xl">
   <div class="card-body">
-
     <%= form_with(model: post, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       <div>
         <%= f.label :title, for: "Title" %>
         <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
