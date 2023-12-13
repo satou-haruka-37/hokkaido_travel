@@ -81,5 +81,8 @@ gem "sentry-ruby", "~> 5.15"
 
 gem "sentry-rails", "~> 5.15"
 
-gem 'cssbundling-rails'
 gem 'dotenv-rails'
+
+# Auth0
+gem 'omniauth-auth0'
+gem 'omniauth-rails_csrf_protection'

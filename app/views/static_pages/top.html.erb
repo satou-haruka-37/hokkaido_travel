@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Simple Map</title>
-  <!-- Tailwind CSSのCDNを追加 -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    /* 地図を表示するための要素のサイズを指定 */
-    #map {
-      height: 400px;
-    }
-  </style>
-</head>
-<body class="bg-gray-100">
-  <!-- 地図を表示するための要素 -->
-  <div id="map" class="w-full bg-gray-300" style="height: 400px;"></div>
 
-  <script>
-    // 地図を初期化する関数
-    function initMap() {
-      // 地図を表示するためのオプションを設定
-      const mapOptions = {
-        center: { lat: 35.6803997, lng: 139.7690174 }, // 地図の中心座標
-        zoom: 10 // ズームレベル
-      };
-
-      // 地図を指定した要素に表示
-      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    }
-  </script>
-  <!-- Google Maps JavaScript APIを読み込む -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap" async defer></script>
-</body>
-</html>
+<%= button_to 'login', '/auth/auth0', method: :post, data: { turbo: false }, class: 'btn' %>
+<%= button_to "logout", logout_path, method: :get, data: { turbo: false }, class: 'btn' %>
 
 
 <div class="flex flex-col m-20">
