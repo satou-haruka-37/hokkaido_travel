@@ -1,0 +1,8 @@
+ja:
+  defaults:
+    aaa: 'aaa'
+  posts:
+    index:
+      title: 'aaa'
+    new:
+      title: 'aaa'

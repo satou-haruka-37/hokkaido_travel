@@ -87,3 +87,6 @@ gem 'dotenv-rails'
 # 地図表示
 gem "geocoder"
 gem 'faker'
+
+
+gem 'rails-i18n'

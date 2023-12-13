@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      post: '投稿'
+    attributes:
+      post:
+        title: 'スポット名'
+        address: '住所'
+        body: 'おすすめポイント'

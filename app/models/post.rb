@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   def validate_address
     geocoded = Geocoder.search(address)
     unless geocoded&.first&.coordinates.present?
-      errors.add(:address, '存在しない住所です')
+      errors.add(:address, 'が存在しません')
     end
   end
 
