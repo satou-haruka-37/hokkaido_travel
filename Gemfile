@@ -81,5 +81,12 @@ gem "sentry-ruby", "~> 5.15"
 
 gem "sentry-rails", "~> 5.15"
 
-gem 'cssbundling-rails'
+# 環境構築・env
 gem 'dotenv-rails'
+
+# 地図表示
+gem "geocoder"
+gem 'faker'
+
+
+gem 'rails-i18n'
