@@ -81,8 +81,17 @@ gem "sentry-ruby", "~> 5.15"
 
 gem "sentry-rails", "~> 5.15"
 
+
+# 環境構築・env
 gem 'dotenv-rails'
+
+# 地図表示
+gem "geocoder"
+gem 'faker'
 
 # Auth0
 gem 'omniauth-auth0'
 gem 'omniauth-rails_csrf_protection'
+
+# その他
+gem 'rails-i18n'
