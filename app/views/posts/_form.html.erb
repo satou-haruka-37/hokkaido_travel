@@ -14,6 +14,14 @@
         <%= f.label :body, for: "Body" %>
         <%= f.text_field :body, id: "Body", placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
       </div>
+      <div>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title) do |tag| %>
+          <div>
+            <%= tag.label { tag.check_box + tag.text }%>  <!-- tag.textは、f.collection_check_boxesを使った時に使えるラベル名を取得する方法 -->
+          </div>
+        <% end %>
+      </div>
+
 
       <%= f.submit class: "btn btn-info" %>
     <% end %>
