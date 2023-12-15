@@ -20,7 +20,6 @@ tags = [
   { title: 'レジャー' },
   { title: '宿泊' },
   { title: '観光' },
-  { title: '温泉' },
   { title: 'お店' },
   { title: '道の駅' }
 ]
