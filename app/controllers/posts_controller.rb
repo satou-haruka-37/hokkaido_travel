@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path
     else
+      @tags = Tag.all
       render :new, status: :unprocessable_entity
     end
   end

@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true
-  validates :body, length: { maximum: 65_535 }
+  validates :body, length: { maximum: 300 }
   validate :validate_address
   validate :must_have_tags
 
