@@ -5,8 +5,13 @@
         <div>
           <p class="text-3xl font-black"><%= @post.title %></p>
         </div>
-        <div class="m-6">
+        <div class="m-5">
           <div>
+            <% @post.tags.each do |tag| %>
+              <span class="badge badge-info gap-2"><%= tag.title %></span>
+            <% end %>
+          </div>
+          <div class="mt-7">
             <p class="font-black">所在地</p>
             <p><%= @post.address %></p>
           </div>
@@ -21,6 +26,12 @@
             <div id="map" class="w-96 h-96"></div>
           </div>
         </div>
+        <% if current_user == @post.user %>
+          <div class="flex justify-end">
+            <%= link_to "編集", edit_post_path(@post), class: "btn mr-2" %>
+            <%= button_to "削除", post_path(@post), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
+          </div>
+        <% end %>
 
       </div>
     </div>
@@ -28,6 +39,7 @@
 </div>
 
 <script>
+  // ミニマップの表示
   function initMap() {
     const mapElement = document.getElementById('map');
 
@@ -44,5 +56,16 @@
       title: '<%= @post.title %>'
     });
   }
+
+  //確認ダイアログ
+  function check(){
+  if(window.confirm('本当に削除しますか？')){
+    return true;
+  }
+  else{
+    window.alert('キャンセルされました');
+    return false;
+  }
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
