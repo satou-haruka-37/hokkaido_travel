@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  belongs_to :user
+
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true
   validates :body, length: { maximum: 65_535 }

@@ -6,7 +6,13 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 mr-10">
-      <li><a>Link</a></li>
+      <li>
+        <% if logged_in? %>
+          <%= button_to "logout", logout_path, method: :get, data: { turbo: false } %>
+        <% else %>
+          <%= button_to 'login', '/auth/auth0', method: :post, data: { turbo: false } %>
+        <% end %>
+      </li>
       <li>
         <details>
           <summary>
