@@ -1,35 +1,39 @@
-<div class="card w-[500px] shadow-xl">
-  <div class="card-body p-12">
-    <%= form_with(model: post, local: true) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <div class="flex flex-col">
-        <%= f.label :title, for: "Title" %>
-        <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full", autocomplete: "off" %>
+<div class="min-h-screen">
+  <div class="flex justify-center mt-14">
+    <div class="card w-[500px] shadow-xl">
+      <div class="card-body p-12">
+        <%= form_with(model: post, local: true) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="flex flex-col">
+            <%= f.label :title, for: "Title" %>
+            <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full", autocomplete: "off" %>
+          </div>
+          <div class="flex flex-col mt-5">
+            <%= f.label :address, for: "Address" %>
+            <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+          </div>
+          <div class="flex flex-col mt-5">
+            <%= f.label :body %>
+            <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full", autocomplete: "off" %>
+            <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
+          </div>
+          <div class="flex flex-col mt-5">
+            <p>タグ</p>
+            <div class="flex flex-wrap">
+              <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title) do |tag| %>
+                <label class="px-2 my-2 w-1/3">
+                  <%= tag.check_box(class: 'hidden', data: { behavior: 'tag-checkbox' }) %>
+                  <button type="button" class="btn btn-sm w-full" data-behavior="tag-button"><%= tag.text %></button>
+                </label>
+              <% end %>
+            </div>
+          </div>
+          <div class="flex justify-center mt-7">
+            <%= f.submit class: "btn btn-info" %>
+          </div>
+        <% end %>
       </div>
-      <div class="flex flex-col mt-5">
-        <%= f.label :address, for: "Address" %>
-        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
-      </div>
-      <div class="flex flex-col mt-5">
-        <%= f.label :body %>
-        <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full", autocomplete: "off" %>
-        <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
-      </div>
-      <div class="flex flex-col mt-5">
-        <p>タグ</p>
-        <div class="flex flex-wrap">
-          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title) do |tag| %>
-            <label class="px-2 my-2 w-1/3">
-              <%= tag.check_box(class: 'hidden', data: { behavior: 'tag-checkbox' }) %>
-              <button type="button" class="btn btn-sm w-full" data-behavior="tag-button"><%= tag.text %></button>
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <div class="flex justify-center mt-7">
-        <%= f.submit class: "btn btn-info" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
 

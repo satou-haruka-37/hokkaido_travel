@@ -1,0 +1,48 @@
+<div class="min-h-screen">
+  <div class="flex justify-center mt-14">
+    <div class="card w-[700px] shadow-xl flex items-center">
+      <div class="card-body p-12">
+        <div>
+          <p class="text-3xl font-black"><%= @post.title %></p>
+        </div>
+        <div class="m-6">
+          <div>
+            <p class="font-black">所在地</p>
+            <p><%= @post.address %></p>
+          </div>
+          <% if @post.body.present? %>
+            <div class="mt-7">
+              <p class="font-black">おすすめポイント</p>
+              <p><%= @post.body %></p>
+            </div>
+          <% end %>
+          <div class="mt-7">
+            <p class="font-black">アクセス</p>
+            <div id="map" class="w-96 h-96"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initMap() {
+    const mapElement = document.getElementById('map');
+
+    const mapOptions = {
+      center: { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      zoom: 16
+    };
+
+    const map = new google.maps.Map(mapElement, mapOptions);
+
+    const marker = new google.maps.Marker({
+      position: { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      map: map,
+      title: '<%= @post.title %>'
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
