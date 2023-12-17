@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   after_validation :geocode
   has_and_belongs_to_many :tags
 
+  belongs_to :user
+
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true
   validates :body, length: { maximum: 300 }
