@@ -1,40 +1,62 @@
-<div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
+<div class="card w-[500px] shadow-xl">
+  <div class="card-body p-12">
     <%= form_with(model: post, local: true) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <div>
+      <div class="flex flex-col">
         <%= f.label :title, for: "Title" %>
-        <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
+        <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full", autocomplete: "off" %>
       </div>
-      <div>
+      <div class="flex flex-col mt-5">
         <%= f.label :address, for: "Address" %>
-        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
+        <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
       </div>
-      <div>
-        <%= f.label :body, for: "Body" %>
-        <%= f.text_field :body, id: "Body", placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full max-w-xs", autocomplete: "off" %>
+      <div class="flex flex-col mt-5">
+        <%= f.label :body %>
+        <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full", autocomplete: "off" %>
+        <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
       </div>
-
-      <%= f.submit class: "btn btn-info" %>
+      <div class="flex flex-col mt-5">
+        <p>タグ</p>
+        <div class="flex flex-wrap">
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title) do |tag| %>
+            <label class="px-2 my-2 w-1/3">
+              <%= tag.check_box(class: 'hidden', data: { behavior: 'tag-checkbox' }) %>
+              <button type="button" class="btn btn-sm w-full" data-behavior="tag-button"><%= tag.text %></button>
+            </label>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex justify-center mt-7">
+        <%= f.submit class: "btn btn-info" %>
+      </div>
     <% end %>
-
   </div>
 </div>
 
-<script type="text/javascript">
+<script>
+  // ページのロードが完了したら initialize 関数を実行
+  document.addEventListener('DOMContentLoaded', function() {
+    // Google Maps APIの読み込みスクリプト
+    var script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=places&callback=initialize";
+    document.body.appendChild(script);
+  });
+
+
+  // Place Autocomplete
   function initialize() {
-    // タイトルの入力フィールドを取得
+    // タイトルの入力フィールド取得
     var inputTitle = document.getElementById('Title');
-    // 住所の入力フィールドを取得
+    // 住所の入力フィールド取得
     var inputAddress = document.getElementById('Address');
     //オートコンプリートで表示される情報の設定（都市名のみ、スポットなど）
     var options = {
       types: ['establishment'],
     };
 
-    // タイトルの入力フィールドにオートコンプリートを適用
+    // タイトルの入力フィールドにオートコンプリート適用
     var autocompleteTitle = new google.maps.places.Autocomplete(inputTitle, options);
-    // 住所の入力フィールドにオートコンプリートを適用
+    // 住所の入力フィールドにオートコンプリート適用
     var autocompleteAddress = new google.maps.places.Autocomplete(inputAddress, options);
 
     // タイトルのオートコンプリートの選択が変更されたときのリスナーを追加
@@ -58,11 +80,39 @@
     });
   }
 
-  // ページのロードが完了したら initialize 関数を実行
+
+  // タグの選択をチェックボックスではなく色を変えて表すためのコード
   document.addEventListener('DOMContentLoaded', function() {
-    // Google Maps APIの読み込みスクリプト
-    var script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&libraries=places&callback=initialize';
-    document.body.appendChild(script);
+    const buttons = document.querySelectorAll('[data-behavior="tag-button"]');
+
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const checkbox = this.parentNode.querySelector('[data-behavior="tag-checkbox"]');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          this.classList.add('bg-success', 'text-white');
+        } else {
+          this.classList.remove('bg-success', 'text-white');
+        }
+      });
+    });
+  });
+
+
+  // 文字数カウント
+  const textField = document.querySelector('input[name="post[body]"]');
+  const charCount = document.getElementById('charCount');
+
+  textField.addEventListener('input', function() {
+    const maxLength = 300;
+    const currentLength = textField.value.length;
+
+    if (currentLength <= maxLength) {
+      const remaining = maxLength - currentLength;
+      charCount.textContent = `${remaining}文字まで`;
+    } else {
+      charCount.textContent = '文字数オーバーです';
+    }
   });
 </script>

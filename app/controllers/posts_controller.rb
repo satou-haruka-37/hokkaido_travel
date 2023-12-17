@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tags = Tag.all
   end
 
   def create
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path
     else
+      @tags = Tag.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -21,6 +23,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body)
+    params.require(:post).permit(:title, :address, :body, tag_ids: [])
   end
 end
