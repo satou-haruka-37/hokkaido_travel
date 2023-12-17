@@ -18,7 +18,7 @@
 
     // マーカーを追加（Postの情報からマーカーを追加する）
     <% @posts.each do |post| %>
-      const marker = new google.maps.Marker({
+      var marker = new google.maps.Marker({ //繰り返しの時はconstではなくvarで定義
         position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
         map: map,
       });

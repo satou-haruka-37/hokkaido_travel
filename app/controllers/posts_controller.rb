@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[new create]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -13,6 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+      flash[:success] = "投稿が作成されました"
       redirect_to posts_path
     else
       @tags = Tag.all
@@ -20,17 +23,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-  end
-
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:success] = "投稿が更新されました"
       redirect_to post_path(@post)
     else
       render :edit
@@ -38,8 +33,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
+    flash[:success] = "投稿が削除されました"
     redirect_to posts_path
   end
 
@@ -47,5 +42,16 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :address, :body, tag_ids: [])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def authorize_user
+    unless current_user == @post.user
+      flash[:error] = "権限がありません"
+      redirect_to posts_path
+    end
   end
 end
