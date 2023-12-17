@@ -18,10 +18,14 @@
 
     // マーカーを追加（Postの情報からマーカーを追加する）
     <% @posts.each do |post| %>
-      new google.maps.Marker({
+      const marker = new google.maps.Marker({
         position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
         map: map,
-        title: '<%= j post.title %>'
+      });
+
+      // マーカーをクリックすると投稿詳細に遷移
+      marker.addListener('click', function() {
+        window.location.href = '<%= post_path(post) %>'; // 投稿詳細ページを開く
       });
     <% end %>
   }
