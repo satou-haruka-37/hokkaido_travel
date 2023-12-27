@@ -18,6 +18,13 @@
             <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
           </div>
           <div class="flex flex-col mt-5">
+            <div class="flex flex-col">
+              <%= f.label :images %>
+              <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered file-input-info w-full" %>
+              <span class="text-xs text-right mt-1">3枚まで（ファイル形式：jpeg、jpg、png）</span>
+            </div>
+          </div>
+          <div class="flex flex-col mt-5">
             <p>タグ</p>
             <div class="flex flex-wrap">
               <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title, { checked: @post.tag_ids }, { multiple: true }) do |tag| %>

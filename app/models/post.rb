@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
+  mount_uploaders :images, ImageUploader
+
   has_and_belongs_to_many :tags
 
   belongs_to :user

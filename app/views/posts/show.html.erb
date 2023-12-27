@@ -2,6 +2,16 @@
   <div class="flex justify-center mt-14">
     <div class="card w-[700px] shadow-xl flex items-center">
       <div class="card-body p-12">
+        <div class="mt-7">
+          <% if @post.images.attached? %>
+            <div class="flex flex-wrap mt-3">
+              <% image_urls = @post.images.map { |image| rails_blob_url(image) } %>
+              <% image_urls.each do |image_url| %>
+                <%= image_tag image_url, class: "mr-4 mb-4", style: "max-width: 300px; max-height: 300px;" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
         <div>
           <p class="text-3xl font-black"><%= @post.title %></p>
         </div>
@@ -32,7 +42,6 @@
             <%= button_to "削除", post_path(@post), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
           </div>
         <% end %>
-
       </div>
     </div>
   </div>
