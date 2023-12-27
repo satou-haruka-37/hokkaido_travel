@@ -94,6 +94,7 @@ gem 'omniauth-line'
 # 画像アップロード
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog-aws'
 
 # その他
 gem 'dotenv-rails'
