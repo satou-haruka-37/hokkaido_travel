@@ -24,6 +24,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    params[:post].delete(:images) if params[:post][:images].all?(&:blank?)
+
     if @post.update(post_params)
       flash[:success] = "投稿が更新されました"
       redirect_to post_path(@post)
@@ -41,7 +43,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body, tag_ids: [])
+    params.require(:post).permit(:title, :address, :body, tag_ids: [], images: [] )
   end
 
   def set_post

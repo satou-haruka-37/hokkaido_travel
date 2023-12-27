@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
+  mount_uploaders :images, ImageUploader
+
   has_and_belongs_to_many :tags
 
   belongs_to :user
@@ -8,6 +10,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true
   validates :body, length: { maximum: 300 }
+  validates :images, length: { maximum: 3, message: 'は3枚までしかアップロードできません' }
+
   validate :validate_address
   validate :must_have_tags
 
