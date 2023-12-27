@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true
   validates :body, length: { maximum: 300 }
+  validates :images, length: { maximum: 3, message: 'は3枚までしかアップロードできません' }
+
   validate :validate_address
   validate :must_have_tags
 
