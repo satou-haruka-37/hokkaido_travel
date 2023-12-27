@@ -24,6 +24,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    params[:post].delete(:images) if params[:post][:images].all?(&:blank?)
+
     if @post.update(post_params)
       flash[:success] = "投稿が更新されました"
       redirect_to post_path(@post)
