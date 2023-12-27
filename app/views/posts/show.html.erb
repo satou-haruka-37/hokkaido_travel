@@ -1,12 +1,12 @@
 <div class="min-h-screen">
   <div class="flex justify-center mt-14">
-    <div class="card w-[700px] shadow-xl flex items-center">
+    <div class="card w-[800px] shadow-xl flex items-center">
       <div class="card-body p-12">
         <div class="mt-7">
           <% if @post.images.present? %>
             <div class="flex flex-wrap mt-3">
               <% @post.images.each do |image| %>
-                <%= image_tag image.to_s %>
+                <%= image_tag image.to_s, class: "w-1/3 h-auto object-contain m-0.5" %>
               <% end %>
             </div>
           <% end %>
