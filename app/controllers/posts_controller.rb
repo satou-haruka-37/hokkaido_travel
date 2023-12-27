@@ -5,12 +5,13 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    if params[:tag_id].present?
-      tag = Tag.find_by(id: params[:tag_id])
-      @posts = tag.present? ? tag.posts : []
-    else
-      @posts = @q.result
-    end
+    @posts = if params[:tag_id].present?
+               tag = Tag.find_by(id: params[:tag_id])
+               tag.present? ? tag.posts : []
+             else
+               @q.result
+             end
+    @filtering_active = params[:q].present? || params[:tag_id].present?
   end
 
   def new
