@@ -4,7 +4,14 @@ class PostsController < ApplicationController
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = if params[:tag_id].present?
+               tag = Tag.find_by(id: params[:tag_id])
+               tag.present? ? tag.posts : []
+             else
+               @q.result
+             end
+    @filtering_active = params[:q].present? || params[:tag_id].present?
   end
 
   def new

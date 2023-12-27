@@ -1,3 +1,38 @@
+<div class="flex">
+  <div class="<%= @filtering_active ? 'w-5/6' : 'w-full' %>">
+    <div class="collapse collapse-arrow border border-base-300 bg-base-200">
+      <input type="checkbox" />
+      <div class="collapse-title">
+        検索
+      </div>
+      <div class="collapse-content">
+        <p class="flex flex-col mb-5">好きな言葉を入力するか、絞り込みたいタグをクリックしてください</p>
+        <div class="flex flex-col mb-5">
+          <p>フリーワード検索</p>
+          <%= render 'search', q: @q, url: posts_path %>
+        </div>
+        <div class="flex flex-col">
+          <p>タグ検索</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
+            <% Tag.limit(6).each do |tag| %>
+              <div class="px-4 my-2">
+                <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm btn-warning w-full" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @filtering_active %>
+    <div class="w-1/6">
+      <%= link_to '検索解除', posts_path, class: "btn btn-info h-[62px] rounded-2xl", style: "width: fit-content" %>
+    </div>
+  <% end %>
+</div>
+
+
 <!-- マップを表示する要素 -->
 <div id="map" class="w-full h-screen"></div>
 

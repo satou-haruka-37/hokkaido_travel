@@ -185,7 +185,15 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.7.0)
+    nokogiri (1.15.5-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.15.5-arm-linux)
+      racc (~> 1.4)
     nokogiri (1.15.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86-linux)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
@@ -261,6 +269,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.1.0)
+    ransack (4.1.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.6.2)
       psych (>= 4.0.0)
     regexp_parser (2.8.3)
@@ -334,7 +346,11 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  arm64-darwin-23
+  aarch64-linux
+  arm-linux
+  arm64-darwin
+  x86-linux
+  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
@@ -360,6 +376,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8)
   rails-i18n
+  ransack
   rspec-rails
   selenium-webdriver
   sentry-rails (~> 5.15)

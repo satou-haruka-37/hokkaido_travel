@@ -96,6 +96,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
 
+# 検索機能
+gem 'ransack'
+
 # その他
 gem 'dotenv-rails'
 gem 'faker'
