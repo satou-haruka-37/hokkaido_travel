@@ -8,9 +8,9 @@
     <ul class="menu menu-horizontal px-1 mr-10">
       <li>
         <% if logged_in? %>
-          <%= button_to "logout", logout_path, method: :get, data: { turbo: false } %>
+          <%= button_to "logout", logout_path, method: :get %>
         <% else %>
-          <%= button_to 'login', '/auth/auth0', method: :post, data: { turbo: false } %>
+          <%= button_to 'login', '/auth/auth0', method: :post %>
         <% end %>
       </li>
       <li>

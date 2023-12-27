@@ -1,8 +1,8 @@
 <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
   <nav class="grid grid-flow-col gap-4">
-    <a class="link link-hover">利用規約</a>
-    <a class="link link-hover">プライバシーポリシー</a>
-    <a class="link link-hover">お問い合わせ</a>
+    <%= button_to "利用規約", terms_of_service_path, method: :get %>
+    <%= button_to "プライバシーポリシー", privacy_policy_path, method: :get %>
+    <%= button_to "お問い合わせ", '#', method: :get %>
   </nav>
   <aside>
     <p>© 2023 - satou haruka</p>
