@@ -3,11 +3,10 @@
     <div class="card w-[700px] shadow-xl flex items-center">
       <div class="card-body p-12">
         <div class="mt-7">
-          <% if @post.images.attached? %>
+          <% if @post.images.present? %>
             <div class="flex flex-wrap mt-3">
-              <% image_urls = @post.images.map { |image| rails_blob_url(image) } %>
-              <% image_urls.each do |image_url| %>
-                <%= image_tag image_url, class: "mr-4 mb-4", style: "max-width: 300px; max-height: 300px;" %>
+              <% @post.images.each do |image| %>
+                <%= image_tag image.to_s %>
               <% end %>
             </div>
           <% end %>

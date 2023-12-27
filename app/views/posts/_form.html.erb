@@ -20,20 +20,28 @@
           <div class="flex flex-col mt-5">
             <div class="flex flex-col">
               <%= f.label :images %>
-              <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered file-input-info w-full" %>
+              <%= f.file_field :images, multiple: true, onchange: "previewImages(event)", class: "file-input file-input-bordered file-input-info w-full" %>
               <span class="text-xs text-right mt-1">3枚まで（ファイル形式：jpeg、jpg、png）</span>
+            </div>
+            <div id="preview-images" class="flex flex-wrap justify-center">
+              <% if post.images.present? %>
+                <% post.images.each do |image| %>
+                  <%= image_tag image.to_s, class: "w-1/3 h-auto object-contain m-2" %>
+                <% end %>
+              <% end %>
             </div>
           </div>
           <div class="flex flex-col mt-5">
             <p>タグ</p>
             <div class="flex flex-wrap">
               <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :title, { checked: @post.tag_ids }, { multiple: true }) do |tag| %>
-                <label class="px-2 my-2 w-1/3">
+                <label class="px-4 my-2 w-1/2 sm:w-1/3">
                   <%= tag.check_box(class: 'hidden', data: { behavior: 'tag-checkbox' }) %>
                   <button type="button" class="btn btn-sm w-full <%= 'bg-success text-white' if @post.tag_ids.include?(tag.value.to_i) %>" data-behavior="tag-button"><%= tag.text %></button>
                 </label>
               <% end %>
             </div>
+            <span class="text-xs text-right mt-1">タグを1つ以上選択してください</span>
           </div>
           <div class="flex justify-center mt-7">
             <%= f.submit class: "btn btn-info" %>
@@ -45,51 +53,58 @@
 </div>
 
 <script>
-  // ページのロードが完了したら initialize 関数を実行
+  // Google Maps APIの読み込み
   document.addEventListener('DOMContentLoaded', function() {
-    // Google Maps APIの読み込みスクリプト
-    var script = document.createElement('script');
+    let script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=places&callback=initialize";
     document.body.appendChild(script);
   });
 
-
   // Place Autocomplete
   function initialize() {
-    // タイトルの入力フィールド取得
-    var inputTitle = document.getElementById('Title');
-    // 住所の入力フィールド取得
-    var inputAddress = document.getElementById('Address');
-    //オートコンプリートで表示される情報の設定（都市名のみ、スポットなど）
-    var options = {
+    let inputTitle = document.getElementById('Title');
+    let inputAddress = document.getElementById('Address');
+
+    //オートコンプリートのオプション
+    let options = {
       types: ['establishment'],
     };
 
-    // タイトルの入力フィールドにオートコンプリート適用
-    var autocompleteTitle = new google.maps.places.Autocomplete(inputTitle, options);
-    // 住所の入力フィールドにオートコンプリート適用
-    var autocompleteAddress = new google.maps.places.Autocomplete(inputAddress, options);
+    // オートコンプリート適用
+    let autocompleteTitle = new google.maps.places.Autocomplete(inputTitle, options);
+    let autocompleteAddress = new google.maps.places.Autocomplete(inputAddress, options);
 
-    // タイトルのオートコンプリートの選択が変更されたときのリスナーを追加
+    // タイトルのオートコンプリートが選択されたとき
     autocompleteTitle.addListener('place_changed', function() {
-      // 選択された場所の情報を取得
-      var place = autocompleteTitle.getPlace();
-      // タイトルのフィールドに選択された場所の名称を入力
+      let place = autocompleteTitle.getPlace();
       inputTitle.value = place.name;
-      // 住所のフィールドに選択された場所の住所を入力
       inputAddress.value = place.formatted_address;
     });
 
-    // 住所のオートコンプリートの選択が変更されたときのリスナーを追加
+    // 住所のオートコンプリートが選択されたとき
     autocompleteAddress.addListener('place_changed', function() {
-      // 選択された場所の情報を取得
-      var place = autocompleteAddress.getPlace();
-      // タイトルのフィールドに選択された場所の名称を入力
+      let place = autocompleteAddress.getPlace();
       inputTitle.value = place.name;
-      // 住所のフィールドに選択された場所の住所を入力
       inputAddress.value = place.formatted_address;
     });
   }
+
+
+  // bodyの文字数カウント
+  const textField = document.querySelector('input[name="post[body]"]');
+  const charCount = document.getElementById('charCount');
+
+  textField.addEventListener('input', function() {
+    const maxLength = 300;
+    const currentLength = textField.value.length;
+
+    if (currentLength <= maxLength) {
+      const remaining = maxLength - currentLength;
+      charCount.textContent = `${remaining}文字まで`;
+    } else {
+      charCount.textContent = '文字数オーバーです';
+    }
+  });
 
 
   // タグの選択をチェックボックスではなく色を変えて表すためのコード
@@ -111,19 +126,25 @@
   });
 
 
-  // 文字数カウント
-  const textField = document.querySelector('input[name="post[body]"]');
-  const charCount = document.getElementById('charCount');
+  // 画像のプレビュー表示
+  function previewImages(event) {
+    let previewImages = document.getElementById('preview-images');
+    previewImages.innerHTML = '';
 
-  textField.addEventListener('input', function() {
-    const maxLength = 300;
-    const currentLength = textField.value.length;
+    let files = event.target.files;
 
-    if (currentLength <= maxLength) {
-      const remaining = maxLength - currentLength;
-      charCount.textContent = `${remaining}文字まで`;
-    } else {
-      charCount.textContent = '文字数オーバーです';
+    for (var i = 0; i < files.length; i++) {
+      let file = files[i];
+      let reader = new FileReader();
+
+      reader.onload = function(e) {
+        let img = document.createElement('img');
+        img.src = e.target.result;
+        img.classList.add("w-1/3", "h-auto", "object-contain", "m-2");
+        previewImages.appendChild(img);
+      }
+
+      reader.readAsDataURL(file);
     }
-  });
+  }
 </script>
