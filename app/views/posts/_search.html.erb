@@ -1,0 +1,6 @@
+<div class="form-control">
+  <%= search_form_for @q, url: url do |f| %>
+    <%= f.search_field :title_or_body_cont, class: 'input input-bordered', placeholder: '検索ワード' %>
+    <%= f.submit '検索', class: 'btn btn-info' %>
+  <% end %>
+</div>
