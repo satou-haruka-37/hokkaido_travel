@@ -7,5 +7,14 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'auth0#callback'
   get '/auth/failure', to: 'auth0#failure'
   get '/logout', to: 'auth0#logout'
+
   resources :posts
+
+  namespace :mypage do
+    get '/', to: 'favorites#index'
+
+    resources :posts, only: [:index]
+    resources :favorites, only: [:index]
+    resource :settings
+  end
 end

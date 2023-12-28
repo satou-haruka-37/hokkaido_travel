@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>えぞとらべる | マイページ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="flex flex-col min-h-screen">
+    <%= render 'shared/header' %>
+
+    <div class="collapse collapse-arrow bg-base-200">
+      <input type="checkbox" />
+      <div class="collapse-title font-bold">
+        マイページメニュー
+      </div>
+      <div class="collapse-content">
+        <ul class="menu">
+          <li><a>お気に入りの投稿</a></li>
+          <li><a>自分の投稿</a></li>
+          <li><a>ユーザー設定</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex-grow">
+      <%= render 'shared/flash_message' %>
+      <%= yield %>
+    </div>
+
+    <%= render 'shared/footer' %>
+  </body>
+</html>
