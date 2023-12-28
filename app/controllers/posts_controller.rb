@@ -44,7 +44,12 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = "投稿が削除されました"
-    redirect_to posts_path
+
+    if request.referer == mypage_posts_url
+      redirect_to mypage_posts_path
+    else
+      redirect_to posts_path
+    end
   end
 
   private
