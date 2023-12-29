@@ -53,15 +53,17 @@
 
     // マーカーを追加（Postの情報からマーカーを追加する）
     <% @posts.each do |post| %>
-      var marker = new google.maps.Marker({ //繰り返しの時はconstではなくvarで定義
-        position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
-        map: map,
-      });
+      (() => {
+        let marker = new google.maps.Marker({ //繰り返しの時はconstではなくletで定義
+          position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
+          map: map,
+        });
 
-      // マーカーをクリックすると投稿詳細に遷移
-      marker.addListener('click', function() {
-        window.location.href = '<%= post_path(post) %>'; // 投稿詳細ページを開く
-      });
+        // マーカーをクリックすると投稿詳細に遷移
+        marker.addListener('click', function() {
+          window.location.href = '<%= post_path(post) %>'; // 投稿詳細ページを開く
+        });
+      })();
     <% end %>
   }
 </script>

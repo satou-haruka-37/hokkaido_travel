@@ -30,9 +30,9 @@
     // クリックした地点の座標を取得し、マーカーを作成
     google.maps.event.addListener(map, 'click', function(event) {
       if (markers.length < 2) {
-        var clickedLocation = event.latLng;
+        let clickedLocation = event.latLng;
 
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
           position: clickedLocation,
           map: map
         });
@@ -58,7 +58,7 @@
           directionsRenderer.setDirections(response);
 
           // 移動時間を取得して表示
-          var duration = response.routes[0].legs[0].duration.text;
+          let duration = response.routes[0].legs[0].duration.text;
           document.getElementById('route-time').innerText = '移動時間: ' + duration;
 
           // 結果がある場合はボタンを表示する
