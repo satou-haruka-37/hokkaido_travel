@@ -1,1 +1,83 @@
 北海道の距離感計算ツール
+
+<div id="route-time">移動時間を計測したい、2つの地点を選択してください。</div>
+<button id="clear-button" class="btn btn-info">結果クリア</button>
+<div id="map" class="w-full h-screen"></div>
+
+<script>
+  function initMap() {
+    const mapElement = document.getElementById('map');
+    const mapOptions = {
+      center: { lat: 43.534001, lng: 142.774103 },
+      zoom: 7
+    };
+
+    const map = new google.maps.Map(mapElement, mapOptions);
+    let markers = [];
+    let directionsRenderer = new google.maps.DirectionsRenderer();
+    let directionsService = new google.maps.DirectionsService();
+
+    // 初期状態ではボタンを非表示にする
+    document.getElementById('clear-button').style.display = 'none';
+
+    // クリックした地点の座標を取得し、マーカーを作成
+    google.maps.event.addListener(map, 'click', function(event) {
+      if (markers.length < 2) {
+        var clickedLocation = event.latLng;
+
+        var marker = new google.maps.Marker({
+          position: clickedLocation,
+          map: map
+        });
+
+        markers.push(marker);
+
+        // ２つのマーカーがある場合に距離を計算
+        if (markers.length === 2) {
+          calculateRoute(markers[0].getPosition(), markers[1].getPosition());
+        }
+      }
+    });
+
+    function calculateRoute(origin, destination) {
+      // ２点間の移動ルートを計算
+      directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsRenderer.setMap(map);
+          directionsRenderer.setDirections(response);
+
+          // 移動時間を取得して表示
+          var duration = response.routes[0].legs[0].duration.text;
+          document.getElementById('route-time').innerText = '移動時間: ' + duration;
+
+          // 結果がある場合はボタンを表示する
+          document.getElementById('clear-button').style.display = 'block';
+        } else {
+          window.alert('ルートの取得に失敗しました: ' + status);
+        }
+      });
+    }
+
+    // 結果をクリアするボタン
+    document.getElementById('clear-button').addEventListener('click', function() {
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+      directionsRenderer.setMap(null);
+      document.getElementById('route-time').innerText = '';
+
+      // ズームレベルを初期表示に戻す
+      map.setCenter(mapOptions.center);
+      map.setZoom(mapOptions.zoom);
+
+      // ボタンを再び非表示にする
+      document.getElementById('clear-button').style.display = 'none';
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
