@@ -17,21 +17,20 @@ class Post < ApplicationRecord
 
   def validate_address
     geocoded = Geocoder.search(address)
-    unless geocoded&.first&.coordinates.present?
-      errors.add(:address, 'が存在しません')
-    end
+    return if geocoded&.first&.coordinates.present?
+
+    errors.add(:address, 'が存在しません')
   end
 
   def must_have_tags
     errors.add(:base, '少なくとも1つのタグを選択してください') unless tags.present?
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["title", "body"] # 検索可能な属性を指定してください
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title body] # 検索可能な属性を指定してください
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["tags", "user"] # 検索可能な関連付けを指定してください
+  def self.ransackable_associations(_auth_object = nil)
+    %w[tags user] # 検索可能な関連付けを指定してください
   end
-
 end

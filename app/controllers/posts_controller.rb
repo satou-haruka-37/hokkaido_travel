@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:success] = "投稿が作成されました"
+      flash[:success] = '投稿が作成されました'
       redirect_to posts_path
     else
       @tags = Tag.all
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     params[:post].delete(:images) if params[:post][:images].all?(&:blank?)
 
     if @post.update(post_params)
-      flash[:success] = "投稿が更新されました"
+      flash[:success] = '投稿が更新されました'
       redirect_to post_path(@post)
     else
       render :edit
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    flash[:success] = "投稿が削除されました"
+    flash[:success] = '投稿が削除されました'
 
     if request.referer == mypage_posts_url
       redirect_to mypage_posts_path
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body, tag_ids: [], images: [] )
+    params.require(:post).permit(:title, :address, :body, tag_ids: [], images: [])
   end
 
   def set_post
@@ -63,9 +63,9 @@ class PostsController < ApplicationController
   end
 
   def authorize_user
-    unless current_user == @post.user
-      flash[:error] = "権限がありません"
-      redirect_to posts_path
-    end
+    return if current_user == @post.user
+
+    flash[:error] = '権限がありません'
+    redirect_to posts_path
   end
 end
