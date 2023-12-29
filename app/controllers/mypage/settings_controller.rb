@@ -1,5 +1,5 @@
 class Mypage::SettingsController < Mypage::BaseController
-  before_action :set_user,only: %i[show update destroy]
+  before_action :set_user, only: %i[show update destroy]
 
   def show; end
 

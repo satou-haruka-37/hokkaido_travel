@@ -1,5 +1,5 @@
 class Mypage::PostsController < Mypage::BaseController
-	def index
+  def index
     @posts = current_user.posts
   end
 end
