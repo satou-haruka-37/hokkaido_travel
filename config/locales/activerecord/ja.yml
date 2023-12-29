@@ -8,3 +8,5 @@ ja:
         address: '住所'
         body: 'おすすめポイント'
         images: '写真'
+      user:
+        name: 'ニックネーム'

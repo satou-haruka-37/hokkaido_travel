@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[new create]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
 
   def index
     @q = Post.ransack(params[:q])
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       redirect_to posts_path
     else
       @tags = Tag.all
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 

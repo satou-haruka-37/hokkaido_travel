@@ -15,6 +15,6 @@ Rails.application.routes.draw do
 
     resources :posts, only: [:index]
     resources :favorites, only: [:index]
-    resource :settings
+    resource :settings, only: [:show, :update, :destroy]
   end
 end
