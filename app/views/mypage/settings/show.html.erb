@@ -1,0 +1,35 @@
+<div class="min-h-screen">
+  <div class="flex justify-center mt-14">
+    <div class="card w-[800px] shadow-xl">
+      <div class="card-body p-12">
+        <%= form_with(model: @user, url: mypage_settings_path, local: true) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="flex flex-col">
+            <%= f.label :name %>
+            <%= f.text_field :name, placeholder: "ニックネームを入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+          </div>
+          <div class="flex justify-center mt-7">
+            <%= f.submit class: "btn btn-info" %>
+          </div>
+        <% end %>
+        <div class="flex justify-end mt-4"> <!-- 追加 -->
+          <%= button_to "退会", mypage_settings_path, method: :delete, form: { onSubmit: "return check()" }, class: "btn btn-error" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function check() {
+    const firstConfirmation = window.confirm('本当に退会しますか？');
+    const secondConfirmation = firstConfirmation && window.confirm('本当に本当に退会しますか？');
+
+    if (secondConfirmation) {
+      return true;
+    } else {
+      window.alert('退会をキャンセルしました');
+      return false;
+    }
+  }
+</script>

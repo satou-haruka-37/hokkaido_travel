@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   enum role: { normal: 0, admin: 1 }
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :uid, presence: true, uniqueness: true
+  validates :name, presence: true
 
   def self.find_or_create_from_auth(auth)
     uid = auth[:uid]

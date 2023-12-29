@@ -1,0 +1,9 @@
+<div class="flex flex-col justify-center p-10">
+  <% if @posts.present? %>
+    <% @posts.each do |post| %>
+      <%= render 'mypage/shared/post', post: post %>
+    <% end %>
+  <% else %>
+    <p>投稿がありません</p>
+  <% end %>
+</div>
