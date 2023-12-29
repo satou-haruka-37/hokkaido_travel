@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :distance_calculators, only: [:index]
+
   namespace :mypage do
     get '/', to: 'favorites#index'
 
