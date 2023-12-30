@@ -1,4 +1,7 @@
 ja:
+  errors:
+    messages:
+        extension_allowlist_error: は許可されていないファイル形式です
   activerecord:
     models:
       post: '投稿'

@@ -1,5 +1,5 @@
-<div class="min-h-screen">
-  <div class="p-10">
+<div class="min-h-screen p-5">
+  <div class="m-5 flex justify-center">
     <div class="text-xl font-bold">ユーザー設定</div>
   </div>
 
@@ -27,12 +27,12 @@
 <script>
   function check() {
     const firstConfirmation = window.confirm('本当に退会しますか？');
-    const secondConfirmation = firstConfirmation && window.confirm('本当に本当に退会しますか？');
+    const secondConfirmation = firstConfirmation && window.confirm('本当に本当に退会しますか？（お気に入りの投稿やマイページの設定が削除されます）');
 
     if (secondConfirmation) {
       return true;
     } else {
-      window.alert('退会をキャンセルしました');
+      window.alert('退会がキャンセルされました');
       return false;
     }
   }

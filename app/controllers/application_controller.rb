@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def require_login
     return if session[:user_id]
 
-    flash[:info] = 'ログインが必要です'
+    flash[:info] = 'ログインしてください'
     redirect_to root_path
   end
 
