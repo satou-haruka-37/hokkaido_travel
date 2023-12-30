@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get '/logout', to: 'auth0#logout'
 
   resources :posts
-
   resources :distance_calculators, only: [:index]
+  resources :movement_methods, only: [:index]
 
   namespace :mypage do
     get '/', to: 'favorites#index'
