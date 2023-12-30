@@ -7,9 +7,11 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag('favicon.ico') %>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&display=swap" rel="stylesheet">
   </head>
 
-  <body class="flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen font-main">
     <%= render 'shared/header' %>
 
     <div class="collapse collapse-arrow bg-base-200">

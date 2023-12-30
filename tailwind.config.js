@@ -10,6 +10,11 @@ module.exports = {
       'sm': '440px', //ビューでsm:クラスとすると440以上でsm:クラスを適応。元のクラスをスマホ用にしておく
       'md': '734px', //微妙な横幅のブラウザの時
     },
+    extend: {
+      fontFamily: {
+        main: ['Zen Maru Gothic', 'serif'],
+      }
+    },
   },
 	plugins: [require("daisyui")],
 
