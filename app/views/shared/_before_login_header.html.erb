@@ -1,24 +1,24 @@
 <div class="navbar bg-base-100 z-10">
   <div class="flex-1">
-    <%= link_to root_path, class: "btn btn-ghost text-xl" do %>
-      えぞとらべる
+    <%= link_to root_path, class: "btn btn-ghost text-xl h-auto w-[150px] sm:w-[170px]" do %>
+      <%= image_tag('toplogo.png') %>
     <% end %>
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 mr-10">
+    <ul class="menu menu-horizontal px-1 sm:mr-10">
       <li>
-        <%= button_to 'login', '/auth/auth0', method: :post %>
+        <%= button_to 'ログイン', '/auth/auth0', method: :post %>
       </li>
       <li>
         <details>
           <summary>
-            menu
+            メニュー
           </summary>
-          <ul class="p-2 bg-base-100 rounded-t-none w-[120px]">
+          <ul class="bg-base-100 rounded-t-none w-[120px]">
             <li><%= link_to "投稿一覧", posts_path %></li>
             <li><%= link_to "新規投稿", new_post_path %></li>
             <li><%= link_to "北海道の距離感計算", distance_calculators_path %></li>
-            <li><%= link_to "北海道への移動手段提案", movement_methods_path %></li>
+            <li><%= link_to "北海道への移動手段", movement_methods_path %></li>
           </ul>
         </details>
       </li>
