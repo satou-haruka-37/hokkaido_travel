@@ -1,10 +1,14 @@
-<div class="flex flex-col justify-center p-10">
-  <div class="text-xl font-bold">自分の投稿</div>
-  <% if @posts.present? %>
-    <% @posts.each do |post| %>
-      <%= render 'mypage/shared/post', post: post %>
+<div class="flex flex-col justify-center p-5">
+  <div class="m-5 flex justify-center">
+    <div class="text-xl font-bold">自分の投稿</div>
+  </div>
+  <div class="p-5">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <%= render 'mypage/shared/post', post: post %>
+      <% end %>
+    <% else %>
+      <p class="p-10">投稿がありません</p>
     <% end %>
-  <% else %>
-    <p class="p-10">投稿がありません</p>
-  <% end %>
+  </div>
 </div>

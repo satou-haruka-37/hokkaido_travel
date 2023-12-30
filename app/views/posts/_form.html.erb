@@ -1,20 +1,29 @@
 <div class="min-h-screen">
   <div class="flex justify-center mt-14">
     <div class="card w-[800px] shadow-xl">
-      <div class="card-body p-12">
+      <div class="card-body p-10">
         <%= form_with(model: post, local: true) do |f| %>
+          <div class="mb-8 flex justify-center">
+            <% if f.object.new_record? %>
+              <div class="text-2xl font-bold">新規投稿</div>
+            <% else %>
+              <div class="text-2xl font-bold">投稿編集</div>
+            <% end %>
+          </div>
           <%= render 'shared/error_messages', object: f.object %>
-          <div class="flex flex-col">
+          <div class="flex flex-col mt-5">
             <%= f.label :title, for: "Title" %>
-            <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力して下さい", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <span class="text-xs text-right mt-1">必須</span>
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :address, for: "Address" %>
             <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <span class="text-xs text-right mt-1">必須</span>
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :body %>
-            <%= f.text_field :body, placeholder: "おすすめポイントなど、一言", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_field :body, placeholder: "このスポットのおすすめポイントを教えてください", class: "input input-bordered w-full", autocomplete: "off" %>
             <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
           </div>
           <div class="flex flex-col mt-5">
@@ -44,7 +53,7 @@
             <span class="text-xs text-right mt-1">タグを1つ以上選択してください</span>
           </div>
           <div class="flex justify-center mt-7">
-            <%= f.submit class: "btn btn-info" %>
+            <%= f.submit (f.object.new_record? ? "投稿する" : "更新する"), class: "btn btn-info" %>
           </div>
         <% end %>
       </div>
@@ -113,7 +122,22 @@
     const buttons = document.querySelectorAll('[data-behavior="tag-button"]');
 
     buttons.forEach(function(button) {
-      button.addEventListener('click', function() {
+      // PC用
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const checkbox = this.parentNode.querySelector('[data-behavior="tag-checkbox"]');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          this.classList.add('bg-success', 'text-white');
+        } else {
+          this.classList.remove('bg-success', 'text-white');
+        }
+      });
+
+      // スマートフォン用
+      button.addEventListener('touchstart', function(event) {
+        event.preventDefault();
         const checkbox = this.parentNode.querySelector('[data-behavior="tag-checkbox"]');
         checkbox.checked = !checkbox.checked;
 

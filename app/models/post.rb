@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   end
 
   def must_have_tags
-    errors.add(:base, '少なくとも1つのタグを選択してください') unless tags.present?
+    errors.add(:base, 'タグを1つ以上選択してください') unless tags.present?
   end
 
   def self.ransackable_attributes(_auth_object = nil)
