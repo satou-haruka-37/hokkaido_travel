@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   enum role: { normal: 0, admin: 1 }
 
   has_many :posts, dependent: :destroy
