@@ -14,6 +14,8 @@ class PostsController < ApplicationController
     @filtering_active = params[:q].present? || params[:tag_id].present?
   end
 
+  def show; end
+
   def new
     @post = Post.new
     @tags = Tag.all
