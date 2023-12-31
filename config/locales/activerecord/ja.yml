@@ -13,3 +13,4 @@ ja:
         images: '写真'
       user:
         name: 'ニックネーム'
+        avatar: 'プロフィール画像'
