@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
+  before_action :set_current_temperature
 
   private
 
@@ -18,5 +19,9 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!session[:user_id]
+  end
+
+  def set_current_temperature
+    @temperature = OpenWeather.current_temperature_in_hokkaido
   end
 end
