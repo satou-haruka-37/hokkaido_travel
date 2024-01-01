@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
 
   belongs_to :user
+  has_many :bookmarks, dependent: :destroy
+  has_many :users, through: :bookmarks
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :address, presence: true

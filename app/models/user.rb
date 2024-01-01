@@ -3,6 +3,8 @@ class User < ApplicationRecord
   enum role: { normal: 0, admin: 1 }
 
   has_many :posts, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarks_posts, through: :bookmarks, source: :post
 
   validates :uid, presence: true, uniqueness: true
   validates :name, presence: true
