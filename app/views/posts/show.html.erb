@@ -2,6 +2,9 @@
   <div class="flex justify-center mt-14">
     <div class="card w-[800px] shadow-xl flex items-center">
       <div class="card-body p-10">
+        <div class="flex justify-end">
+          <%= render 'bookmark_button', { post: @post } %>
+        </div>
         <div class="mt-7">
           <% if @post.images.present? %>
             <div class="flex flex-wrap mt-3">

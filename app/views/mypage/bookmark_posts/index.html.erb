@@ -1,0 +1,14 @@
+<div class="flex flex-col justify-center p-5">
+  <div class="m-5 flex justify-center">
+    <div class="text-xl font-bold">お気に入りの投稿</div>
+  </div>
+  <div class="p-5">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <%= render 'mypage/shared/post', post: post %>
+      <% end %>
+    <% else %>
+      <p class="p-10">お気に入りがありません</p>
+    <% end %>
+  </div>
+</div>

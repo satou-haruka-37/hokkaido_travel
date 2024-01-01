@@ -1,5 +1,10 @@
 <div class="card w-full bg-base-100 shadow-xl mb-5">
   <div class="card-body flex justify-center">
+    <div class="flex justify-end">
+      <% if current_user.bookmark?(post) %>
+        <%= button_to 'お気に入り解除', post_bookmark_path(post_id: post.id, id: current_user.bookmarks.find_by(post_id: post.id)), method: :delete, class: "btn" %>
+      <% end %>
+    </div>
     <div class="flex">
       <div class="w-1/5 mr-10">
         <% if post.images.present? %>
