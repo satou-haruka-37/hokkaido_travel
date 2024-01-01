@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'auth0#failure'
   get '/logout', to: 'auth0#logout'
 
-  resources :posts
+  resources :posts do
+    resources :bookmarks, only: %i[create destroy]
+  end
   resources :distance_calculators, only: [:index]
   resources :movement_methods, only: [:index]
 
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
     get '/', to: 'favorites#index'
 
     resources :posts, only: [:index]
-    resources :favorites, only: [:index]
+    resources :bookmark_posts, only: [:index]
     resource :settings, only: %i[show update destroy]
   end
 end

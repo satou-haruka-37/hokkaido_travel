@@ -16,4 +16,18 @@ class User < ApplicationRecord
     user.save if user.changed? # 変更がある場合のみ保存
     user
   end
+
+  # ブックマーク機能のメソッド
+  def bookmark(post)
+    bookmarks_posts << post
+  end
+
+  def bookmark_destroy(post)
+    bookmarks_posts.destroy(post)
+  end
+
+  def bookmark?(post)
+    bookmarks_posts.include?(post)
+  end
+
 end
