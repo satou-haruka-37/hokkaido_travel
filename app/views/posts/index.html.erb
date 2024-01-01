@@ -12,11 +12,21 @@
           <%= render 'search', q: @q, url: posts_path %>
         </div>
         <div class="flex flex-col mt-5">
-          <p>タグ検索</p>
+          <p>タグで検索</p>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
             <% Tag.limit(6).each do |tag| %>
               <div class="px-4 my-2">
                 <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm btn-warning w-full" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="flex flex-col mt-5">
+          <p>観光時期で検索</p>
+          <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
+            <% Season.limit(12).each do |season| %>
+              <div class="px-4 my-2">
+                <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm btn-warning w-full" %>
               </div>
             <% end %>
           </div>

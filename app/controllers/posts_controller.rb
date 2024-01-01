@@ -8,17 +8,19 @@ class PostsController < ApplicationController
     @posts = if params[:tag_id].present?
                tag = Tag.find_by(id: params[:tag_id])
                tag.present? ? tag.posts : []
+             elsif params[:season_id].present?
+               season = Season.find_by(id: params[:season_id])
+               season.present? ? season.posts : []
              else
                @q.result
              end
-    @filtering_active = params[:q].present? || params[:tag_id].present?
+    @filtering_active = params[:q].present? || params[:tag_id].present? || params[:season_id].present?
   end
 
   def show; end
 
   def new
     @post = Post.new
-    @tags = Tag.all
   end
 
   def create
@@ -27,7 +29,6 @@ class PostsController < ApplicationController
       flash[:success] = '投稿が作成されました'
       redirect_to posts_path
     else
-      @tags = Tag.all
       render :new
     end
   end
@@ -57,7 +58,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body, tag_ids: [], images: [])
+    params.require(:post).permit(:title, :address, :body, tag_ids: [], season_ids: [], images: [])
   end
 
   def set_post

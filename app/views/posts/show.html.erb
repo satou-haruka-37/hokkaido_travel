@@ -22,6 +22,9 @@
             <% @post.tags.each do |tag| %>
               <span class="badge badge-info gap-2"><%= tag.title %></span>
             <% end %>
+            <% @post.seasons.each do |season| %>
+              <span class="badge badge-warning gap-2"><%= season.title %></span>
+            <% end %>
           </div>
           <div class="mt-7">
             <p class="font-black">所在地</p>
