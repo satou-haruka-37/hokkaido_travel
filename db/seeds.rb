@@ -12,18 +12,18 @@
 # end
 
 # タグのデータ
-tags = [
-  { title: 'グルメ' },
-  { title: 'レジャー' },
-  { title: '宿泊' },
-  { title: '観光' },
-  { title: 'お店' },
-  { title: '道の駅' }
-]
+# tags = [
+#   { title: 'グルメ' },
+#   { title: 'レジャー' },
+#   { title: '宿泊' },
+#   { title: '観光' },
+#   { title: 'お店' },
+#   { title: '道の駅' }
+# ]
 
-tags.each do |tag_data|
-  Tag.create(tag_data)
-end
+# tags.each do |tag_data|
+#   Tag.create(tag_data)
+# end
 
 # 観光時期のデータ
 seasons = [
