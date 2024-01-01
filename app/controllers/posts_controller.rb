@@ -8,10 +8,13 @@ class PostsController < ApplicationController
     @posts = if params[:tag_id].present?
                tag = Tag.find_by(id: params[:tag_id])
                tag.present? ? tag.posts : []
+             elsif params[:season_id].present?
+               season = Season.find_by(id: params[:season_id])
+               season.present? ? season.posts : []
              else
                @q.result
              end
-    @filtering_active = params[:q].present? || params[:tag_id].present?
+    @filtering_active = params[:q].present? || params[:tag_id].present? || params[:season_id].present?
   end
 
   def show; end
