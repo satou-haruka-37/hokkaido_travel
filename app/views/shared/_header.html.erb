@@ -6,8 +6,13 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 sm:mr-10">
-      <li>
-        <%= button_to "ログアウト", logout_path, method: :get %>
+      <!-- PCサイズ以上の場合に表示 -->
+      <li class="hidden sm:block">
+        <p>現在の北海道：-10℃</p>
+      </li>
+      <!-- スマホサイズの場合に表示 -->
+      <li class="block sm:hidden">
+        <p>-10℃</p>
       </li>
       <li>
         <details>
@@ -20,6 +25,7 @@
             <li><%= link_to "北海道の距離感計算", distance_calculators_path %></li>
             <li><%= link_to "北海道への移動手段", movement_methods_path %></li>
             <li><%= link_to "マイページ", mypage_bookmark_posts_path %></li>
+            <li><%= button_to "ログアウト", logout_path, method: :get %></li>
           </ul>
         </details>
       </li>
