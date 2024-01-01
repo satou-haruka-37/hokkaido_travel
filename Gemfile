@@ -98,6 +98,9 @@ gem 'mini_magick'
 # 検索機能
 gem 'ransack'
 
+# 気温表示機能
+gem 'httparty'
+
 # その他
 gem 'dotenv-rails'
 gem 'faker'

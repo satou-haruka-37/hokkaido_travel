@@ -8,7 +8,14 @@
     <ul class="menu menu-horizontal px-1 sm:mr-10">
       <!-- PCサイズ以上の場合に表示 -->
       <li class="hidden sm:block">
-        <p>現在の北海道：-10℃</p>
+        <p>
+          現在の北海道：
+          <% if @temperature %>
+            <%= @temperature %>°C
+          <% else %>
+            気温を取得できません
+          <% end %>
+        </p>
       </li>
       <li>
         <%= button_to 'ログイン', '/auth/auth0', method: :post %>
