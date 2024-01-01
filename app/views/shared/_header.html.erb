@@ -6,27 +6,29 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 sm:mr-10">
-      <!-- PCサイズ以上の場合に表示 -->
-      <li class="hidden sm:block">
-        <p>
-          現在の北海道：
-          <% if @temperature %>
-            <%= @temperature %>°C
-          <% else %>
-            気温を取得できません
-          <% end %>
-        </p>
-      </li>
-      <!-- スマホサイズの場合に表示 -->
-      <li class="block sm:hidden">
-        <p>
-          <% if @temperature %>
-            <%= @temperature %>°C
-          <% else %>
-            気温を取得できません
-          <% end %>
-        </p>
-      </li>
+      <%= link_to clothing_suggestions_path do %>
+        <!-- PCサイズ以上の場合に表示 -->
+        <li class="hidden sm:block">
+          <p>
+            現在の北海道：
+            <% if @temperature %>
+              <%= @temperature %>°C
+            <% else %>
+              気温を取得できません
+            <% end %>
+          </p>
+        </li>
+        <!-- スマホサイズの場合に表示 -->
+        <li class="block sm:hidden">
+          <p>
+            <% if @temperature %>
+              <%= @temperature %>°C
+            <% else %>
+              気温を取得できません
+            <% end %>
+          </p>
+        </li>
+      <% end %>
       <li>
         <details>
           <summary>
@@ -37,6 +39,7 @@
             <li><%= link_to "新規投稿", new_post_path %></li>
             <li><%= link_to "北海道の距離感計算", distance_calculators_path %></li>
             <li><%= link_to "北海道への移動手段", movement_methods_path %></li>
+            <li><%= link_to "北海道に来る際の服装", clothing_suggestions_path %></li>
             <li><%= link_to "マイページ", mypage_bookmark_posts_path %></li>
             <li><%= button_to "ログアウト", logout_path, method: :get %></li>
           </ul>
