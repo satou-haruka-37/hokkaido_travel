@@ -52,6 +52,17 @@
             </div>
             <span class="text-xs text-right mt-1">タグを1つ以上選択してください</span>
           </div>
+          <div class="flex flex-col mt-5">
+            <p>観光時期（任意）</p>
+            <div class="flex flex-wrap">
+              <%= f.collection_check_boxes(:season_ids, Season.all, :id, :title, { checked: @post.season_ids }, { multiple: true }) do |season| %>
+                <label class="px-2.5 my-2 w-1/4 sm:w-1/6">
+                  <%= season.check_box(class: 'hidden', data: { behavior: 'season-checkbox' }) %>
+                  <button type="button" class="btn btn-sm w-full <%= 'bg-success text-white' if @post.season_ids.include?(season.value.to_i) %>" data-behavior="season-button"><%= season.text %></button>
+                </label>
+              <% end %>
+            </div>
+          </div>
           <div class="flex justify-center mt-7">
             <%= f.submit (f.object.new_record? ? "投稿する" : "更新する"), class: "btn btn-info" %>
           </div>
@@ -139,6 +150,39 @@
       button.addEventListener('touchstart', function(event) {
         event.preventDefault();
         const checkbox = this.parentNode.querySelector('[data-behavior="tag-checkbox"]');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          this.classList.add('bg-success', 'text-white');
+        } else {
+          this.classList.remove('bg-success', 'text-white');
+        }
+      });
+    });
+  });
+
+  // 観光時期の選択をチェックボックスではなく色を変えて表すためのコード
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('[data-behavior="season-button"]');
+
+    buttons.forEach(function(button) {
+      // PC用
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const checkbox = this.parentNode.querySelector('[data-behavior="season-checkbox"]');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          this.classList.add('bg-success', 'text-white');
+        } else {
+          this.classList.remove('bg-success', 'text-white');
+        }
+      });
+
+      // スマートフォン用
+      button.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        const checkbox = this.parentNode.querySelector('[data-behavior="season-checkbox"]');
         checkbox.checked = !checkbox.checked;
 
         if (checkbox.checked) {

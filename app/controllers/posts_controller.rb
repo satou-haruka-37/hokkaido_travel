@@ -18,7 +18,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @tags = Tag.all
   end
 
   def create
@@ -27,7 +26,6 @@ class PostsController < ApplicationController
       flash[:success] = '投稿が作成されました'
       redirect_to posts_path
     else
-      @tags = Tag.all
       render :new
     end
   end
@@ -57,7 +55,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body, tag_ids: [], images: [])
+    params.require(:post).permit(:title, :address, :body, tag_ids: [], season_ids: [], images: [])
   end
 
   def set_post
