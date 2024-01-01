@@ -24,3 +24,23 @@ tags = [
 tags.each do |tag_data|
   Tag.create(tag_data)
 end
+
+# 観光時期のデータ
+seasons = [
+  { title: '1月' },
+  { title: '2月' },
+  { title: '3月' },
+  { title: '4月' },
+  { title: '5月' },
+  { title: '6月' },
+  { title: '7月' },
+  { title: '8月' },
+  { title: '9月' },
+  { title: '10月' },
+  { title: '11月' },
+  { title: '12月' }
+]
+
+seasons.each do |season_data|
+  Season.create(season_data)
+end
