@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   resources :distance_calculators, only: [:index]
   resources :movement_methods, only: [:index]
+  resources :clothing_suggestions, only: [:index]
 
   namespace :mypage do
     get '/', to: 'favorites#index'

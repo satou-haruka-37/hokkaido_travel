@@ -1,0 +1,29 @@
+<div class="p-8">
+  <div class="mb-8 flex justify-center">
+    <div class="text-xl font-bold">北海道に来る際の服装</div>
+  </div>
+
+  <div>
+    <% if @temperature %>
+      <p class="text-lg font-semibold">現在の気温：<%= @temperature %>°C</p>
+
+      <p class="mt-7 text-lg font-semibold">おすすめの服装</p>
+      <div class="mt-4 px-5">
+        <% if @temperature <= 0 %>
+          <p>セーターや裏起毛の服、冬用のジャンバー（アウトドアブランドだとより良い、おしゃれなコートの場合薄いダウンやヒートテックを中に仕込むと良い）、手袋、耳当て、マフラー、ヒートテック、冬履。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。</p>
+        <% elsif @temperature.between?(1, 10) %>
+          <p>肌寒い時期です。長袖を着用しましょう。天気の悪い場合は寒く感じる可能性があるので、少し暖かめの格好をしましょう。</p>
+        <% elsif @temperature.between?(11, 20) %>
+          <p>過ごしやすい気温です。薄手の長袖や薄手のコートがちょうど良いです。</p>
+        <% elsif @temperature.between?(21, 25) %>
+          <p>半袖で過ごしやすい気温です。朝と夜は寒暖差があり寒くなるため羽織るものがあると良いです。天気の悪い場合は寒く感じる可能性があるので、少し暖かめの格好をしましょう。</p>
+        <% else %>
+          <p>夏です。クーラーを使いましょう。朝と夜は夏でも寒暖差があり寒くなるため羽織るものがあると良いです。</p>
+        <% end %>
+        <div class="text-sm mt-5">※あくまで目安です（道産子の感覚で記載しているので不安な方は記載よりも少し暖かめの格好をしてください。）</div>
+      </div>
+    <% else %>
+      <p>気温を取得できません</p>
+    <% end %>
+  </div>
+</div>

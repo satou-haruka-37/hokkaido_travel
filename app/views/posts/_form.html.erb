@@ -5,9 +5,9 @@
         <%= form_with(model: post, local: true) do |f| %>
           <div class="mb-8 flex justify-center">
             <% if f.object.new_record? %>
-              <div class="text-2xl font-bold">新規投稿</div>
+              <div class="text-xl font-bold">新規投稿</div>
             <% else %>
-              <div class="text-2xl font-bold">投稿編集</div>
+              <div class="text-xl font-bold">投稿編集</div>
             <% end %>
           </div>
           <%= render 'shared/error_messages', object: f.object %>
