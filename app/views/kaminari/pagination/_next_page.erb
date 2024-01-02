@@ -1,0 +1,3 @@
+<% unless current_page.last? %>
+  <%= link_to t('pagination.next').html_safe, url, rel: 'next', remote: remote, class: "btn" %>
+<% end %>

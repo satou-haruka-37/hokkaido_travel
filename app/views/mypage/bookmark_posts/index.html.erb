@@ -6,8 +6,8 @@
     <% if @posts.present? %>
       <% @posts.each do |post| %>
         <%= render 'mypage/shared/post', post: post %>
-        <div class="m-12 flex justify-center">
-          <%= paginate @posts %>
+        <div class="flex justify-center">
+          <%= paginate @posts, theme: 'pagination' %>
         </div>
       <% end %>
     <% else %>
