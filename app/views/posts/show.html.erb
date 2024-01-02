@@ -2,12 +2,17 @@
   <div class="flex justify-center mt-14">
     <div class="card w-[800px] shadow-xl flex items-center">
       <div class="card-body p-10">
-        <div class="flex justify-end">
-          <% if logged_in? %>
-            <%= render 'bookmark_button', { post: @post } %>
-          <% end %>
+        <div class="flex items-center justify-between">
+          <div>
+            <%= link_to "＜ 戻る", posts_path %>
+          </div>
+          <div>
+            <% if logged_in? %>
+              <%= render 'bookmark_button', { post: @post } %>
+            <% end %>
+          </div>
         </div>
-        <div class="mt-7">
+        <div>
           <% if @post.images.present? %>
             <div class="flex flex-wrap mt-3">
               <% @post.images.each do |image| %>
