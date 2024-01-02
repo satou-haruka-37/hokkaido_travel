@@ -60,7 +60,7 @@
             </div>
           </div>
         </div>
-        <% if current_user == @post.user || current_user.admin? %>
+        <% if current_user && (current_user == @post.user || current_user.admin?) %>
           <div class="flex justify-end">
             <%= link_to "編集", edit_post_path(@post), class: "btn mr-2" %>
             <%= button_to "削除", post_path(@post), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
