@@ -30,4 +30,9 @@ class User < ApplicationRecord
     bookmarks_posts.include?(post)
   end
 
+  # 管理者権限を持つか判定
+  def admin?
+    self.role == 'admin'
+  end
+
 end
