@@ -61,12 +61,28 @@
     // 地図を指定した要素に表示
     const map = new google.maps.Map(mapElement, mapOptions);
 
+    // 各タグに対応するマーカーの色を定義
+    const tagColors = {
+      'グルメ': 'https://maps.google.com/mapfiles/ms/micons/red.png',
+      'レジャー': 'https://maps.google.com/mapfiles/ms/micons/pink.png',
+      '宿泊': 'https://maps.google.com/mapfiles/ms/micons/orange.png',
+      '観光': 'https://maps.google.com/mapfiles/ms/micons/lightblue.png',
+      'お店': 'https://maps.google.com/mapfiles/ms/micons/yellow.png',
+      '道の駅': 'https://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
+    };
+
     // マーカーを追加（Postの情報からマーカーを追加する）
     <% @posts.each do |post| %>
       (() => {
+        let firstTag = '<%= post.tags.first.title %>';
+
         let marker = new google.maps.Marker({ //繰り返しの時はconstではなくletで定義
           position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>}, // 投稿の緯度経度情報
           map: map,
+          icon: {
+            url: tagColors[firstTag],
+            scaledSize: new google.maps.Size(40, 40),
+          },
         });
 
         // マーカーをクリックすると投稿詳細に遷移
