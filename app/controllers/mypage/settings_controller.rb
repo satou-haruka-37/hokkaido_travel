@@ -13,6 +13,7 @@ class Mypage::SettingsController < Mypage::BaseController
   end
 
   def destroy
+    @user.posts.update_all(user_id: nil)
     @user.destroy
     flash[:info] = 'ユーザーを削除しました'
     reset_session
