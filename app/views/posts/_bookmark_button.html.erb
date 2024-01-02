@@ -1,5 +1,9 @@
 <% if current_user.bookmark?(post) %>
-  <%= button_to 'お気に入り解除', post_bookmark_path(post_id: post.id, id: current_user.bookmarks.find_by(post_id: post.id)), method: :delete, class: "btn" %>
+  <%= button_to post_bookmark_path(post_id: post.id, id: current_user.bookmarks.find_by(post_id: post.id)), method: :delete, class: "btn btn-ghost" do %>
+    <p class="text-xl text-yellow-500">★</p>
+  <% end %>
 <% else %>
-  <%= button_to 'お気に入り追加', post_bookmarks_path(post_id: post.id), method: :post, class: "btn" %>
+  <%= button_to post_bookmarks_path(post_id: post.id), method: :post, class: "btn btn-ghost" do %>
+    <p class="text-xl">☆</p>
+  <% end %>
 <% end %>
