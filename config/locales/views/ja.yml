@@ -1,4 +1,7 @@
 ja:
+  pagination:
+    previous: "前へ"
+    next: "次へ"
   defaults:
     aaa: 'aaa'
   posts:

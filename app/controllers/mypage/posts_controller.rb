@@ -1,5 +1,5 @@
 class Mypage::PostsController < Mypage::BaseController
   def index
-    @posts = current_user.posts
+    @posts = current_user.posts.page(params[:page]).per(10)
   end
 end
