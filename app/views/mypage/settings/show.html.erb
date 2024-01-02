@@ -42,7 +42,7 @@
   // ユーザー削除時のアラート
   function check() {
     const firstConfirmation = window.confirm('本当に退会しますか？');
-    const secondConfirmation = firstConfirmation && window.confirm('本当に本当に退会しますか？（お気に入りの投稿やマイページの設定が削除されます）');
+    const secondConfirmation = firstConfirmation && window.confirm('本当に本当に退会しますか？\n（このボタンを押すとアカウントが削除され元に戻せません）\n※投稿は「退会したユーザー」の投稿として残ります');
 
     if (secondConfirmation) {
       return true;
