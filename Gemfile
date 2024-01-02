@@ -101,6 +101,9 @@ gem 'ransack'
 # 気温表示機能
 gem 'httparty'
 
+# ページネーション
+gem 'kaminari'
+
 # その他
 gem 'dotenv-rails'
 gem 'faker'
