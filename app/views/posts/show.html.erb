@@ -3,7 +3,9 @@
     <div class="card w-[800px] shadow-xl flex items-center">
       <div class="card-body p-10">
         <div class="flex justify-end">
-          <%= render 'bookmark_button', { post: @post } %>
+          <% if logged_in? %>
+            <%= render 'bookmark_button', { post: @post } %>
+          <% end %>
         </div>
         <div class="mt-7">
           <% if @post.images.present? %>
