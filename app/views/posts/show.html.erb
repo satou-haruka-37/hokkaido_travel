@@ -48,16 +48,25 @@
             <div id="map" class="w-full h-60 sm:w-96 sm:h-96"></div>
           </div>
           <div class="mt-7 flex items-center">
-            <div>
-            <% if @post.user.avatar? %>
-              <%= image_tag @post.user.avatar.url, class: "rounded-full w-10" %>
+            <% if @post.user.present? %>
+              <div>
+                <% if @post.user.avatar? %>
+                  <%= image_tag @post.user.avatar.url, class: "rounded-full w-10" %>
+                <% else %>
+                  <%= image_tag ("default.png"), class: "rounded-full w-10" %>
+                <% end %>
+              </div>
+              <div class="ml-5">
+                <%= @post.user.name %>
+              </div>
             <% else %>
-              <%= image_tag ("default.png"), class: "rounded-full w-10" %>
+              <div>
+                <%= image_tag ("default.png"), class: "rounded-full w-10" %>
+              </div>
+              <div class="ml-5">
+                <p>退会したユーザー</p>
+              </div>
             <% end %>
-            </div>
-            <div class="ml-5">
-            <%= @post.user.name %>
-            </div>
           </div>
         </div>
         <% if current_user && (current_user == @post.user || current_user.admin?) %>
