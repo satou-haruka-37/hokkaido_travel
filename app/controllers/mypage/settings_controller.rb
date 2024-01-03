@@ -4,7 +4,9 @@ class Mypage::SettingsController < Mypage::BaseController
   def show; end
 
   def update
-    if @user.update(user_params)
+    @user.attributes = user_params
+
+    if validate_avatar(user_params[:avatar]) && @user.save
       flash[:success] = 'ユーザーを更新しました'
       redirect_to mypage_settings_path
     else
@@ -28,5 +30,18 @@ class Mypage::SettingsController < Mypage::BaseController
 
   def user_params
     params.require(:user).permit(:name, :avatar)
+  end
+
+  def validate_avatar(avatar)
+    return true if avatar.blank?
+
+    result = Vision.image_analysis(avatar)
+
+    unless result
+      flash[:error] = '不適切な画像です'
+      return false
+    end
+
+    true
   end
 end

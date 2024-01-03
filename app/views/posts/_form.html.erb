@@ -76,7 +76,7 @@
   // Google Maps APIの読み込み
   document.addEventListener('DOMContentLoaded', function() {
     let script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=places&callback=initialize";
+    script.src = "https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initialize";
     document.body.appendChild(script);
   });
 
