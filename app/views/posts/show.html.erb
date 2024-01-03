@@ -47,6 +47,15 @@
             <p class="font-black">アクセス</p>
             <div id="map" class="w-full h-60 sm:w-96 sm:h-96"></div>
           </div>
+          <div class="mt-7">
+            <div class="mt-7 flex items-center">
+              <div>移動時間：</div>
+              <div id="calculate-route">
+                <div class="btn btn-info">道民はボタンを押してチェック</div>
+              </div>
+            </div>
+            <span class="text-xs mt-1">※実際の移動時間はこれより長くなるのであくまで目安です</span>
+          </div>
           <div class="mt-7 flex items-center">
             <% if @post.user.present? %>
               <div>
@@ -99,6 +108,7 @@
     });
   }
 
+
   //確認ダイアログ
   function check(){
     if(window.confirm('本当に削除しますか？')){
@@ -108,6 +118,67 @@
       window.alert('削除がキャンセルされました');
       return false;
     }
+  }
+
+
+  // 道民用の移動時間表示
+  document.addEventListener('DOMContentLoaded', function() {
+    // ユーザーの位置情報取得の許可状態を確認
+    if ('geolocation' in navigator) {
+      navigator.permissions.query({name: 'geolocation'}).then(function(result) {
+        if (result.state === 'granted') {
+          // 許可されている場合は自動的に移動時間を計算
+          navigator.geolocation.getCurrentPosition(function(position) {
+            const originLat = position.coords.latitude;
+            const originLng = position.coords.longitude;
+            calculateRoute(originLat, originLng, destinationLat, destinationLng);
+          });
+        } else {
+          // 許可されていない場合は位置情報取得確認のボタンを表示
+          document.getElementById('calculate-route').style.display = 'block';
+        }
+      });
+    } else {
+      alert('位置情報が取得できませんでした');
+    }
+  });
+
+  const destinationLat = <%= @post.latitude %>;
+  const destinationLng = <%= @post.longitude %>;
+
+  document.getElementById('calculate-route').addEventListener('click', function() {
+    // ユーザーに位置情報取得
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const originLat = position.coords.latitude;
+        const originLng = position.coords.longitude;
+
+        // Google Maps APIを使って移動時間を計算するための関数を呼び出し
+        calculateRoute(originLat, originLng, destinationLat, destinationLng);
+      });
+    } else {
+      alert('位置情報が取得できませんでした');
+    }
+  });
+
+  function calculateRoute(originLat, originLng, destinationLat, destinationLng) {
+    const directionsService = new google.maps.DirectionsService();
+
+    const request = {
+      origin: {lat: originLat, lng: originLng},
+      destination: {lat: destinationLat, lng: destinationLng},
+      travelMode: 'DRIVING'
+    };
+
+    directionsService.route(request, function(response, status) {
+      if (status == 'OK') {
+        // 移動時間を取得して表示
+        const travelTime = response.routes[0].legs[0].duration.text;
+        document.getElementById('calculate-route').innerHTML = '車で' + travelTime;
+      } else {
+        alert('移動時間を取得できませんでした');
+      }
+    });
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
