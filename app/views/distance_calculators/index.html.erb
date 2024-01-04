@@ -3,15 +3,11 @@
     <div class="text-xl font-bold">北海道の距離感計算ツール</div>
   </div>
 
-  <div id="route-time" class="mt-5">移動時間を計測したい、2つの地点を地図上で選択してください。</div>
+  <div id="route-time" class="mt-5 text-lg">移動時間を計測したい、2つの地点を地図上で選択してください。</div>
   <button id="clear-button" class="btn btn-info">もう一度計算する</button>
-
-  <div class="text-sm mt-5">※実際の移動時間はこれより長くなるのであくまで目安です</div>
 </div>
 
-<div id="map" class="w-full h-screen"></div>
-
-
+<div id="map" class="w-auto h-[400px] sm:h-[700px] lg:h-[600px]"></div>
 
 <script>
   function initMap() {
@@ -61,7 +57,7 @@
 
           // 移動時間を取得して表示
           let duration = response.routes[0].legs[0].duration.text;
-          document.getElementById('route-time').innerText = '移動時間: ' + duration;
+          document.getElementById('route-time').innerText = '移動時間：およそ' + duration;
 
           // 結果がある場合はボタンを表示する
           document.getElementById('clear-button').style.display = 'block';
@@ -101,3 +97,9 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
+
+<style>
+  #map:focus {
+    outline: none;
+  }
+</style>
