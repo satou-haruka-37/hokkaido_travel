@@ -56,7 +56,7 @@
             <p>観光時期（任意）</p>
             <div class="flex flex-wrap">
               <%= f.collection_check_boxes(:season_ids, Season.all, :id, :title, { checked: @post.season_ids }, { multiple: true }) do |season| %>
-                <label class="px-2.5 my-2 w-1/4 sm:w-1/6">
+                <label class="px-2 my-2 w-1/4 sm:w-1/6">
                   <%= season.check_box(class: 'hidden', data: { behavior: 'season-checkbox' }) %>
                   <button type="button" class="btn btn-sm w-full <%= 'bg-success text-white' if @post.season_ids.include?(season.value.to_i) %>" data-behavior="season-button"><%= season.text %></button>
                 </label>

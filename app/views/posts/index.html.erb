@@ -15,7 +15,7 @@
           <p>タグで検索</p>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
             <% Tag.all.each do |tag| %>
-              <div class="px-4 my-2">
+              <div class="px-2 my-2">
                 <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm btn-warning w-full" %>
               </div>
             <% end %>
@@ -25,7 +25,7 @@
           <p>観光時期で検索</p>
           <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
             <% Season.limit(12).each do |season| %>
-              <div class="px-4 my-2">
+              <div class="px-2 my-2">
                 <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm btn-warning w-full" %>
               </div>
             <% end %>
@@ -37,7 +37,7 @@
 
   <% if @filtering_active %>
     <div class="w-1/6">
-      <%= link_to '検索解除', posts_path, class: "btn btn-info h-[62px] rounded-2xl", style: "width: fit-content" %>
+      <%= link_to '解除', posts_path, class: "btn btn-info h-[62px] rounded-2xl", style: "width: fit-content" %>
     </div>
   <% end %>
 </div>
