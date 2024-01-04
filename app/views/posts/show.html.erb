@@ -95,7 +95,10 @@
 
     const mapOptions = {
       center: { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
-      zoom: 16
+      zoom: 16,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      keyboardShortcuts: false
     };
 
     const map = new google.maps.Map(mapElement, mapOptions);
