@@ -1,7 +1,7 @@
 <% if page.current? %>
-  <div class="btn" disabled="disabled">
+  <div class="btn btn-sm" disabled="disabled">
     <%= page %>
   </div>
 <% else %>
-  <%= link_to page, url, remote: remote, rel: page.rel, class: "btn btn-ghost" %>
+  <%= link_to page, url, remote: remote, rel: page.rel, class: "btn btn-ghost btn-sm" %>
 <% end %>
