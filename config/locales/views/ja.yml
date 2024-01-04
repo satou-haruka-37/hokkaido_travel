@@ -2,6 +2,7 @@ ja:
   pagination:
     previous: "前へ"
     next: "次へ"
+    truncate: '...'
   defaults:
     aaa: 'aaa'
   posts:
