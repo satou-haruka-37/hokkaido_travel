@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-  <div class="flex justify-center mt-14">
+  <div class="flex justify-center my-14">
     <div class="card w-[800px] shadow-xl flex items-center">
       <div class="card-body p-10">
         <div class="flex items-center justify-between">
@@ -12,19 +12,43 @@
             <% end %>
           </div>
         </div>
-        <div>
+        <div class="my-7">
           <% if @post.images.present? %>
-            <div class="flex flex-wrap mt-3">
-              <% @post.images.each do |image| %>
-                <%= image_tag image.to_s, class: "w-1/3 h-auto object-contain m-0.5" %>
+            <div class="carousel">
+              <div id="slide1" class="carousel-item relative w-full justify-center">
+                <%= image_tag @post.images.first.to_s, class: "object-fit" %>
+                <% if @post.images.second.present? %>
+                  <div class="absolute flex justify-end transform -translate-y-1/2 right-2.5 top-1/2">
+                    <a href="#slide2" class="btn btn-circle glass btn-sm">❯</a>
+                  </div>
+                <% end %>
+              </div>
+              <% if @post.images.second.present? %>
+                <div id="slide2" class="carousel-item relative w-full justify-center">
+                  <%= image_tag @post.images.second.to_s, class: "object-fit" %>
+                  <div class="absolute flex justify-between transform -translate-y-1/2 left-2.5 right-2.5 top-1/2">
+                    <a href="#slide1" class="btn btn-circle glass btn-sm">❮</a>
+                    <% if @post.images.third.present? %>
+                      <a href="#slide3" class="btn btn-circle glass btn-sm">❯</a>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+              <% if @post.images.third.present? %>
+                <div id="slide3" class="carousel-item relative w-full justify-center">
+                  <%= image_tag @post.images.third.to_s, class: "object-fit" %>
+                  <div class="absolute flex justify-start transform -translate-y-1/2 left-2.5 top-1/2">
+                    <a href="#slide2" class="btn btn-circle glass btn-sm">❮</a>
+                  </div>
+                </div>
               <% end %>
             </div>
           <% end %>
         </div>
-        <div>
-          <p class="text-3xl font-black"><%= @post.title %></p>
-        </div>
-        <div class="m-5">
+        <div class="px-1 sm:px-28">
+          <div>
+            <p class="text-3xl font-bold mb-2"><%= @post.title %></p>
+          </div>
           <div>
             <% @post.tags.each do |tag| %>
               <span class="badge badge-info gap-2"><%= tag.title %></span>
@@ -33,21 +57,21 @@
               <span class="badge badge-warning gap-2"><%= season.title %></span>
             <% end %>
           </div>
-          <div class="mt-7">
-            <p class="font-black">所在地</p>
+          <div class="mt-9">
+            <p class="font-bold">所在地</p>
             <p><%= @post.address %></p>
           </div>
           <% if @post.body.present? %>
-            <div class="mt-7">
-              <p class="font-black">おすすめポイント</p>
+            <div class="mt-8">
+              <p class="font-bold">おすすめポイント</p>
               <p><%= @post.body %></p>
             </div>
           <% end %>
-          <div class="mt-7">
-            <p class="font-black">アクセス</p>
+          <div class="mt-8">
+            <p class="font-bold">アクセス</p>
             <div id="map" class="w-full h-60 sm:w-96 sm:h-96"></div>
           </div>
-          <div class="mt-7">
+          <div class="mt-8">
             <div class="mt-7 flex items-center">
               <div>移動時間：</div>
               <div id="calculate-route">
@@ -56,7 +80,7 @@
             </div>
             <%= link_to "※位置情報取得ボタンが押せない場合はこちら", location_trouble_path, class: " mt-1 btn btn-xs btn-ghost" %>
           </div>
-          <div class="mt-7 flex items-center">
+          <div class="mt-8 flex items-center">
             <% if @post.user.present? %>
               <div>
                 <% if @post.user.avatar? %>
