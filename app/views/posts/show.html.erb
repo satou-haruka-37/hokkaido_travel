@@ -51,9 +51,10 @@
             <div class="mt-7 flex items-center">
               <div>移動時間：</div>
               <div id="calculate-route">
-                <div class="btn">道民はここを押してチェック</div>
+                <div class="btn">位置情報を許可する</div>
               </div>
             </div>
+            <%= link_to "※位置情報取得ボタンが押せない場合はこちら", location_trouble_path, class: " mt-1 btn btn-xs btn-ghost" %>
           </div>
           <div class="mt-7 flex items-center">
             <% if @post.user.present? %>
@@ -61,7 +62,7 @@
                 <% if @post.user.avatar? %>
                   <%= image_tag @post.user.avatar.url, class: "rounded-full w-10" %>
                 <% else %>
-                  <%= image_tag ("default.png"), class: "rounded-full w-10" %>
+                  <%= image_tag ("default.webp"), class: "rounded-full w-10" %>
                 <% end %>
               </div>
               <div class="ml-5">
@@ -69,7 +70,7 @@
               </div>
             <% else %>
               <div>
-                <%= image_tag ("default.png"), class: "rounded-full w-10" %>
+                <%= image_tag ("default.webp"), class: "rounded-full w-10" %>
               </div>
               <div class="ml-5">
                 <p>退会したユーザー</p>
@@ -176,7 +177,7 @@
       if (status == 'OK') {
         // 移動時間を取得して表示
         const travelTime = response.routes[0].legs[0].duration.text;
-        document.getElementById('calculate-route').innerHTML = 'およそ 車で' + travelTime;
+        document.getElementById('calculate-route').innerHTML = '現在地からおよそ 車で' + travelTime;
       } else {
         alert('移動時間を取得できませんでした');
       }
@@ -184,3 +185,9 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
+
+<style>
+  #calculate-route .btn {
+    cursor: pointer;
+  }
+</style>
