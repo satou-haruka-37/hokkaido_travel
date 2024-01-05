@@ -1,1 +1,41 @@
-北海道への移動方法提案ツールページ
+<div class="flex flex-col p-8">
+  <div class="mb-8 flex justify-center">
+    <div class="text-xl font-bold">北海道への行き方検索ツール</div>
+  </div>
+
+  <div class="mx-auto">
+    <p class="mt-5 text-lg">あなたの街から北海道まで、意外とすぐ行けるかも。</p>
+    <p class="mt-5">行きたいエリアを選択して下さい。</p>
+    <p>※Google Mapに移動します</p>
+    <div class="mt-10 flex flex-col space-y-5">
+      <div class="flex items-center space-x-5">
+        <%= link_to '札幌', google_maps_directions_url('札幌'), target: '_blank', class: 'btn ' %>
+        <p>札幌・ニセコ・ルスツ・定山渓・小樽・キロロ・余市・洞爺・登別</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '函館', google_maps_directions_url('函館'), target: '_blank', class: 'btn' %>
+        <p>函館・大沼・松前</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '旭川', google_maps_directions_url('旭川'), target: '_blank', class: 'btn' %>
+        <p>旭川・層雲峡・富良野・美瑛</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '帯広', google_maps_directions_url('帯広'), target: '_blank', class: 'btn' %>
+        <p>帯広・十勝・トマム・えりも</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '網走', google_maps_directions_url('網走'), target: '_blank', class: 'btn' %>
+        <p>網走・北見・知床・川湯</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '釧路', google_maps_directions_url('釧路'), target: '_blank', class: 'btn' %>
+        <p>釧路・阿寒・根室</p>
+      </div>
+      <div class="flex items-center space-x-5">
+        <%= link_to '稚内', google_maps_directions_url('稚内'), target: '_blank', class: 'btn' %>
+        <p>稚内・留萌・利尻島・礼文島</p>
+      </div>
+    </div>
+  </div>
+</div>
