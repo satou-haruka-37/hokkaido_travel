@@ -1,9 +1,9 @@
 <% if current_user.bookmark?(post) %>
-  <%= button_to post_bookmark_path(post_id: post.id, id: current_user.bookmarks.find_by(post_id: post.id)), method: :delete, class: "btn btn-ghost" do %>
+  <%= button_to post_bookmark_path(post_id: post.id, id: current_user.bookmarks.find_by(post_id: post.id)), method: :delete, class: "btn btn-ghost btn-sm" do %>
     <p class="text-xl text-yellow-500">★</p>
   <% end %>
 <% else %>
-  <%= button_to post_bookmarks_path(post_id: post.id), method: :post, class: "btn btn-ghost" do %>
+  <%= button_to post_bookmarks_path(post_id: post.id), method: :post, class: "btn btn-ghost btn-sm" do %>
     <p class="text-xl">☆</p>
   <% end %>
 <% end %>

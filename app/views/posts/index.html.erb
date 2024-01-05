@@ -1,3 +1,6 @@
+<div class="p-7 flex">
+  <%= image_tag 'redmarker.webp', class: "w-6 h-6" %>を押しておすすめスポットを見つけよう
+</div>
 <div class="flex">
   <div class="<%= @filtering_active ? 'w-5/6' : 'w-full' %>">
     <div class="collapse collapse-arrow bg-base-200">
@@ -6,7 +9,7 @@
         検索
       </div>
       <div class="collapse-content">
-        <p class="flex flex-col mb-5">好きな言葉を入力するか、絞り込みたいタグをクリックしてください</p>
+        <p class="flex flex-col mb-5">好きな言葉を入力するか、絞り込みたい条件のボタンをクリックしてください</p>
         <div class="flex flex-col mb-5">
           <p>フリーワード検索</p>
           <%= render 'search', q: @q, url: posts_path %>
@@ -15,7 +18,7 @@
           <p>タグで検索</p>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
             <% Tag.all.each do |tag| %>
-              <div class="px-4 my-2">
+              <div class="px-2 my-2">
                 <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm btn-warning w-full" %>
               </div>
             <% end %>
@@ -25,7 +28,7 @@
           <p>観光時期で検索</p>
           <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
             <% Season.limit(12).each do |season| %>
-              <div class="px-4 my-2">
+              <div class="px-2 my-2">
                 <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm btn-warning w-full" %>
               </div>
             <% end %>
@@ -37,14 +40,14 @@
 
   <% if @filtering_active %>
     <div class="w-1/6">
-      <%= link_to '検索解除', posts_path, class: "btn btn-info h-[62px] rounded-2xl", style: "width: fit-content" %>
+      <%= link_to '解除', posts_path, class: "btn btn-info h-[62px] rounded-2xl", style: "width: fit-content" %>
     </div>
   <% end %>
 </div>
 
 
 <!-- マップを表示する要素 -->
-<div id="map" class="w-full h-screen"></div>
+<div id="map" class="w-auto h-[400px] sm:h-[750px]"></div>
 
 <script>
   // 地図を初期化する関数
@@ -55,7 +58,11 @@
     // 地図のオプション
     const mapOptions = {
       center: { lat: 43.534001, lng: 142.774103 }, // 地図の初期表示位置
-      zoom: 7 // ズームレベル
+      zoom: 7, // ズームレベル
+      streetViewControl: false, // ストリートビューのボタン非表示
+      mapTypeControl: false, // 地図、航空写真のボタン非表示
+      fullscreenControl: false, // フルスクリーンボタン非表示
+      keyboardShortcuts: false //キーボードショートカットオフ、キーボードボタン非表示
     };
 
     // 地図を指定した要素に表示

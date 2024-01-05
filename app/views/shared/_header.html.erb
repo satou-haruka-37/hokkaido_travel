@@ -1,7 +1,7 @@
 <div class="navbar bg-base-100 z-10">
   <div class="flex-1">
     <%= link_to root_path, class: "btn btn-ghost text-xl h-auto w-[150px] sm:w-[170px]" do %>
-      <%= image_tag('toplogo.png') %>
+      <%= image_tag('logo.webp') %>
     <% end %>
   </div>
   <div class="flex-none">
@@ -34,12 +34,24 @@
           <summary>
             メニュー
           </summary>
-          <ul class="bg-base-100 rounded-t-none w-[120px]">
+          <ul class="bg-base-100 rounded-t-none w-[120px] break-words">
             <li><%= link_to "投稿一覧", posts_path %></li>
             <li><%= link_to "新規投稿", new_post_path %></li>
-            <li><%= link_to "北海道の距離感計算", distance_calculators_path %></li>
-            <li><%= link_to "北海道への移動手段", movement_methods_path %></li>
-            <li><%= link_to "北海道に来る際の服装", clothing_suggestions_path %></li>
+            <li>
+              <%= link_to distance_calculators_path do %>
+                道内の移動<br>時間計算
+              <% end %>
+            </li>
+            <li>
+              <%= link_to movement_methods_path do %>
+                北海道への<br>行き方検索
+              <% end %>
+            </li>
+            <li>
+              <%= link_to clothing_suggestions_path do %>
+                北海道での<br>服装の提案
+              <% end %>
+            </li>
             <li><%= link_to "マイページ", mypage_bookmark_posts_path %></li>
             <li><%= button_to "ログアウト", logout_path, method: :get %></li>
           </ul>

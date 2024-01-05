@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-  <div class="flex justify-center mt-14">
+  <div class="flex justify-center my-14">
     <div class="card w-[800px] shadow-xl">
       <div class="card-body p-10">
         <%= form_with(model: post, local: true) do |f| %>
@@ -23,7 +23,7 @@
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :body %>
-            <%= f.text_field :body, placeholder: "このスポットのおすすめポイントを教えてください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_field :body, placeholder: "どういう部分がおすすめか教えてください", class: "input input-bordered w-full", autocomplete: "off" %>
             <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
           </div>
           <div class="flex flex-col mt-5">
@@ -56,7 +56,7 @@
             <p>観光時期（任意）</p>
             <div class="flex flex-wrap">
               <%= f.collection_check_boxes(:season_ids, Season.all, :id, :title, { checked: @post.season_ids }, { multiple: true }) do |season| %>
-                <label class="px-2.5 my-2 w-1/4 sm:w-1/6">
+                <label class="px-2 my-2 w-1/4 sm:w-1/6">
                   <%= season.check_box(class: 'hidden', data: { behavior: 'season-checkbox' }) %>
                   <button type="button" class="btn btn-sm w-full <%= 'bg-success text-white' if @post.season_ids.include?(season.value.to_i) %>" data-behavior="season-button"><%= season.text %></button>
                 </label>

@@ -9,7 +9,7 @@ ja:
       post:
         title: 'スポット名'
         address: '住所'
-        body: 'おすすめポイント'
+        body: 'おすすめコメント'
         images: '写真'
       user:
         name: 'ニックネーム'
