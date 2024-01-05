@@ -61,7 +61,7 @@
 
           // 移動時間を取得して表示
           let duration = response.routes[0].legs[0].duration.text;
-          document.getElementById('route-time').innerText = '移動時間：およそ' + duration;
+          document.getElementById('route-time').innerText = '移動時間：およそ 車で' + duration;
 
           // 結果がある場合はボタンを表示する
           document.getElementById('clear-button').style.display = 'block';

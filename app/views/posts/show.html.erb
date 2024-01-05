@@ -49,7 +49,7 @@
           </div>
           <div class="mt-7">
             <div class="mt-7 flex items-center">
-              <div>移動時間：およそ</div>
+              <div>移動時間：</div>
               <div id="calculate-route">
                 <div class="btn">道民はここを押してチェック</div>
               </div>
@@ -176,7 +176,7 @@
       if (status == 'OK') {
         // 移動時間を取得して表示
         const travelTime = response.routes[0].legs[0].duration.text;
-        document.getElementById('calculate-route').innerHTML = '車で' + travelTime;
+        document.getElementById('calculate-route').innerHTML = 'およそ 車で' + travelTime;
       } else {
         alert('移動時間を取得できませんでした');
       }
