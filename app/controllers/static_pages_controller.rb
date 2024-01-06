@@ -6,4 +6,6 @@ class StaticPagesController < ApplicationController
   def terms_of_service; end
 
   def location_trouble; end
+
+  def auth0_icon; end
 end
