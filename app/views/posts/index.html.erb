@@ -49,6 +49,16 @@
 <!-- マップを表示する要素 -->
 <div id="map" class="w-auto h-[400px] sm:h-[750px]"></div>
 
+<dialog id="post_modal" class="modal">
+  <div class="modal-box sm:w-[500px]">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div class="post_show mt-4"></div>
+  </div>
+</dialog>
+
+
 <script>
   // 地図を初期化する関数
   function initMap() {
@@ -94,7 +104,40 @@
 
         // マーカーをクリックすると投稿詳細に遷移
         marker.addListener('click', function() {
-          window.location.href = '<%= post_path(post) %>'; // 投稿詳細ページを開く
+          const modalContent = `
+            <div>
+              <p class="text-xl font-bold mb-2"><%= post.title %></p>
+
+              <div class="mb-5">
+                <% post.tags.each do |tag| %>
+                  <span class="badge badge-info gap-2"><%= tag.title %></span>
+                <% end %>
+                <% post.seasons.each do |season| %>
+                  <span class="badge badge-warning gap-2"><%= season.title %></span>
+                <% end %>
+              </div>
+
+              <% if post.images.present? %>
+                <div class="flex justify-center">
+                  <div class="w-full sm:w-[300px] mb-5">
+                    <% first_image = post.images.first %>
+                    <%= image_tag first_image.to_s %>
+                  </div>
+                </div>
+              <% end %>
+
+              <% if post.images.present? %>
+                <p class="mb-5"><%= post.body %></p>
+              <% end %>
+
+              <div class="flex justify-end">
+                <%= link_to "詳細へ", post_path(post), class: "btn" %>
+              </div>
+            </div>
+          `;
+
+          document.querySelector('.post_show').innerHTML = modalContent;
+          post_modal.showModal();
         });
       })();
     <% end %>
