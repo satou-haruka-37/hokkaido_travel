@@ -11,11 +11,12 @@ class Post < ApplicationRecord
   has_many :users, through: :bookmarks
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :address, presence: true
+  validates :address, presence: true, uniqueness: true
   validates :body, length: { maximum: 300 }
   validates :images, length: { maximum: 3, message: 'は3枚までしかアップロードできません' }
 
   validate :validate_address
+  validate :validate_hokkaido
   validate :must_have_tags
 
   def validate_address
@@ -23,6 +24,12 @@ class Post < ApplicationRecord
     return if geocoded&.first&.coordinates.present?
 
     errors.add(:address, 'が存在しません')
+  end
+
+  def validate_hokkaido
+    unless address.include?("北海道")
+      errors.add(:base, "北海道の住所を入力してください")
+    end
   end
 
   def must_have_tags
