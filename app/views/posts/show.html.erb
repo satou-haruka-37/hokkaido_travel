@@ -1,6 +1,6 @@
 <div class="min-h-screen">
   <div class="flex justify-center my-14">
-    <div class="card w-[800px] shadow-xl flex items-center">
+    <div class="card w-full sm:w-[800px] shadow-xl flex items-center">
       <div class="card-body p-10">
         <div class="flex items-center justify-between">
           <div>
@@ -16,7 +16,7 @@
           <div class="flex justify-center">
             <% if @post.images.present? %>
               <div class="carousel">
-                <div id="slide1" class="carousel-item relative w-full justify-center">
+                <div id="slide1" class="carousel-item relative w-full sm:w-[500px] justify-center">
                   <%= image_tag @post.images.first.to_s %>
                   <% if @post.images.second.present? %>
                     <div class="absolute flex justify-end transform -translate-y-1/2 right-2.5 top-1/2">
@@ -25,7 +25,7 @@
                   <% end %>
                 </div>
                 <% if @post.images.second.present? %>
-                  <div id="slide2" class="carousel-item relative w-full justify-center">
+                  <div id="slide2" class="carousel-item relative w-full sm:w-[500px] justify-center">
                     <%= image_tag @post.images.second.to_s %>
                     <div class="absolute flex justify-between transform -translate-y-1/2 left-2.5 right-2.5 top-1/2">
                       <a href="#slide1" class="btn btn-circle glass btn-sm">❮</a>
@@ -36,7 +36,7 @@
                   </div>
                 <% end %>
                 <% if @post.images.third.present? %>
-                  <div id="slide3" class="carousel-item relative w-full justify-center">
+                  <div id="slide3" class="carousel-item relative w-full sm:w-[500px] justify-center">
                     <%= image_tag @post.images.third.to_s %>
                     <div class="absolute flex justify-start transform -translate-y-1/2 left-2.5 top-1/2">
                       <a href="#slide2" class="btn btn-circle glass btn-sm">❮</a>
