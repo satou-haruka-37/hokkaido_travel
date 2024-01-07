@@ -19,7 +19,7 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
             <% Tag.all.each do |tag| %>
               <div class="px-2 my-2">
-                <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm btn-warning w-full" %>
+                <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm #{params[:tag_id].to_i == tag.id ? 'btn-success' : 'btn-warning'} w-full" %>
               </div>
             <% end %>
           </div>
@@ -29,7 +29,7 @@
           <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
             <% Season.limit(12).each do |season| %>
               <div class="px-2 my-2">
-                <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm btn-warning w-full" %>
+                <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm #{params[:season_id].to_i == season.id ? 'btn-success' : 'btn-warning'} w-full" %>
               </div>
             <% end %>
           </div>
