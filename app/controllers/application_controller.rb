@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     return if session[:user_id]
 
     flash[:info] = 'ログインしてください'
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
   def current_user
