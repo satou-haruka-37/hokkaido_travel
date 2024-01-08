@@ -25,4 +25,6 @@ Rails.application.routes.draw do
     resources :bookmark_posts, only: [:index]
     resource :settings, only: %i[show update destroy]
   end
+
+  get '*unmatched_route', to: 'static_pages#top'
 end
