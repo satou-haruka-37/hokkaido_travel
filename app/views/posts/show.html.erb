@@ -71,7 +71,7 @@
           <% end %>
           <div class="mt-8">
             <p class="font-bold">アクセス</p>
-            <div class="mt-5 flex justify-center">
+            <div class="mt-2 flex justify-center">
               <div id="map" class="w-full h-60 sm:w-96 sm:h-96"></div>
             </div>
           </div>
@@ -83,6 +83,10 @@
               </div>
             </div>
             <%= link_to "※位置情報取得ボタンが押せない場合はこちら", location_trouble_path, class: " mt-1 btn btn-xs btn-ghost" %>
+          </div>
+          <div class="mt-12">
+            <p class="font-bold">近くのおすすめスポット</p>
+            <div id="nearby-posts" class="mt-2 flex flex-wrap justify-center"></div>
           </div>
           <div class="mt-8 flex items-center">
             <% if @post.user.present? %>
@@ -211,5 +215,57 @@
       }
     });
   }
+
+
+  // 近くのおすすめスポット表示機能
+  document.addEventListener("DOMContentLoaded", function() {
+    const postId = <%= @post.id %>;
+    const postLatitude = <%= @post.latitude %>;
+    const postLongitude = <%= @post.longitude %>;
+
+    fetch(`/posts/${postId}/nearby_posts?distance=20`) // distance=検索したい距離(km)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then(data => {
+        const nearbyPostsContainer = document.getElementById('nearby-posts');
+
+        if (data.length === 0) {
+          const noPostsMessage = document.createElement('p');
+          noPostsMessage.textContent = '見つかりませんでした';
+          noPostsMessage.className = 'px-2 text-neutral-content';
+          nearbyPostsContainer.appendChild(noPostsMessage);
+        } else {
+          data.forEach(post => {
+            // カード要素（カード全体をリンクに）
+            const card = document.createElement('a');
+            card.className = 'card bg-base-100 shadow-xl w-[200px] h-[150px] m-4 pb-4 flex items-center justify-center';
+            card.href = `/posts/${post.id}`;
+
+            // 投稿に写真があれば画像を表示
+            if (post.images && post.images.length > 0) {
+              const img = document.createElement('img');
+              img.src = post.images[0].url; // 最初の画像のURLを設定
+              img.className = 'rounded-t-2xl aspect-[16/9] object-cover'; // Tailwind CSSのクラス
+              card.appendChild(img); // 画像をカードに追加
+            }
+
+            // 投稿のタイトルを表示
+            const title = document.createElement('h3');
+            title.textContent = post.title;
+            title.className = 'text-xs p-2';
+            card.appendChild(title);
+            nearbyPostsContainer.appendChild(card);
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>

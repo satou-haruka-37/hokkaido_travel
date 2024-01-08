@@ -57,6 +57,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def nearby_posts
+    post = Post.find(params[:id])
+    nearby_posts = post.nearbys(params[:distance]).limit(3)
+
+    render json: nearby_posts.as_json(only: [:id, :title, :latitude, :longitude, :images])
+  end
+
   private
 
   def post_params

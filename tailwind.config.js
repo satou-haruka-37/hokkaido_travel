@@ -15,9 +15,6 @@ module.exports = {
       fontFamily: {
         main: ['Zen Maru Gothic', 'serif'],
       },
-      aspectRatio: {
-        '3/2': '3 / 2',
-      },
     },
   },
 	plugins: [require("daisyui")],
