@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :bookmarks, only: %i[create destroy]
+    member do
+      get 'nearby_posts'
+    end
   end
   resources :distance_calculators, only: [:index]
   resources :movement_methods, only: [:index]

@@ -11,7 +11,7 @@
       <div class="w-44 md:mr-10">
         <% if post.images.present? %>
           <% first_image = post.images.first %>
-          <%= image_tag first_image.to_s, class: "aspect-[4/3] object-cover" %>
+          <%= image_tag first_image.to_s, class: "aspect-[3/2] object-cover" %>
         <% end %>
       </div>
       <div class="flex flex-col w-auto">
