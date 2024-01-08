@@ -16,8 +16,8 @@
           <div class="flex justify-center">
             <% if @post.images.present? %>
               <div class="carousel">
-                <div id="slide1" class="carousel-item relative w-full justify-center">
-                  <%= image_tag @post.images.first.to_s, class: "sm:w-[500px]" %>
+                <div id="slide1" class="carousel-item relative w-full justify-center items-center">
+                  <%= image_tag @post.images.first.to_s, width: 500%>
                   <% if @post.images.second.present? %>
                     <div class="absolute flex justify-end transform -translate-y-1/2 right-2.5 top-1/2">
                       <a href="#slide2" class="btn btn-circle glass btn-sm">❯</a>
@@ -25,8 +25,8 @@
                   <% end %>
                 </div>
                 <% if @post.images.second.present? %>
-                  <div id="slide2" class="carousel-item relative w-full justify-center">
-                    <%= image_tag @post.images.second.to_s, class: "sm:w-[500px]" %>
+                  <div id="slide2" class="carousel-item relative w-full justify-center items-center">
+                    <%= image_tag @post.images.second.to_s, width: 500 %>
                     <div class="absolute flex justify-between transform -translate-y-1/2 left-2.5 right-2.5 top-1/2">
                       <a href="#slide1" class="btn btn-circle glass btn-sm">❮</a>
                       <% if @post.images.third.present? %>
@@ -36,8 +36,8 @@
                   </div>
                 <% end %>
                 <% if @post.images.third.present? %>
-                  <div id="slide3" class="carousel-item relative w-full justify-center">
-                    <%= image_tag @post.images.third.to_s, class: "sm:w-[500px]" %>
+                  <div id="slide3" class="carousel-item relative w-full justify-center items-center">
+                    <%= image_tag @post.images.third.to_s, width: 500 %>
                     <div class="absolute flex justify-start transform -translate-y-1/2 left-2.5 top-1/2">
                       <a href="#slide2" class="btn btn-circle glass btn-sm">❮</a>
                     </div>
