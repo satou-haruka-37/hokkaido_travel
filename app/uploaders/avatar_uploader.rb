@@ -27,7 +27,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
-  process resize_to_fill: [500, 500, "Center"]
+  process resize_to_fill: [400, 400, "Center"]
   #
   # def scale(width, height)
   #   # do something
@@ -41,12 +41,22 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w[jpg jpeg png]
+    %w[jpg jpeg png heic webp]
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg"
-  # end
+
+  process :convert_to_webp
+
+  def convert_to_webp
+    manipulate! do |img|
+      img.format 'webp'
+      img
+    end
+  end
+
+  def filename
+    super.chomp(File.extname(super)) + '.webp' if original_filename.present?
+  end
 end

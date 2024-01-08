@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
   def require_login
     return if session[:user_id]
 
-    flash[:info] = 'ログインしてください'
-    redirect_to root_path
+    redirect_to lets_login_path
   end
 
   def current_user
@@ -24,4 +23,5 @@ class ApplicationController < ActionController::Base
   def set_current_temperature
     @temperature = OpenWeather.current_temperature_in_hokkaido
   end
+
 end
