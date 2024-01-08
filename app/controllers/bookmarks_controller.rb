@@ -18,7 +18,7 @@ class BookmarksController < ApplicationController
         redirect_to post_path(post)
       end
     else
-      flash[:error] = 'ブックマークボタンを連打しないでください！'
+      flash[:error] = 'お気に入りボタンを連打しないでください！'
       redirect_back(fallback_location: root_path)
     end
   end

@@ -17,7 +17,7 @@ class User < ApplicationRecord
     user
   end
 
-  # ブックマーク機能のメソッド
+  # お気に入り機能のメソッド
   def bookmark(post)
     bookmarks_posts << post unless bookmarks_posts.include?(post)
   end
