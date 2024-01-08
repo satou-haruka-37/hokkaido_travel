@@ -64,7 +64,9 @@
             </div>
           </div>
           <div class="flex justify-center mt-7">
-            <%= f.submit (f.object.new_record? ? "投稿する" : "更新する"), class: "btn btn-info" %>
+            <button class="btn btn-info", id="submit-button">
+              <%= f.submit (f.object.new_record? ? "投稿する" : "更新する") %>
+            </button>
           </div>
         <% end %>
       </div>
@@ -216,4 +218,10 @@
       reader.readAsDataURL(file);
     }
   }
+
+
+  // 送信ボタンを押した時にローディングのアニメーション
+  document.getElementById('submit-button').addEventListener('click', function() {
+    document.getElementById('submit-button').innerHTML = '<span class="loading loading-spinner btn-info"></span> 送信中';
+  });
 </script>
