@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/terms_of_service', to: 'static_pages#terms_of_service'
   get '/location_trouble', to: 'static_pages#location_trouble'
   get '/auth0_icon', to: 'static_pages#auth0_icon'
+  get '/lets_login', to: 'static_pages#lets_login'
 
   get '/auth/:provider/callback', to: 'auth0#callback'
   get '/auth/failure', to: 'auth0#failure'

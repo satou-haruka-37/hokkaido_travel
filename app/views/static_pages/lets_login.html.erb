@@ -1,0 +1,30 @@
+<div class="flex flex-col px-4">
+  <div class="flex justify-center mt-16 mb-20">
+    <%= button_to 'ログインしてたくさんの機能を使う！', '/auth/auth0', method: :post, class: "btn btn-success md:btn-lg" %>
+  </div>
+
+  <div class="flex justify-center mb-10">
+    <div class="text-xl font-bold">ログインでえぞとらべるをもっと便利に</div>
+  </div>
+
+  <div class="mx-auto space-y-36 mb-36">
+    <div class="flex flex-wrap items-center">
+      <div class="w-[350px] md:mx-4">
+        <p class="flex justify-center font-bold">ログインでできること① 新規投稿</p>
+        <p class="mt-5">地元民しか知らないおすすめスポットをぜひ教えてください！</p>
+      </div>
+      <div class="card w-11/12 sm:w-96 h-auto bg-base-100 shadow-xl shadow-xl">
+        <figure><%= image_tag "instructions03.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center md:flex-row-reverse">
+      <div class="w-[350px] md:mx-4">
+        <p class="flex justify-center font-bold">ログインでできること② お気に入り</p>
+        <p class="mt-5">気になったスポットはお気に入りに追加して、後でまとめて見返せる！旅の計画に役立ちます。</p>
+      </div>
+      <div class="card w-11/12 sm:w-96 h-auto bg-base-100 shadow-xl shadow-xl">
+        <figure><%= image_tag "instructions07.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
+      </div>
+    </div>
+  </div>
+</div>
