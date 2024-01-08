@@ -221,7 +221,15 @@
 
 
   // 送信ボタンを押した時にローディングのアニメーション
-  document.getElementById('submit-button').addEventListener('click', function() {
-    document.getElementById('submit-button').innerHTML = '<span class="loading loading-spinner btn-info"></span> 送信中';
+  const submitBuuton = document.getElementById('submit-button')
+  // PC用
+  submitBuuton.addEventListener('click', function() {
+    document.getElementById('submit-button').innerHTML = '<span class="lg:loading"></span> 送信中…';
   });
+
+  // スマホ用
+  submitBuuton.addEventListener('touchstart', function() {
+    document.getElementById('submit-button').innerHTML = '<span class="lg:loading"></span> 送信中…';
+  });
+
 </script>
