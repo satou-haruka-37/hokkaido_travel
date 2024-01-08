@@ -9,7 +9,7 @@
         <%= form_with(model: @user, url: mypage_settings_path, local: true) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
           <div class="flex flex-col">
-            <div id="preview-avartar" class="flex flex-wrap justify-center">
+            <div id="preview-avatar" class="flex flex-wrap justify-center">
               <% if @user.avatar.present? %>
                 <%= image_tag @user.avatar.to_s, class: "w-32 h-auto rounded-full" %>
               <% else %>
@@ -53,7 +53,7 @@
   }
 
   function previewAvatar(event) {
-    let previewAvatar = document.getElementById('preview-avartar');
+    let previewAvatar = document.getElementById('preview-avatar');
     previewAvatar.innerHTML = '';
 
     let file = event.target.files[0];

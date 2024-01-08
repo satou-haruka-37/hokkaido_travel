@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   # ブックマーク機能のメソッド
   def bookmark(post)
-    bookmarks_posts << post
+    bookmarks_posts << post unless bookmarks_posts.include?(post)
   end
 
   def bookmark_destroy(post)
