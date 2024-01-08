@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'auth0#failure'
   get '/logout', to: 'auth0#logout'
 
+  get '*unmatched_route', to: 'static_pages#top'
+
   resources :posts do
     resources :bookmarks, only: %i[create destroy]
   end
