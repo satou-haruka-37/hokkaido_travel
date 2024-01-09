@@ -1,5 +1,4 @@
 class StaticPagesController < ApplicationController
-  before_action :set_current_temperature
 
   def top; end
 

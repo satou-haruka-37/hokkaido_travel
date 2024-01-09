@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
-  before_action :set_current_temperature
+  before_action :set_weather
 
   private
 
@@ -20,8 +20,12 @@ class ApplicationController < ActionController::Base
     !!session[:user_id]
   end
 
-  def set_current_temperature
-    @temperature = OpenWeather.current_temperature_in_hokkaido
+  def set_weather
+    @weather = OpenWeather.current_weather_in_sapporo
+
+    @fair_conditions = WeatherHelper::FAIR_CONDITIONS
+    @inclement_conditions = WeatherHelper::INCLEMENT_CONDITIONS
+    @others_conditions = WeatherHelper::OTHERS_CONDITIONS
   end
 
 end

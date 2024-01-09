@@ -11,8 +11,9 @@
         <li class="hidden sm:block">
           <p>
             現在の北海道：
-            <% if @temperature %>
-              <%= @temperature %>°C
+            <% if @weather[:temp] %>
+              <%= @weather[:temp] %>°C
+              <%= image_tag(weather_icon(@weather[:condition]), class: "w-6 h-6") %>
             <% else %>
               気温を取得できません
             <% end %>
