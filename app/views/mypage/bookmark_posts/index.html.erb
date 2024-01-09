@@ -6,10 +6,10 @@
     <% if @posts.present? %>
       <% @posts.each do |post| %>
         <%= render 'mypage/shared/post', post: post %>
-        <div class="flex justify-center">
-          <%= paginate @posts, theme: 'pagination' %>
-        </div>
       <% end %>
+      <div class="flex justify-center">
+        <%= paginate @posts, theme: 'pagination' %>
+      </div>
     <% else %>
       <p class="p-10">お気に入りがありません</p>
     <% end %>
