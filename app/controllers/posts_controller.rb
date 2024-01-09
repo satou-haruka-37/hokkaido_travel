@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+
     if validate_images(post_params[:images]) && @post.save
       flash[:success] = '投稿が作成されました'
       redirect_to posts_path
@@ -67,7 +68,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :address, :body, tag_ids: [], season_ids: [], images: [])
+    params.require(:post).permit(:title, :address, :body, :images_cache, tag_ids: [], season_ids: [], images: [])
   end
 
   def validate_images(images)
