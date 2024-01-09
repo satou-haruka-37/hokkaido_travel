@@ -25,7 +25,7 @@
 #   Tag.create(tag_data)
 # end
 
-# 観光時期のデータ
+# ベストシーズンのデータ
 # seasons = [
 #   { title: '1月' },
 #   { title: '2月' },

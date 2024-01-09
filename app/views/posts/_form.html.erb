@@ -18,7 +18,7 @@
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :address, for: "Address" %>
-            <%= f.text_field :address, id: "Address", placeholder: "住所を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_field :address, id: "Address", placeholder: "候補から選択すると住所が自動で入力されます", class: "input input-bordered w-full", autocomplete: "off" %>
             <span class="text-xs text-right mt-1">必須（すでに投稿されている住所は使えません）</span>
           </div>
           <div class="flex flex-col mt-5">
@@ -54,7 +54,7 @@
             <span class="text-xs text-right mt-1">タグを1つ以上選択してください</span>
           </div>
           <div class="flex flex-col mt-5">
-            <p>観光時期（任意）</p>
+            <p>ベストシーズン（任意）</p>
             <div class="flex flex-wrap">
               <%= f.collection_check_boxes(:season_ids, Season.all, :id, :title, { checked: @post.season_ids }, { multiple: true }) do |season| %>
                 <label class="px-2 my-2 w-1/4 sm:w-1/6">
@@ -164,7 +164,7 @@
     });
   });
 
-  // 観光時期の選択をチェックボックスではなく色を変えて表すためのコード
+  // ベストシーズンの選択をチェックボックスではなく色を変えて表すためのコード
   document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('[data-behavior="season-button"]');
 
