@@ -23,7 +23,7 @@
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :body %>
-            <%= f.text_field :body, placeholder: "どういう部分がおすすめか教えてください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_area :body, placeholder: "どういう部分がおすすめか教えてください", class: "input input-bordered w-full textarea", autocomplete: "off" %>
             <span id="charCount" class="text-xs text-right mt-1">300文字まで</span>
           </div>
           <div class="flex flex-col mt-5">
@@ -115,12 +115,12 @@
 
 
   // bodyの文字数カウント
-  const textField = document.querySelector('input[name="post[body]"]');
+  const textArea = document.querySelector('textarea[name="post[body]"]');
   const charCount = document.getElementById('charCount');
 
-  textField.addEventListener('input', function() {
+  textArea.addEventListener('input', function() {
     const maxLength = 300;
-    const currentLength = textField.value.length;
+    const currentLength = textArea.value.length;
 
     if (currentLength <= maxLength) {
       const remaining = maxLength - currentLength;
