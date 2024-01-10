@@ -1,0 +1,72 @@
+<div class="flex flex-col p-8">
+  <div class="mb-16 flex justify-center">
+    <div class="text-xl font-bold">アプリをダウンロードする方法</div>
+  </div>
+
+  <div class="px-6 sm:px-12 w-full sm:w-[700px] lg:w-[800px] mx-auto flex justify-center">
+    <ul class="list-decimal">
+      <li>
+        <a href="#android" class="btn btn-link">Androidをご利用の方(Chrome)</a>
+      </li>
+      <li>
+        <a href="#iphone" class="btn btn-link">iPhoneをご利用の方(Safari)</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="android" class="mt-24 px-6 sm:px-12 w-full sm:w-[700px] lg:w-[800px] mx-auto">
+    <div class="mb-5 sm:mb-10 flex justify-center">
+      <div class="text-lg font-bold">Androidをご利用の方(Chrome)</div>
+    </div>
+    <ul class="list-decimal space-y-16">
+      <li>
+        <p class="mb-4">図の矢印で示されたボタンを押します。</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa04.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+      <li>
+        <p class="mb-4">「アプリをインストール」を選んでください。</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa05.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+      <li>
+        <p class="mb-4">「インストール」を押すと、インストールが開始されアプリが追加されます！</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa06.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="iphone" class="mt-24 px-6 sm:px-12 w-full sm:w-[700px] lg:w-[800px] mx-auto">
+    <div class="mb-5 sm:mb-10 flex justify-center">
+      <div class="text-lg font-bold">iPhoneをご利用の方(Safari)</div>
+    </div>
+    <ul class="list-decimal space-y-16">
+      <li>
+        <p class="mb-4">「共有ボタン」を押します。</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa01.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+      <li>
+        <p class="mb-4">「ホーム画面に追加」を選んでください。</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa02.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+      <li>
+        <p class="mb-4">「追加」を押すとホーム画面にアプリアイコンが追加されます！</p>
+        <div class="flex justify-center">
+          <%= image_tag 'pwa03.webp', class: "w-full sm:w-96" %>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="my-20 flex justify-center">
+    <%= link_to "元の画面に戻る", :back, class: "btn" %>
+  </div>
+</div>
