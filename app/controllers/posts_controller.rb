@@ -71,25 +71,6 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :address, :body, :images_cache, tag_ids: [], season_ids: [], images: [])
   end
 
-  def validate_images(images)
-    return true if images.blank? || images.all?(&:blank?)
-
-    cleaned_images = images.reject(&:blank?) # imagesに空の値が含まれる場合はimage_analysisメソッドでエラーが起こるため除去
-    inappropriate_images = []
-
-    cleaned_images.each do |image|
-      result = Vision.image_analysis(image)
-      inappropriate_images << image unless result
-    end
-
-    if inappropriate_images.any?
-      flash[:error] = '不適切な画像が含まれています'
-      return false
-    end
-
-    true
-  end
-
   def set_post
     @post = Post.find(params[:id])
   end
