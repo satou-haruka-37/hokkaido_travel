@@ -2,7 +2,7 @@
   <%= image_tag 'redmarker.webp', class: "w-6 h-6" %>を押しておすすめスポットを見つけよう
 </div>
 <div class="flex">
-  <div class="<%= @filtering_active ? 'w-5/6 sm:w-11/12' : 'w-full' %>">
+  <div id="search-bar" class="<%= @filtering_active ? 'w-5/6 sm:w-11/12' : 'w-full' %>">
     <div class="collapse collapse-arrow bg-base-200">
       <input type="checkbox" />
       <div class="collapse-title font-bold flex justify-center">
@@ -10,9 +10,18 @@
       </div>
       <div class="collapse-content">
         <p class="flex flex-col my-5">好きな言葉を入力するか、検索したい条件のボタンをクリックしてください</p>
-        <div class="flex flex-col mb-5">
+        <div class="flex flex-col mt-5">
           <p>フリーワード検索</p>
           <%= render 'search', q: @q, url: posts_path %>
+        </div>
+        <div class="flex flex-col mt-5">
+          <p>地域で検索</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
+            <div id="central-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道央</div>
+            <div id="southern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道南</div>
+            <div id="northern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道北</div>
+            <div id="eastern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道東</div>
+          </div>
         </div>
         <div class="flex flex-col mt-5">
           <p>タグで検索</p>
@@ -38,11 +47,11 @@
     </div>
   </div>
 
-  <% if @filtering_active %>
-    <div class="w-1/6 sm:w-1/12">
+  <div id="search-reset" class="<%= @filtering_active ? 'w-1/6 sm:w-1/12' : '' %>">
+    <% if @filtering_active %>
       <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl" %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 
@@ -141,6 +150,108 @@
         });
       })();
     <% end %>
+
+
+    // 地域ごとにフォーカスする機能
+    // 検索解除ボタンの表示
+    function searchReset() {
+      const searchResetButton = document.getElementById('search-reset')
+      const searchBar = document.getElementById('search-bar')
+      const searchResetButtonContent = `
+        <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl" %>
+      `;
+
+      searchBar.classList.remove('w-full');
+
+      let windowWidth = window.innerWidth;
+      if (windowWidth >= 440) {
+        searchBar.classList.add('w-11/12');
+        searchResetButton.classList.add('w-1/12');
+      } else {
+        searchBar.classList.add('w-5/6');
+        searchResetButton.classList.add('w-1/6');
+      }
+      searchResetButton.innerHTML = searchResetButtonContent;
+    }
+
+    // 道央
+    const centralHokkaido = document.getElementById('central-hokkaido')
+    centralHokkaido.addEventListener('click', function() {
+      const centralHokkaidoMapOptions = {
+        center: { lat: 42.837586, lng: 141.665121 },
+        zoom: 9,
+      };
+
+      map.setCenter(centralHokkaidoMapOptions.center);
+      map.setZoom(centralHokkaidoMapOptions.zoom);
+
+      resetAllButtons();
+      centralHokkaido.classList.remove('btn-warning');
+      centralHokkaido.classList.add('btn-success');
+      searchReset();
+    });
+
+    // 道南
+    const southernHokkaido = document.getElementById('southern-hokkaido')
+    southernHokkaido.addEventListener('click', function() {
+      const southernHokkaidoMapOptions = {
+        center: { lat: 42.132789, lng: 140.132470 },
+        zoom: 9,
+      };
+
+      map.setCenter(southernHokkaidoMapOptions.center);
+      map.setZoom(southernHokkaidoMapOptions.zoom);
+
+      resetAllButtons();
+      southernHokkaido.classList.remove('btn-warning');
+      southernHokkaido.classList.add('btn-success');
+      searchReset();
+    });
+
+    // 道北
+    const northernHokkaido = document.getElementById('northern-hokkaido')
+    northernHokkaido.addEventListener('click', function() {
+      const northernHokkaidoMapOptions = {
+        center: { lat: 44.424222, lng: 142.475780 },
+        zoom: 8,
+      };
+
+      map.setCenter(northernHokkaidoMapOptions.center);
+      map.setZoom(northernHokkaidoMapOptions.zoom);
+
+      resetAllButtons();
+      northernHokkaido.classList.remove('btn-warning');
+      northernHokkaido.classList.add('btn-success');
+      searchReset();
+    });
+
+    // 道東
+    const easternHokkaido = document.getElementById('eastern-hokkaido')
+    easternHokkaido.addEventListener('click', function() {
+      const easternHokkaidoMapOptions = {
+        center: { lat: 43.524780, lng: 144.276112 },
+        zoom: 8,
+      };
+
+      map.setCenter(easternHokkaidoMapOptions.center);
+      map.setZoom(easternHokkaidoMapOptions.zoom);
+
+      resetAllButtons();
+      easternHokkaido.classList.remove('btn-warning');
+      easternHokkaido.classList.add('btn-success');
+      searchReset();
+    });
+
+    // 他のボタンの色を戻すための関数（一旦全てのボタンの色を元に戻す）
+    function resetAllButtons() {
+      const buttons = document.querySelectorAll('.regionbtn');
+
+      buttons.forEach(button => {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-warning');
+      });
+    }
+
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
