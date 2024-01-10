@@ -81,4 +81,23 @@ class PostsController < ApplicationController
     flash[:error] = '権限がありません'
     redirect_to posts_path
   end
+
+  def validate_images(images)
+    return true if images.blank? || images.all?(&:blank?)
+
+    cleaned_images = images.reject(&:blank?) # imagesに空の値が含まれる場合はimage_analysisメソッドでエラーが起こるため除去
+    inappropriate_images = []
+
+    cleaned_images.each do |image|
+      result = Vision.image_analysis(image)
+      inappropriate_images << image unless result
+    end
+
+    if inappropriate_images.any?
+      flash[:error] = '不適切な画像が含まれています'
+      return false
+    end
+
+    true
+  end
 end
