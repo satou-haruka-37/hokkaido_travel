@@ -114,6 +114,7 @@
             </div>
 
             <div class="space-x-2 flex items-center">
+              <p class="text-xs hidden sm:block">SNSで共有</p>
               <div>
                 <%= link_to "https://twitter.com/share?url=#{ request.url }&text=#{@post.title}を見つけたよ！%0A&hashtags=えぞとらべる&hashtags=北海道&hashtags=北海道旅行&hashtags=#{@post.title.gsub(/[[:space:]]+/, '')}", target: '_blank' do %>
                   <%= image_tag ("sns_x.webp"), class: "rounded-full w-10" %>
