@@ -7,15 +7,20 @@
 </div>
 
 <div class="flex flex-col px-4">
-  <div class="flex justify-center my-24">
-    <div class="text-xl font-bold">北海道を、もっと身近に。</div>
+  <div class="mb-32 mt-24 md:mt-36">
+    <div class="flex justify-center px-4">
+      <div class="text-xl sm:text-2xl font-bold">北海道を、もっと身近に。</div>
+    </div>
+    <div class="flex justify-center mt-7 px-4">
+      <div class=" font-bold">えぞとらべるは、北海道の新たな魅力を発見し、北海道旅行のお悩みを解決するサービスです。</div>
+    </div>
   </div>
 
   <div class="mx-auto space-y-36">
-    <div class="flex flex-wrap items-center">
+    <div class="flex flex-wrap items-center justify-center">
       <div class="w-[350px] md:mx-4">
         <p class="flex justify-center font-bold">みんなの投稿を見に行こう</p>
-        <p class="mt-5">道民も、道外からの旅行でも！各地の道民のおすすめの場所を探そう</p>
+        <p class="mt-5">道民も、道外からの旅行でも！北海道のおすすめの場所を探そう</p>
         <div class="mt-5 flex justify-center">
           <%= link_to "見にいく！", posts_path, class: "btn btn-info" %>
         </div>
@@ -24,19 +29,19 @@
         <figure><%= image_tag "instructions01.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
       </div>
     </div>
-    <div class="flex flex-wrap items-center md:flex-row-reverse">
+    <div class="flex flex-wrap items-center justify-center md:flex-row-reverse">
       <div class="w-[350px] md:mx-4">
-        <p class="flex justify-center font-bold">詳しい情報を見る</p>
-        <p class="mt-5">北海道は自然の観光地が多いので、観光時期が重要！アクセスやおすすめポイントなど、詳しい情報も見てみよう</p>
+        <p class="flex justify-center font-bold">詳しい情報を見よう</p>
+        <p class="mt-5">ベストシーズンや、アクセス、移動時間、合わせて行ける近くのスポットなど、詳しい情報を見てみよう</p>
       </div>
       <div class="card w-11/12 sm:w-96 h-auto bg-base-100 shadow-xl shadow-xl">
         <figure><%= image_tag "instructions02.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
       </div>
     </div>
-    <div class="flex flex-wrap items-center">
+    <div class="flex flex-wrap items-center justify-center">
       <div class="w-[350px] md:mx-4">
         <p class="flex justify-center font-bold">北海道のいいところ、おすすめしあおう</p>
-        <p class="mt-5">地元民行きつけのお店や、スポットを投稿して、「ここよかったよ！」を教え合おう</p>
+        <p class="mt-5">地元民行きつけの場所や、行ってよかった場所を教えあおう！</p>
         <p class="text-xs">※LINEまたはGoogleでログインが必要です</p>
         <div class="mt-5 flex justify-center">
           <%= link_to "おすすめする！", new_post_path, class: "btn btn-info" %>
@@ -46,10 +51,10 @@
         <figure><%= image_tag "instructions03.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
       </div>
     </div>
-    <div class="flex flex-wrap items-center md:flex-row-reverse">
+    <div class="flex flex-wrap items-center justify-center md:flex-row-reverse">
       <div class="w-[350px] md:mx-4">
         <p class="flex justify-center font-bold">道内の移動時間計算ツール</p>
-        <p class="mt-5">北海道ってどこからどこまで何時間で行けるの…？広さのイメージがつかない人へ。道内の距離感もかんたんに計算できる</p>
+        <p class="mt-5">北海道ってどこからどこまで何時間で行けるの…？道内の移動時間をかんたんに計算しよう</p>
         <div class="mt-5 flex justify-center">
           <%= link_to "距離を調べる！", distance_calculators_path, class: "btn btn-info" %>
         </div>
@@ -58,10 +63,10 @@
         <figure><%= image_tag "instructions04.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
       </div>
     </div>
-    <div class="flex flex-wrap items-center">
+    <div class="flex flex-wrap items-center justify-center">
       <div class="w-[350px] md:mx-4">
         <p class="flex justify-center font-bold">北海道への行き方検索ツール</p>
-        <p class="mt-5">北海道、いつか行きたいな。いいえ、今行きましょう。実は距離のわりに思ったよりも行きやすいかも。あなたの街から北海道までの移動手段を調べよう</p>
+        <p class="mt-5">北海道いつか行きたいな、と思っている方へ。あなたの街から北海道までの行き方をかんたんに調べよう</p>
         <div class="mt-5 flex justify-center">
           <%= link_to "北海道に行く！", movement_methods_path, class: "btn btn-info" %>
         </div>
@@ -70,10 +75,10 @@
         <figure><%= image_tag "instructions05.webp", class: "rounded-2xl mt-5 md:mt-0" %></figure>
       </div>
     </div>
-    <div class="flex flex-wrap items-center md:flex-row-reverse">
+    <div class="flex flex-wrap items-center justify-center md:flex-row-reverse">
       <div class="w-[350px] md:mx-4">
-        <p class="flex justify-center font-bold">北海道に来る際の服装提案</p>
-        <p class="mt-5">北海道って何着ていけばいいの？どのくらい道外と気温差があるの？北海道で生まれ育った開発者から、現在の北海道の気温に応じた服装のアドバイス</p>
+        <p class="flex justify-center font-bold">北海道の服装提案ツール</p>
+        <p class="mt-5">北海道って何着ていけばいいの？現在の北海道の天気に応じた服装を見てみよう</p>
         <div class="mt-5 flex justify-center">
           <%= link_to "服装を調べる！", clothing_suggestions_path, class: "btn btn-info" %>
         </div>
@@ -84,8 +89,8 @@
     </div>
   </div>
 
-  <div class="flex justify-center my-24">
-    <%= link_to "えぞとらべるで北海道に行こう！", posts_path, class: "btn btn-ghost text-xl" %>
+  <div class="flex justify-center my-20 md:my-32">
+    <%= link_to "えぞとらべるで北海道に行こう！", posts_path, class: "btn btn-ghost text-xl sm:text-2xl" %>
   </div>
 </div>
 
