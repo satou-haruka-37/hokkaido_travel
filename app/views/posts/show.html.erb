@@ -1,3 +1,5 @@
+<% assign_meta_tags title: @post.title, image: @post.images.first.url %>
+
 <div class="min-h-screen">
   <div class="flex justify-center my-14">
     <div class="card w-full sm:w-[800px] shadow-xl">
@@ -88,30 +90,45 @@
             <p class="font-bold">近くのおすすめスポット</p>
             <div id="nearby-posts" class="mt-2 flex flex-wrap justify-center"></div>
           </div>
-          <div class="mt-8 flex items-center">
-            <% if @post.user.present? %>
-              <div>
-                <% if @post.user.avatar? %>
-                  <%= image_tag @post.user.avatar.url, class: "rounded-full w-10" %>
-                <% else %>
+          <div class="mt-8 flex justify-between items-center">
+            <div class="flex items-center">
+              <% if @post.user.present? %>
+                <div>
+                  <% if @post.user.avatar? %>
+                    <%= image_tag @post.user.avatar.url, class: "rounded-full w-10" %>
+                  <% else %>
+                    <%= image_tag ("default.webp"), class: "rounded-full w-10" %>
+                  <% end %>
+                </div>
+                <div class="ml-5">
+                  <%= @post.user.name %>
+                </div>
+              <% else %>
+                <div>
                   <%= image_tag ("default.webp"), class: "rounded-full w-10" %>
+                </div>
+                <div class="ml-5">
+                  <p>退会したユーザー</p>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="space-x-2 flex items-center">
+              <div>
+                <%= link_to "https://twitter.com/share?url=#{ request.url }&text=#{@post.title}を見つけたよ！%0A&hashtags=えぞとらべる&hashtags=北海道&hashtags=北海道旅行&hashtags=#{@post.title.gsub(/[[:space:]]+/, '')}", target: '_blank' do %>
+                  <%= image_tag ("sns_x.webp"), class: "rounded-full w-10" %>
                 <% end %>
               </div>
-              <div class="ml-5">
-                <%= @post.user.name %>
+              <div class="w-10">
+                <%= link_to "https://social-plugins.line.me/lineit/share?url=#{ request.url }&text=#{@post.title}を見つけたよ！", target: '_blank' do %>
+                  <%= image_tag ("sns_line.webp"), class: "rounded-full w-10" %>
+                <% end %>
               </div>
-            <% else %>
-              <div>
-                <%= image_tag ("default.webp"), class: "rounded-full w-10" %>
-              </div>
-              <div class="ml-5">
-                <p>退会したユーザー</p>
-              </div>
-            <% end %>
+            </div>
           </div>
         </div>
         <% if current_user && (current_user == @post.user || current_user.admin?) %>
-          <div class="flex justify-end">
+          <div class="mt-8 flex justify-end">
             <%= link_to "編集", edit_post_path(@post), class: "btn mr-2" %>
             <%= button_to "削除", post_path(@post), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
           </div>

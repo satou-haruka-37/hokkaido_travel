@@ -109,3 +109,4 @@ gem 'dotenv-rails'
 gem 'faker'
 gem 'rails-i18n'
 gem 'rubocop'
+gem "meta-tags"
