@@ -10,6 +10,8 @@ class StaticPagesController < ApplicationController
 
   def auth0_icon; end
 
+  def progressive_web_apps; end
+
   def lets_login
     if logged_in?
       redirect_to new_post_path

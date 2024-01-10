@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/location_trouble', to: 'static_pages#location_trouble'
   get '/auth0_icon', to: 'static_pages#auth0_icon'
   get '/lets_login', to: 'static_pages#lets_login'
+  get '/progressive_web_apps', to: 'static_pages#progressive_web_apps'
 
   get '/auth/:provider/callback', to: 'auth0#callback'
   get '/auth/failure', to: 'auth0#failure'
