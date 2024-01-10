@@ -1,34 +1,43 @@
 <div class="flex flex-col p-8">
-  <div class="mb-8 flex justify-center">
+  <div class="mb-16 flex justify-center">
     <div class="text-xl font-bold">iPhone(iOS)のSafariで位置情報の取得ボタンが押せない場合</div>
   </div>
 
-  <div class="px-6 sm:px-12 sm:w-[900px]  mx-auto">
-    <ul class="list-decimal">
-      <li class="mt-7">
+  <div class="px-6 sm:px-12 w-full sm:w-[700px] lg:w-[800px] mx-auto">
+    <ul class="list-decimal space-y-16">
+      <li>
         <p class="mb-4">iPhoneの「設定」アプリを開き、「プライバシーとセキュリティ」を開いてください。</p>
-        <%= image_tag 'location_trouble01.webp', class: "w-full sm:w-96" %>
+        <div class="flex justify-center">
+          <%= image_tag 'location_trouble01.webp', class: "w-full sm:w-96" %>
+        </div>
       </li>
-      <li class="mt-7">
+      <li>
         <p class="mb-4">「位置情報サービス」を開いてください。</p>
-        <%= image_tag 'location_trouble02.webp', class: "w-full sm:w-96" %>
+        <div class="flex justify-center">
+          <%= image_tag 'location_trouble02.webp', class: "w-full sm:w-96" %>
+        </div>
       </li>
-      <li class="mt-7">
+      <li>
         <p>位置情報サービスの中から、Safariを探します。</p>
         <p>ここでSafariの位置情報の利用許可が「しない」になっていると、位置情報を取得するボタンが押せなくなってしまいます。</p>
         <p>また、当アプリのユーザーの位置情報を使った機能が使えなくなってしまうので、設定を変更します。</p>
         <p class="mb-4">「SafariのWebサイト」をタップして開きます。</p>
-        <%= image_tag 'location_trouble03.webp', class: "w-full sm:w-96" %>
+        <div class="flex justify-center">
+          <%= image_tag 'location_trouble03.webp', class: "w-full sm:w-96" %>
+        </div>
       </li>
-      <li class="mt-7">
+      <li>
         <p class="mb-4">設定を「次回または共有時に確認」か、「このAppの使用中」に変更します。</p>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap justify-center">
           <%= image_tag 'location_trouble04.webp', class: "w-full sm:w-96 mb-4 sm:mr-4" %>
           <%= image_tag 'location_trouble05.webp', class: "w-full sm:w-96 mb-4" %>
         </div>
       </li>
-      <li class="mt-7">
+      <li>
         <p class="mb-4">これでアプリの中でユーザーの位置情報を利用する準備ができました！</p>
+        <div class="my-20 flex justify-center">
+          <%= link_to "元の画面に戻る", :back, class: "btn" %>
+        </div>
       </li>
     </ul>
   </div>
