@@ -40,6 +40,6 @@
   </div>
 
   <div class="my-20 flex justify-center">
-    <%= link_to "元の画面に戻る", :back, class: "btn" %>
+    <%= link_to "元の画面に戻る", request.referer || root_path, class: "btn" %>
   </div>
 </div>
