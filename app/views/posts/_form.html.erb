@@ -13,13 +13,13 @@
           <%= render 'shared/error_messages', object: f.object %>
           <div class="flex flex-col mt-5">
             <%= f.label :title, for: "Title" %>
-            <%= f.text_field :title, id: "Title", placeholder: "スポット名を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+            <%= f.text_field :title, id: "Title", placeholder: "スポット名や市町村名を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
             <span class="text-xs text-right mt-1">必須</span>
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :address, for: "Address" %>
             <%= f.text_field :address, id: "Address", placeholder: "候補から選択すると住所が自動で入力されます", class: "input input-bordered w-full", autocomplete: "off" %>
-            <span class="text-xs text-right mt-1">必須（すでに投稿されている住所は使えません）</span>
+            <span class="text-xs text-right mt-1">必須（同じ住所は投稿できません）</span>
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :body %>
