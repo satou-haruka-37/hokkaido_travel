@@ -47,6 +47,7 @@
     <% end %>
     <%= render 'shared/flash_message' %>
     <div class="flex-grow">
+      <%= render 'shared/modal' if @unset_user %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>

@@ -1,6 +1,6 @@
 <div class="min-h-screen p-5">
   <div class="m-5 flex justify-center">
-    <div class="text-xl font-bold">ユーザー設定</div>
+    <div class="text-xl font-bold">プロフィール設定</div>
   </div>
 
   <div class="flex justify-center">
@@ -27,7 +27,11 @@
             <%= f.text_field :name, placeholder: "ニックネームを入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
           </div>
           <div class="flex justify-center mt-7">
-            <%= f.submit class: "btn btn-info" %>
+            <%= f.submit id: "profile-submit-button", class: "btn btn-info" %>
+          </div>
+          <div class="hidden flex justify-center mt-4" id="loading">
+            <div class="text-sm">送信中</div>
+            <div class="ml-0.5 loading loading-dots loading-xs"></div>
           </div>
         <% end %>
         <div class="flex justify-end mt-4"> <!-- 追加 -->
@@ -52,6 +56,7 @@
     }
   }
 
+  // アバター画像のプレビュー
   function previewAvatar(event) {
     let previewAvatar = document.getElementById('preview-avatar');
     previewAvatar.innerHTML = '';
@@ -86,4 +91,15 @@
 
     reader.readAsDataURL(file);
   }
+
+
+  // 二重送信防止と送信中のアニメーション
+  const submitButton = document.getElementById('profile-submit-button');
+
+  submitButton.addEventListener('click', function(event) {
+    submitButton.disabled = true;
+    event.preventDefault(); // フォームのデフォルト送信をキャンセル
+    submitButton.form.submit(); // フォームをプログラムから送信
+    document.getElementById('loading').classList.remove('hidden');
+  });
 </script>

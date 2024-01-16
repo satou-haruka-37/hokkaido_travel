@@ -12,7 +12,25 @@
           </div>
           <%= render 'shared/error_messages', object: f.object %>
           <div class="flex flex-col mt-5">
-            <%= f.label :title, for: "Title" %>
+            <div class="flex justify-between">
+              <%= f.label :title, for: "Title" %>
+
+              <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-xs sm:btn-ghost flex justify-center">
+                  <%= image_tag 'yubi.webp', class: "w-5 h-5" %>
+                  <p>スポット名がわからない方</p>
+                </div>
+                <div tabindex="0" class="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                  <div tabindex="0" class="card-body">
+                    <p>投稿したい場所に関するキーワード入力してください</p>
+                    <span class="text-xs mt-1">新しいタブで検索結果が表示されます</span>
+                    <%= text_field_tag :query, nil, placeholder: 'キーワードを入力して検索', id: 'search-query', autocomplete: "off", class: "input input-bordered" %>
+                    <%= button_tag "検索", type: 'button', id: 'search-btn', class: "btn btn-sm btn-info" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <%= f.text_field :title, id: "Title", placeholder: "スポット名や市町村名を入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
             <span class="text-xs text-right mt-1">必須</span>
           </div>
@@ -233,4 +251,16 @@
     document.getElementById('loading').classList.remove('hidden');
   });
 
+
+  // スポット名が思い出せない方の検索フォーム
+  document.getElementById('search-btn').addEventListener('click', function(event) {
+    let query = document.getElementById('search-query').value.trim(); // trim()で前後の空白を除去
+    if (query === '') {
+      alert('キーワードを入力してから検索ボタンを押してください');
+      event.preventDefault(); // デフォルトのイベントをキャンセルしてURLに遷移しないようにする
+    } else {
+      let url = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+      window.open(url, '_blank');
+    }
+  });
 </script>
