@@ -4,43 +4,46 @@
 <div class="flex">
   <div id="search-bar" class="<%= @filtering_active ? 'w-5/6 sm:w-11/12' : 'w-full' %>">
     <div class="collapse collapse-arrow bg-base-200">
-      <input type="checkbox" />
+      <input type="checkbox" id="search-bar-check" />
       <div class="collapse-title font-bold flex justify-center">
+        <%= image_tag 'yubi.webp', class: "w-6 h-6" %>
         <p>ここから検索ができます</p>
       </div>
       <div class="collapse-content">
-        <p class="flex flex-col my-5">好きな言葉を入力するか、検索したい条件のボタンをクリックしてください</p>
-        <div class="flex flex-col mt-5">
-          <p>フリーワード検索</p>
-          <%= render 'search', q: @q, url: posts_path %>
-        </div>
-        <div class="flex flex-col mt-5">
-          <p>地域で検索</p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
-            <div id="central-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道央</div>
-            <div id="southern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道南</div>
-            <div id="northern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道北</div>
-            <div id="eastern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道東</div>
+        <div class="flex flex-col space-y-5 px-2 sm:px-10 lg:px-40">
+          <p class="sm:text-center my-4">好きな言葉を入力するか、検索したい条件のボタンをクリックしてください</p>
+          <div>
+            <p>フリーワード検索</p>
+            <%= render 'search', q: @q, url: posts_path %>
           </div>
-        </div>
-        <div class="flex flex-col mt-5">
-          <p>タグで検索</p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
-            <% Tag.all.each do |tag| %>
-              <div class="px-2 my-2">
-                <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm #{params[:tag_id].to_i == tag.id ? 'btn-success' : 'btn-warning'} w-full" %>
-              </div>
-            <% end %>
+          <div>
+            <p>地域で検索</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
+              <div id="central-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道央</div>
+              <div id="southern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道南</div>
+              <div id="northern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道北</div>
+              <div id="eastern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道東</div>
+            </div>
           </div>
-        </div>
-        <div class="flex flex-col mt-5">
-          <p>ベストシーズンで検索</p>
-          <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
-            <% Season.limit(12).each do |season| %>
-              <div class="px-2 my-2">
-                <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm #{params[:season_id].to_i == season.id ? 'btn-success' : 'btn-warning'} w-full" %>
-              </div>
-            <% end %>
+          <div>
+            <p>タグで検索</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
+              <% Tag.all.each do |tag| %>
+                <div class="px-2 my-2">
+                  <%= link_to tag.title, posts_path(tag_id: tag.id), class: "btn btn-sm #{params[:tag_id].to_i == tag.id ? 'btn-success' : 'btn-warning'} w-full" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <p>ベストシーズンで検索</p>
+            <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
+              <% Season.limit(12).each do |season| %>
+                <div class="px-2 my-2">
+                  <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm #{params[:season_id].to_i == season.id ? 'btn-success' : 'btn-warning'} w-full" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -89,11 +92,11 @@
 
     // 各タグに対応するマーカーの色を定義
     const tagColors = {
-      'グルメ': 'https://maps.google.com/mapfiles/ms/micons/red.png',
-      'レジャー': 'https://maps.google.com/mapfiles/ms/micons/pink.png',
-      '宿泊': 'https://maps.google.com/mapfiles/ms/micons/orange.png',
+      'グルメ': 'https://maps.google.com/mapfiles/ms/micons/orange.png',
+      'レジャー': 'https://maps.google.com/mapfiles/ms/micons/yellow.png',
+      '宿泊': 'https://maps.google.com/mapfiles/ms/micons/red.png',
       '観光': 'https://maps.google.com/mapfiles/ms/micons/lightblue.png',
-      'お店': 'https://maps.google.com/mapfiles/ms/micons/yellow.png',
+      'お店': 'https://maps.google.com/mapfiles/ms/micons/pink.png',
       '道の駅': 'https://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
     };
 
@@ -153,6 +156,7 @@
 
 
     // 地域ごとにフォーカスする機能
+
     // 検索解除ボタンの表示
     function searchReset() {
       const searchResetButton = document.getElementById('search-reset')
@@ -189,6 +193,8 @@
       centralHokkaido.classList.remove('btn-warning');
       centralHokkaido.classList.add('btn-success');
       searchReset();
+      const checkbox = document.getElementById('search-bar-check');
+      checkbox.checked = false;
     });
 
     // 道南
@@ -206,6 +212,8 @@
       southernHokkaido.classList.remove('btn-warning');
       southernHokkaido.classList.add('btn-success');
       searchReset();
+      const checkbox = document.getElementById('search-bar-check');
+      checkbox.checked = false;
     });
 
     // 道北
@@ -223,6 +231,8 @@
       northernHokkaido.classList.remove('btn-warning');
       northernHokkaido.classList.add('btn-success');
       searchReset();
+      const checkbox = document.getElementById('search-bar-check');
+      checkbox.checked = false;
     });
 
     // 道東
@@ -230,7 +240,7 @@
     easternHokkaido.addEventListener('click', function() {
       const easternHokkaidoMapOptions = {
         center: { lat: 43.524780, lng: 144.276112 },
-        zoom: 8,
+        zoom: 9,
       };
 
       map.setCenter(easternHokkaidoMapOptions.center);
@@ -240,6 +250,8 @@
       easternHokkaido.classList.remove('btn-warning');
       easternHokkaido.classList.add('btn-success');
       searchReset();
+      const checkbox = document.getElementById('search-bar-check');
+      checkbox.checked = false;
     });
 
     // 他のボタンの色を戻すための関数（一旦全てのボタンの色を元に戻す）
