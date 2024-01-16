@@ -15,86 +15,95 @@
           <% if (@weather[:temp] > 25.0 && @fair_conditions.include?(@weather[:condition])) ||
                 (@weather[:temp] > 25.0 && @others_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>暑すぎです。脱水に注意しましょう。</p>
-            </div>
+            <p class="sm:text-center">
+              暑すぎです。脱水に注意しましょう。
+            </p>
 
           <!-- 20〜25度で天気がいい時 または 25度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 20.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 20.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 25.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>暑いです。港町は風があり、盆地は蒸し暑くなります。</p>
-            </div>
+            <p class="sm:text-center">
+              暑いです。港町は風があり、盆地は蒸し暑くなります。
+            </p>
 
           <!-- 15〜20度で天気がいい時 または 20度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 15.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 15.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 20.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>日中は半袖など薄手の服で快適に過ごせます。日中この気温でも夜は冷え込むことがあるので上着が必要です。</p>
-            </div>
+            <p class="sm:text-center">
+              日中は半袖など薄手の服で快適に過ごせます。日中この気温でも夜は冷え込むことがあるので上着が必要です。
+            </p>
 
           <!-- 10〜15度で天気がいい時 または 15度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 10.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 10.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 15.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>過ごしやすい気温です。春服や秋服などの薄手の長袖や薄手のアウターで過ごせます。</p>
-            </div>
+            <p class="sm:text-center">
+              過ごしやすい気温です。春服や秋服などの薄手の長袖や薄手のアウターで過ごせます。
+            </p>
 
           <!-- 5〜10度で天気がいい時 または 10度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 5.0 && @fair_conditions.include?(@weather[:condition])) ||
                   (@weather[:temp] > 5.0 && @others_conditions.include?(@weather[:condition])) ||
                   (@weather[:temp] > 10.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>肌寒い時期です。長袖を着用しましょう。日中は薄手の長袖でも良いですが、朝夜は冷え込む可能性があるのでアウターが必要です。</p>
-            </div>
+            <p class="sm:text-center">
+              肌寒い時期です。長袖を着用しましょう。日中は薄手の長袖でも良いですが、朝夜は冷え込む可能性があるのでアウターが必要です。
+            </p>
 
           <!-- 0〜5度で天気がいい時 または 5度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 0.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 0.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 5.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>春秋服を着るにはまだ寒めです。秋のコートなど暖かめの上着を着用し、寒さ対策をしましょう。</p>
-            </div>
+            <p class="sm:text-center">
+              春秋服を着るにはまだ寒めです。秋のコートなど暖かめの上着を着用し、寒さ対策をしましょう。
+            </p>
 
           <!-- -5〜0度で天気がいい時 または 0度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -5.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -5.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 0.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>冬にしてはあったかいです（道民）。ヒートテック＋裏起毛の暖かい厚手の冬服＋アウトドアブランドなどのしっかりした冬のアウターで、寒さストレスを感じることなく過ごせるレベルです。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。</p>
-            </div>
+            <p class="sm:text-center">
+              冬にしてはあったかいです（道民）。<br>
+              ヒートテック＋裏起毛の暖かい厚手の冬服＋アウトドアブランドなどのしっかりした冬のアウターで、寒さストレスを感じることなく過ごせるレベルです。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            </p>
 
           <!-- -10〜-5度で天気がいい時 または -5度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -10.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -10.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -5.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <div class="flex justify-center">
-              <p>寒いです。セーターや裏起毛の服、冬用のアウター（アウトドアブランドだとより良い、おしゃれなコートの場合薄いダウンやヒートテックを中に仕込むと良い）、手袋やマフラー、ヒートテックで、耐えられるレベルです。タイツは110デニール以上。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。</p>
-            </div>
+            <p class="sm:text-center">
+              寒いです。<br>
+              セーターや裏起毛の服、冬用のアウター（アウトドアブランドだとより良い、おしゃれなコートの場合薄いダウンやヒートテックを中に仕込むと良い）、手袋やマフラー、ヒートテックで、耐えられるレベルです。<br>
+              タイツは110デニール以上。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            </p>
 
           <!-- -10度以下の時 または -10度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -10.0 && @inclement_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] <= -10.0) %>
 
-            <div class="flex justify-center">
-              <p>かなり寒いです。手袋・マフラーはもちろんですが、耳当ても必須になってきます。この寒さになると、手袋は手首の部分が長いものを選び、靴下も足首をしっかり覆う長いものが良いです。肌の露出をとにかく無くしましょう。スカートではなくズボンが良いです。ヒートテックはもちろんですが、重ね着などをして寒さ対策をしましょう。（道民もウインタースポーツの時などは何枚も重ね着をして対策します）地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。</p>
-            </div>
+            <p class="sm:text-center">
+              かなり寒いです。<br>
+              手袋・マフラーはもちろんですが、耳当ても必須になってきます。<br>
+              この寒さになると、手袋は手首の部分が長いものを選び、靴下も足首をしっかり覆う長いものが良いです。肌の露出をとにかく無くしましょう。<br>
+              スカートではなくズボンが良いです。ヒートテックはもちろんですが、重ね着などをして寒さ対策をしましょう。（道民もウインタースポーツの時などは何枚も重ね着をして対策します）<br>
+              地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            </p>
 
           <% end %>
         </div>
       </div>
     <% else %>
-      <p>天気情報を取得できません</p>
+      <p class="sm:text-center">
+        天気情報を取得できません
+      </p>
     <% end %>
   </div>
 </div>
