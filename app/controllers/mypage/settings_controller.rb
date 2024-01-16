@@ -4,22 +4,29 @@ class Mypage::SettingsController < Mypage::BaseController
   def show; end
 
   def update
-    @user.attributes = user_params
+  @user.assign_attributes(user_params)
+  # 保存前にupdated_at以外に変更があるかチェック
+  changes_without_updated_at = @user.changed - ['updated_at']
 
-    if validate_avatar(user_params[:avatar]) && @user.save
-      @user.touch
+  if validate_avatar(user_params[:avatar]) && @user.save
+    @user.touch  # 初期設定モーダルであとで設定を押すとupdated_atのみ更新される（２回目のモーダルが出なくなる）
 
-      if request.referer == mypage_settings_url
-        flash[:success] = 'ユーザーを更新しました'
-        redirect_to mypage_settings_path
-      else
-        redirect_to request.referer || root_path
-      end
-
-    else
-      render :show
+    # updated_at以外に変更があった場合のみフラッシュメッセージを表示
+    if changes_without_updated_at.any?
+      flash[:success] = 'ユーザーを更新しました'
     end
+
+    # リダイレクト処理
+    if request.referer == mypage_settings_url
+      redirect_to mypage_settings_path
+    else
+      redirect_to request.referer || root_path
+    end
+
+  else
+    render :show
   end
+end
 
   def destroy
     @user.posts.update_all(user_id: nil)
