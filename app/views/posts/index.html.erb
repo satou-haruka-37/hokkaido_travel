@@ -1,5 +1,11 @@
-<div class="p-7 flex">
-  <%= image_tag 'redmarker.webp', class: "w-6 h-6" %>を押しておすすめスポットを見つけよう
+<div class="p-7 flex flex-col md:flex-row items-center justify-between">
+  <div class="flex">
+    <%= image_tag 'redmarker.webp', class: "w-6 h-6" %>を押しておすすめスポットを見つけよう
+  </div>
+  <!-- PCサイズ以上の場合に表示 -->
+  <div class="hidden sm:block mt-4 md:mt-0">
+    <%= link_to "新規投稿", new_post_path, class: "btn btn-wide shadow" %>
+  </div>
 </div>
 <div class="flex">
   <div id="search-bar" class="<%= @filtering_active ? 'w-5/6 sm:w-11/12' : 'w-full' %>">
