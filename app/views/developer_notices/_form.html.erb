@@ -1,0 +1,25 @@
+<div class="min-h-screen">
+  <div class="flex justify-center my-14">
+    <div class="card w-[800px] shadow-xl">
+      <div class="card-body p-10">
+        <%= form_with(model: developer_notice, local: true) do |f| %>
+          <div class="mb-8 flex justify-center">
+            <div class="text-xl font-bold">お知らせ作成</div>
+          </div>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="flex flex-col mt-5">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "input input-bordered w-full", autocomplete: "off" %>
+          </div>
+          <div class="flex flex-col mt-5">
+            <%= f.label :body %>
+            <%= f.text_area :body, class: "input input-bordered w-full textarea h-96", autocomplete: "off" %>
+          </div>
+          <div class="flex justify-center mt-7">
+            <%= f.submit "投稿する", id: "submit-button", class: "btn btn-info" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -76,7 +76,7 @@ class PostsController < ApplicationController
   end
 
   def authorize_user
-    return if current_user == @post.user || current_user.admin?
+    return if current_user && (current_user == @post.user || current_user.admin?)
 
     flash[:error] = '権限がありません'
     redirect_to posts_path

@@ -30,5 +30,7 @@ Rails.application.routes.draw do
     resource :settings, only: %i[show update destroy]
   end
 
+  resources :developer_notices
+
   get '*unmatched_route', to: 'static_pages#top'
 end

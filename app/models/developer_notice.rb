@@ -1,0 +1,2 @@
+class DeveloperNotice < ApplicationRecord
+end
