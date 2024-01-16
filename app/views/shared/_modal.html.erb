@@ -1,0 +1,85 @@
+<dialog id="modal" class="modal">
+  <div class="modal-box sm:w-[500px]">
+    <div class="my-7">
+      <p class="text-center">
+        ご登録ありがとうございます<br>
+        プロフィールを設定してください
+      </p>
+      <p class="text-center text-xs mt-2">
+        いつでもマイページから設定することができます
+      </p>
+    <div>
+    <div class="mt-10">
+      <%= form_with(model: @user, url: mypage_settings_path, local: true) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="flex flex-col">
+          <div id="preview-avatar" class="flex flex-wrap justify-center">
+            <% if @user.avatar.present? %>
+              <%= image_tag @user.avatar.to_s, class: "w-32 h-auto rounded-full" %>
+            <% else %>
+              <%= image_tag ("default.webp"), class: "w-32 h-auto rounded-full" %>
+            <% end %>
+          </div>
+          <div class="flex flex-col mt-5">
+            <%= f.label :avatar %>
+            <%= f.file_field :avatar, onchange: "previewAvatar(event)", class: "file-input file-input-bordered file-input-info w-full" %>
+            <span class="text-xs text-right mt-1">ファイル形式：jpeg、jpg、png</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "ニックネームを入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
+        </div>
+        <div class="flex justify-center mt-5">
+          <%= f.submit class: "btn btn-info" %>
+        </div>
+
+        <div class="flex justify-center sm:justify-end mt-5">
+          <%= f.submit "あとで設定する", class: "btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('modal').showModal();
+  });
+
+  // アバター画像のプレビュー
+  function previewAvatar(event) {
+    let previewAvatar = document.getElementById('preview-avatar');
+    previewAvatar.innerHTML = '';
+
+    let file = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+      let img = new Image();
+      img.src = e.target.result;
+
+      // 正方形にリサイズ
+      img.onload = function() {
+        let canvas = document.createElement('canvas');
+        let context = canvas.getContext('2d');
+
+        let size = Math.min(img.width, img.height);
+        canvas.width = size;
+        canvas.height = size;
+
+        let offsetX = (img.width - size) / 2;
+        let offsetY = (img.height - size) / 2;
+        context.drawImage(img, offsetX, offsetY, size, size, 0, 0, size, size);
+
+        // 以降、他画像プレビューと同様
+        let imgElement = new Image();
+        imgElement.src = canvas.toDataURL('image/png');
+        imgElement.classList.add("w-32", "h-auto", "rounded-full");
+        previewAvatar.appendChild(imgElement);
+      };
+    };
+
+    reader.readAsDataURL(file);
+  }
+</script>

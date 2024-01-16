@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
-  before_action :set_weather
+  before_action :set_weather, :modal_name_setting
 
   private
 
@@ -26,6 +26,15 @@ class ApplicationController < ActionController::Base
     @fair_conditions = WeatherHelper::FAIR_CONDITIONS
     @inclement_conditions = WeatherHelper::INCLEMENT_CONDITIONS
     @others_conditions = WeatherHelper::OTHERS_CONDITIONS
+  end
+
+  def modal_name_setting
+    if logged_in?
+      if current_user.created_at == current_user.updated_at
+        @unset_user = true
+        @user = current_user
+      end
+    end
   end
 
 end

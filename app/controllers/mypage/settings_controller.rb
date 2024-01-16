@@ -7,8 +7,15 @@ class Mypage::SettingsController < Mypage::BaseController
     @user.attributes = user_params
 
     if validate_avatar(user_params[:avatar]) && @user.save
-      flash[:success] = 'ユーザーを更新しました'
-      redirect_to mypage_settings_path
+      @user.touch
+
+      if request.referer == mypage_settings_url
+        flash[:success] = 'ユーザーを更新しました'
+        redirect_to mypage_settings_path
+      else
+        redirect_to request.referer || root_path
+      end
+
     else
       render :show
     end
