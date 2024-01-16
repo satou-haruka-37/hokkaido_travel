@@ -1,0 +1,43 @@
+<div class="min-h-screen">
+  <div class="flex justify-center my-14">
+    <div class="card w-full sm:w-[800px] shadow-xl">
+      <div class="card-body p-10">
+        <div class="flex items-center justify-start">
+          <div>
+            <%= link_to "＜ お知らせ一覧へ", developer_notices_path %>
+          </div>
+        </div>
+        <div class="my-5 px-1 sm:px-28 space-y-8">
+          <div>
+            <%= @developer_notice.created_at.strftime('%Y/%m/%d') %>
+          </div>
+          <div>
+            <p class="text-3xl font-bold mb-2"><%= @developer_notice.title %></p>
+          </div>
+          <div>
+            <%= markdown_to_html(@developer_notice.body) %>
+          </div>
+        </div>
+        <% if current_user && current_user.admin? %>
+          <div class="flex flex-wrap justify-end">
+            <%= link_to "編集", edit_developer_notice_path(@developer_notice), class: "btn mr-2" %>
+            <%= button_to "削除", developer_notice_path(@developer_notice), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //確認ダイアログ
+  function check(){
+    if(window.confirm('本当に削除しますか？')){
+      return true;
+    }
+    else{
+      window.alert('削除がキャンセルされました');
+      return false;
+    }
+  }
+</script>

@@ -1,0 +1,22 @@
+<div class="flex flex-col p-5">
+  <div class="m-5 flex justify-center">
+    <div class="text-xl font-bold">開発者からのお知らせ</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <% if @developer_notices.present? %>
+      <% @developer_notices.each do |notice| %>
+        <%= render 'developer_notices/developer_notice', notice: notice %>
+      <% end %>
+      <div class="flex justify-center">
+        <%= paginate @developer_notices, theme: 'pagination' %>
+      </div>
+    <% else %>
+      <p class="p-10">お知らせはありません</p>
+    <% end %>
+    <% if current_user && current_user.admin? %>
+      <div class="flex justify-center">
+        <%= link_to "お知らせ作成", new_developer_notice_path, class: "btn mr-2" %>
+      </div>
+    <% end %>
+  </div>
+</div>

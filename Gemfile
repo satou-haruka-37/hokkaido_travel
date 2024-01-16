@@ -104,6 +104,9 @@ gem 'httparty'
 # ページネーション
 gem 'kaminari'
 
+# マークダウンの変換
+gem 'redcarpet'
+
 # その他
 gem 'dotenv-rails'
 gem 'faker'

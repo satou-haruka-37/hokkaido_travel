@@ -1,0 +1,12 @@
+<%= link_to developer_notice_path(notice) do %>
+  <div class="card w-[280px] sm:w-[400px] md:w-[600px] lg:w-[820px] bg-base-100 shadow-xl px-5 pb-5 mb-4">
+    <div class="card-body">
+      <p class="card-title my-5 text-xl">
+        <%= notice.title %>
+      </p>
+      <p class="ml-6">
+        <%= notice.created_at.strftime('%Y/%m/%d') %>
+      </p>
+    </div>
+  </div>
+<% end %>
