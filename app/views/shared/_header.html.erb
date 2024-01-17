@@ -1,21 +1,21 @@
 <div class="navbar bg-base-100 z-10">
   <div class="flex-1">
-    <%= link_to root_path, class: "btn btn-ghost text-xl h-auto w-[150px] sm:w-[170px]" do %>
+    <%= link_to root_path, class: "btn btn-ghost h-auto w-[150px] sm:w-[170px]" do %>
       <%= image_tag('logo.webp') %>
     <% end %>
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 sm:mr-10 flex items-center">
+    <ul class="menu menu-horizontal px-1 sm:mr-5 flex items-center">
       <%= link_to clothing_suggestions_path do %>
-        <!-- PCサイズ以上の場合に表示 -->
+        <!-- スマホサイズより大きい場合に表示 -->
         <li class="hidden sm:block">
           <p>
             現在の北海道：
-            <% if @weather[:temp] %>
+            <% if @weather %>
               <%= @weather[:temp] %>°C
               <%= image_tag(weather_icon(@weather[:condition]), class: "w-6 h-6") %>
             <% else %>
-              気温を取得できません
+              天気を取得できません
             <% end %>
           </p>
         </li>
@@ -31,17 +31,17 @@
         </li>
       <% end %>
       <li>
-        <details>
+        <details class="relative">
           <summary>
             メニュー
           </summary>
-          <ul class="bg-base-100 rounded-t-none w-[120px] break-words">
+          <ul class="bg-base-100 rounded-t-none w-[132px] absolute right-0 sm:right-auto">
             <li><%= link_to "投稿一覧", posts_path %></li>
             <li><%= link_to "新規投稿", new_post_path %></li>
             <hr class="my-2 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
-            <li><%= link_to "移動計算", distance_calculators_path %></li>
+            <li><%= link_to "移動時間計算", distance_calculators_path %></li>
             <li><%= link_to "行き方検索", movement_methods_path %></li>
-            <li><%= link_to "服装提案", clothing_suggestions_path %></li>
+            <li><%= link_to "服装の提案", clothing_suggestions_path %></li>
             <hr class="my-2 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
             <li><%= link_to "マイページ", mypage_bookmark_posts_path %></li>
             <li><%= button_to "ログアウト", logout_path, method: :get %></li>

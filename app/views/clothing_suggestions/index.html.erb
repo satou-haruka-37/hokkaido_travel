@@ -1,5 +1,5 @@
 <div class="flex flex-col p-8">
-  <div class="mx-auto w-full md:w-[700px] my-5">
+  <div class="mx-auto w-full md:w-[600px] my-5">
     <% if @weather %>
       <div class="flex items-center justify-center space-x-2 sm:space-x-4">
         <p class="text-lg sm:text-xl font-semibold">現在の札幌の気温：<%= @weather[:temp] %>℃</p>
@@ -8,100 +8,187 @@
 
       <div>
         <div class="flex items-center justify-center">
-          <p class="mt-16 sm:mt-20 text-lg sm:text-xl font-semibold">おすすめの服装</p>
+          <p class="mt-16 text-lg sm:text-xl font-semibold">おすすめの服装</p>
         </div>
-        <div class="mt-4 px-2 sm:px-5">
+        <div class="mt-5 px-2 sm:px-5">
           <!-- 25度より上で天気が悪くない時 -->
           <% if (@weather[:temp] > 25.0 && @fair_conditions.include?(@weather[:condition])) ||
                 (@weather[:temp] > 25.0 && @others_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              暑すぎです。脱水に注意しましょう。
+            <p class="text-left">
+              現在の気温と天気は、暑すぎます。脱水に注意しましょう。<br>
+              <br>
+              トップス：半袖<br>
+              ボトムス：何でも可（短いもの）<br>
+              インナー：接触冷感など<br>
+              　くつ　：何でも可<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing01.webp" %>
+            </div>
 
           <!-- 20〜25度で天気がいい時 または 25度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 20.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 20.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 25.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              暑いです。港町は風があり、盆地は蒸し暑くなります。
+            <p class="text-left">
+              現在の気温と天気は、暑いです。<br>
+              港町は風があり、盆地は蒸し暑くなるので、行く地域によっても体感の暑さは変わります。<br>
+              <br>
+              トップス：半袖<br>
+              ボトムス：何でも可（短いもの）<br>
+              インナー：接触冷感などがあると快適<br>
+              　くつ　：何でも可<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing01.webp" %>
+            </div>
 
           <!-- 15〜20度で天気がいい時 または 20度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 15.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 15.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 20.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              日中は半袖など薄手の服で快適に過ごせます。日中この気温でも夜は冷え込むことがあるので上着が必要です。
+            <p class="text-left">
+              現在の気温と天気では、半袖など薄手の服で快適に過ごせます。<br>
+              <br>
+              アウター：薄手の上着<br>
+              トップス：半袖<br>
+              ボトムス：何でも可<br>
+              　くつ　：何でも可<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing02.webp" %>
+            </div>
 
           <!-- 10〜15度で天気がいい時 または 15度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 10.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 10.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 15.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              過ごしやすい気温です。春服や秋服などの薄手の長袖や薄手のアウターで過ごせます。
+            <p class="text-left">
+              現在の気温と天気は、過ごしやすい天気です。春服や秋服などの薄手の長袖や薄手のアウターで過ごせます。<br>
+              <br>
+              アウター：薄手の上着<br>
+              トップス：薄手の長袖<br>
+              ボトムス：何でも可<br>
+              　くつ　：スニーカー等何の靴でも可<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing03.webp" %>
+            </div>
 
           <!-- 5〜10度で天気がいい時 または 10度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 5.0 && @fair_conditions.include?(@weather[:condition])) ||
                   (@weather[:temp] > 5.0 && @others_conditions.include?(@weather[:condition])) ||
                   (@weather[:temp] > 10.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              肌寒い時期です。長袖を着用しましょう。日中は薄手の長袖でも良いですが、朝夜は冷え込む可能性があるのでアウターが必要です。
+            <p class="text-left">
+              現在の気温と天気では、比較的暖かいですが、まだ肌寒いです。<br>
+              薄手のトップスなら、上着を暖かいものにしたり、インナーにヒートテックを着る、スカートが短ければタイツを厚いものにするなど、組み合わせに応じて調整しましょう<br>
+              <br>
+              アウター：厚めの上着<br>
+              トップス：長袖<br>
+              ボトムス：長ズボン、長めのスカート<br>
+              インナー：必要であればヒートテック<br>
+              　くつ　：雪が溶けていればスニーカー等何の靴でも可<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing04.webp" %>
+            </div>
 
           <!-- 0〜5度で天気がいい時 または 5度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > 0.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 0.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 5.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              春秋服を着るにはまだ寒めです。秋のコートなど暖かめの上着を着用し、寒さ対策をしましょう。
+            <p class="text-left">
+              現在の気温と天気では、寒さ対策が必要ですが、冬服でのお洒落は可能な程度の寒さです。<br>
+              ウィンタースポーツなど外で過ごす時間が長い場合は、インナーのヒートテックだけではなく重ね着をしましょう。<br>
+              <br>
+              アウター：冬用アウター<br>
+              トップス：冬服<br>
+              ボトムス：冬服<br>
+              インナー：厚手でない服やニットの場合は、ヒートテックがあると快適<br>
+              　　　　　タイツは110デニール程度だと快適<br>
+              　くつ　：雪の積もっている場合は冬靴、雪が溶けていればスニーカー等<br>
+              　小物　：手袋があると快適<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing05.webp" %>
+            </div>
 
           <!-- -5〜0度で天気がいい時 または 0度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -5.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -5.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > 0.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              冬にしてはあったかいです（道民）。<br>
-              ヒートテック＋裏起毛の暖かい厚手の冬服＋アウトドアブランドなどのしっかりした冬のアウターで、寒さストレスを感じることなく過ごせるレベルです。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            <p class="text-left">
+              現在の気温と天気では、寒さ対策が必要です。<br>
+              冬服でのお洒落を楽しみたい場合は、対策が必要になります。<br>
+              <br>
+              アウター：しっかりしたアウトドアブランドなどの冬用アウターだと快適<br>
+              　　　　　お洒落なコート等を着る場合は中に薄いダウンを仕込むと良い<br>
+              トップス：冬服<br>
+              ボトムス：冬服<br>
+              インナー：厚手や裏起毛でない冬服や、ニットの場合は、中にヒートテック<br>
+              　　　　　タイツは110デニール以上<br>
+              　くつ　：靴底のしっかりした滑りにくい冬靴<br>
+              　小物　：手袋・マフラーがあると快適<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing06.webp" %>
+            </div>
 
           <!-- -10〜-5度で天気がいい時 または -5度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -10.0 && @fair_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -10.0 && @others_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] > -5.0 && @inclement_conditions.include?(@weather[:condition])) %>
 
-            <p class="sm:text-center">
-              寒いです。<br>
-              セーターや裏起毛の服、冬用のアウター（アウトドアブランドだとより良い、おしゃれなコートの場合薄いダウンやヒートテックを中に仕込むと良い）、手袋やマフラー、ヒートテックで、耐えられるレベルです。<br>
-              タイツは110デニール以上。地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            <p class="text-left">
+              現在の気温と天気は、真冬の寒さです。<br>
+              肌の露出をなるべく無くしましょう。<br>
+              <br>
+              アウター：しっかりしたアウトドアブランドなどの冬用アウター<br>
+              トップス：冬服（厚手・裏起毛）<br>
+              ボトムス：冬服（厚手・裏起毛）<br>
+              インナー：ヒートテック、靴下は足首の部分が長いもの、<br>
+              　　　　　タイツは110デニール以上<br>
+              　くつ　：靴底のしっかりした滑りにくい冬靴<br>
+              　小物　：手袋・マフラー・耳当て・フードのない上着なら帽子があると快適<br>
+              　　　　　（手袋は手首の部分が長いもの）<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing07.webp" %>
+            </div>
 
           <!-- -10度以下の時 または -10度より上で天気が悪い時 -->
           <% elsif (@weather[:temp] > -10.0 && @inclement_conditions.include?(@weather[:condition])) ||
                    (@weather[:temp] <= -10.0) %>
 
-            <p class="sm:text-center">
-              かなり寒いです。<br>
-              手袋・マフラーはもちろんですが、耳当ても必須になってきます。<br>
-              この寒さになると、手袋は手首の部分が長いものを選び、靴下も足首をしっかり覆う長いものが良いです。肌の露出をとにかく無くしましょう。<br>
-              スカートではなくズボンが良いです。ヒートテックはもちろんですが、重ね着などをして寒さ対策をしましょう。（道民もウインタースポーツの時などは何枚も重ね着をして対策します）<br>
-              地面が凍っていたり雪が積もっているかも知れません。靴底のしっかりした滑りにくい靴を選びましょう。
+            <p class="text-left">
+
+              現在の気温と天気は、道民でもかなり寒いと感じる厳しい寒さです。<br>
+              肌の露出をとにかく無くしましょう。<br>
+              <br>
+              アウター：しっかりしたアウトドアブランドなどの冬用アウター<br>
+              トップス：冬服（厚手・裏起毛）<br>
+              ボトムス：スカートではなくズボンが望ましい（厚手・裏起毛）<br>
+              インナー：ヒートテック上下、靴下は足首の部分が長いもの<br>
+              　くつ　：靴底のしっかりした滑りにくい冬靴<br>
+              　小物　：手袋・マフラー・耳当て・フードのない上着なら帽子必須<br>
+              　　　　　（手袋は手首の部分が長いもの）<br>
             </p>
+            <div class="mt-5">
+              <%= image_tag "clothing07.webp" %>
+            </div>
 
           <% end %>
         </div>
       </div>
     <% else %>
-      <p class="sm:text-center">
+      <p class="text-center">
         天気情報を取得できません
       </p>
     <% end %>

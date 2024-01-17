@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/privacy_policy', to: 'static_pages#privacy_policy'
   get '/terms_of_service', to: 'static_pages#terms_of_service'
+  get '/contact_us', to: 'static_pages#contact_us'
   get '/location_trouble', to: 'static_pages#location_trouble'
   get '/auth0_icon', to: 'static_pages#auth0_icon'
   get '/lets_login', to: 'static_pages#lets_login'
