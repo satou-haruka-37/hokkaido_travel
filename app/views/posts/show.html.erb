@@ -1,7 +1,8 @@
 <% if @post.images.present? %>
   <% assign_meta_tags title: @post.title, image: @post.images.first.url %>
+<% else %>
+  <% assign_meta_tags title: @post.title %>
 <% end %>
-<% assign_meta_tags title: @post.title %>
 
 <div class="min-h-screen">
   <div class="flex justify-center my-14">
