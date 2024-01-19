@@ -48,6 +48,6 @@ class Post < ApplicationRecord
   def self.normalize_search_string(search_string)
     hiragana = search_string.tr('ァ-ン', 'ぁ-ん') # カタカナをひらがなに変換
     katakana = search_string.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換
-    "#{hiragana}|#{katakana}" # カタカナとひらがなの両方を含む形で返す
+    "#{hiragana} #{katakana}" # カタカナとひらがなの両方を含む形で返す
   end
 end

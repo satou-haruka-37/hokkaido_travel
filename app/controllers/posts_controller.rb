@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     if params[:q].present? && params[:q][:title_or_body_cont].present?
       search_param = Post.normalize_search_string(params[:q][:title_or_body_cont])
       # OR条件で検索するために`_any`を使って配列を渡す
-      @q = Post.ransack(title_or_body_cont_any: search_param.split('|'))
+      @q = Post.ransack(title_or_body_cont_any: search_param.split(/[[:space:]]+/))
     else
       @q = Post.ransack(params[:q])
     end
