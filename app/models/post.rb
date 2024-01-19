@@ -43,4 +43,11 @@ class Post < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[tags user] # 検索可能な関連付けを指定してください
   end
+
+  # フリーワード検索でひらがなとカタカナを区別しないためのメソッド
+  def self.normalize_search_string(search_string)
+    hiragana = search_string.tr('ァ-ン', 'ぁ-ん') # カタカナをひらがなに変換
+    katakana = search_string.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換
+    "#{hiragana}|#{katakana}" # カタカナとひらがなの両方を含む形で返す
+  end
 end

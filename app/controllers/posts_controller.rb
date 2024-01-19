@@ -4,7 +4,14 @@ class PostsController < ApplicationController
   before_action :authorize_user, only: %i[edit update destroy]
 
   def index
-    @q = Post.ransack(params[:q])
+    if params[:q].present? && params[:q][:title_or_body_cont].present?
+      search_param = Post.normalize_search_string(params[:q][:title_or_body_cont])
+      # OR条件で検索するために`_any`を使って配列を渡す
+      @q = Post.ransack(title_or_body_cont_any: search_param.split('|'))
+    else
+      @q = Post.ransack(params[:q])
+    end
+
     @posts = if params[:tag_id].present?
                tag = Tag.find_by(id: params[:tag_id])
                tag.present? ? tag.posts : []
