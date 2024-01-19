@@ -65,6 +65,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def latest_posts
+    @posts = Post.order(created_at: :desc).limit(20)
+  end
+
   def nearby_posts
     post = Post.find(params[:id])
     nearby_posts = post.nearbys(params[:distance]).limit(3)

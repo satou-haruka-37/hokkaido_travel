@@ -10,7 +10,7 @@
       <div class="card-body p-10">
         <div class="flex items-center justify-between">
           <div>
-            <%= link_to "＜ 一覧へ", posts_path %>
+            <%= link_to "＜ 戻る", request.referer || posts_path %>
           </div>
           <div>
             <% if logged_in? %>
