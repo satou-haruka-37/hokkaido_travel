@@ -272,5 +272,14 @@
     }
 
   }
+
+
+  // 画面のどこを押してもモーダルを閉じる
+  document.addEventListener('click', function(event) {
+    const modal = document.getElementById('post_modal');
+    if (event.target === modal) {
+      modal.close();
+    }
+  });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>
