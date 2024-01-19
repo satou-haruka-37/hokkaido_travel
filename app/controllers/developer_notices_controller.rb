@@ -36,7 +36,6 @@ class DeveloperNoticesController < ApplicationController
     redirect_to developer_notices_path, notice: 'お知らせを削除しました。'
   end
 
-
   private
 
   def developer_notice_params
@@ -48,7 +47,7 @@ class DeveloperNoticesController < ApplicationController
   end
 
   def authorize_user
-    return if current_user && current_user.admin?
+    return if current_user&.admin?
 
     flash[:error] = '権限がありません'
     redirect_to developer_notices_path
