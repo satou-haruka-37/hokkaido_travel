@@ -1,0 +1,20 @@
+<div class="flex flex-col p-5">
+  <div class="m-5 flex justify-center">
+    <%= image_tag 'kira.webp', class: "w-6 h-6" %>
+    <div class="text-xl font-bold mx-2">新着の投稿</div>
+    <%= image_tag 'kira.webp', class: "w-6 h-6" %>
+  </div>
+  <div class="my-5 flex justify-center">
+    <p class="hidden sm:block">新着の投稿20選です！気になる投稿のタイトルを押すと詳細が見られます</p>
+    <p class="text-center block sm:hidden">新着の投稿20選です！<br>投稿のタイトルを押すと詳細が見られます</p>
+  </div>
+  <div class="mx-auto mt-5">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    <% else %>
+      <p class="p-10">投稿がありません</p>
+    <% end %>
+  </div>
+</div>
