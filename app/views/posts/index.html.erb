@@ -1,4 +1,4 @@
-<div class="p-7 flex flex-col md:flex-row items-center justify-between">
+<div class="sm:px-10 pt-5 flex flex-col md:flex-row items-center justify-between">
   <div class="flex">
     <%= image_tag 'redmarker.webp', class: "w-6 h-6" %>を押しておすすめスポットを見つけよう
   </div>
@@ -7,31 +7,65 @@
     <%= link_to "新規投稿", new_post_path, class: "btn btn-wide shadow" %>
   </div>
 </div>
-<div class="flex">
+<div class="flex my-5 mx-1 sm:my-8 sm:mx-10">
   <div id="search-bar" class="<%= @filtering_active ? 'w-5/6 sm:w-11/12' : 'w-full' %>">
-    <div class="collapse collapse-arrow bg-base-200">
+    <div class="collapse collapse-arrow bg-base-200 shadow">
       <input type="checkbox" id="search-bar-check" />
       <div class="collapse-title font-bold flex justify-center">
         <%= image_tag 'yubi.webp', class: "w-6 h-6" %>
-        <p>ここから検索ができます</p>
+        <!-- スマホサイズより大きい場合に表示 -->
+        <p class="hidden sm:block">ここを開いて、見つけたい条件を選んでください</p>
+        <!-- スマホサイズの場合に表示 -->
+        <p class="block sm:hidden">ここを開いて、条件を選択</p>
       </div>
       <div class="collapse-content">
-        <div class="flex flex-col space-y-5 px-2 sm:px-10 lg:px-40">
-          <p class="sm:text-center my-4">好きな言葉を入力するか、検索したい条件のボタンをクリックしてください</p>
-          <div>
+        <div class="flex flex-col space-y-10 px-2 sm:px-0 lg:px-32 mt-4">
+          <div class="text-center">
             <p>フリーワード検索</p>
             <%= render 'search', q: @q, url: posts_path %>
           </div>
-          <div>
+          <div class="text-center">
             <p>地域で検索</p>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
-              <div id="central-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道央</div>
-              <div id="southern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道南</div>
-              <div id="northern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道北</div>
-              <div id="eastern-hokkaido" class="regionbtn btn btn-sm btn-warning mx-2 my-2">道東</div>
+              <div id="sapporo" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>札幌</rb>
+                  <rt>さっぽろ</rt>
+                </ruby>
+              </div>
+              <div id="hakodate" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>函館</rb>
+                  <rt>はこだて</rt>
+                </ruby>
+              </div>
+              <div id="asahikawa" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>旭川</rb>
+                  <rt>あさひかわ</rt>
+                </ruby>
+              </div>
+              <div id="obihiro" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>帯広</rb>
+                  <rt>おびひろ</rt>
+                </ruby>
+              </div>
+              <div id="wakkanai" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>稚内</rb>
+                  <rt>わっかない</rt>
+                </ruby>
+              </div>
+              <div id="abassiri-kusiro" class="regionbtn btn btn-sm btn-warning mx-2 my-2">
+                <ruby>
+                  <rb>網走・釧路</rb>
+                  <rt>あばしり　くしろ</rt>
+                </ruby>
+              </div>
             </div>
           </div>
-          <div>
+          <div class="text-center">
             <p>タグで検索</p>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
               <% Tag.all.each do |tag| %>
@@ -41,11 +75,11 @@
               <% end %>
             </div>
           </div>
-          <div>
+          <div class="text-center">
             <p>ベストシーズンで検索</p>
-            <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6">
+            <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-6 mb-8">
               <% Season.limit(12).each do |season| %>
-                <div class="px-2 my-2">
+                <div class="px-1.5 my-2">
                   <%= link_to season.title, posts_path(season_id: season.id), class: "btn btn-sm #{params[:season_id].to_i == season.id ? 'btn-success' : 'btn-warning'} w-full" %>
                 </div>
               <% end %>
@@ -58,14 +92,14 @@
 
   <div id="search-reset" class="<%= @filtering_active ? 'w-1/6 sm:w-1/12' : '' %>">
     <% if @filtering_active %>
-      <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl" %>
+      <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl shadow" %>
     <% end %>
   </div>
 </div>
 
 
 <!-- マップを表示する要素 -->
-<div id="map" class="w-auto h-[400px] sm:h-[750px]"></div>
+<div id="map" class="w-auto h-[400px] sm:h-[800px]"></div>
 
 <!-- モーダルを表示する要素 -->
 <dialog id="post_modal" class="modal">
@@ -163,18 +197,18 @@
 
 
     // 地域ごとにフォーカスする機能
+    let windowWidth = window.innerWidth; // 画面サイズによる分岐
 
     // 検索解除ボタンの表示
     function searchReset() {
       const searchResetButton = document.getElementById('search-reset')
       const searchBar = document.getElementById('search-bar')
       const searchResetButtonContent = `
-        <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl" %>
+        <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl shadow" %>
       `;
 
       searchBar.classList.remove('w-full');
 
-      let windowWidth = window.innerWidth;
       if (windowWidth >= 440) {
         searchBar.classList.add('w-11/12');
         searchResetButton.classList.add('w-1/12');
@@ -183,82 +217,141 @@
         searchResetButton.classList.add('w-1/6');
       }
       searchResetButton.innerHTML = searchResetButtonContent;
+
+      const checkbox = document.getElementById('search-bar-check');
+      checkbox.checked = false;
     }
 
-    // 道央
-    const centralHokkaido = document.getElementById('central-hokkaido')
-    centralHokkaido.addEventListener('click', function() {
-      const centralHokkaidoMapOptions = {
-        center: { lat: 42.837586, lng: 141.665121 },
-        zoom: 9,
-      };
+    // 札幌
+    const sapporo = document.getElementById('sapporo')
+    sapporo.addEventListener('click', function() {
+      const sapporoMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 42.846847, lng: 141.158352 },
+          zoom: 10,
+        } :
+        {
+          center: { lat: 42.846847, lng: 141.158352 },
+          zoom: 9,
+        };
 
-      map.setCenter(centralHokkaidoMapOptions.center);
-      map.setZoom(centralHokkaidoMapOptions.zoom);
+      map.setCenter(sapporoMapOptions.center);
+      map.setZoom(sapporoMapOptions.zoom);
 
       resetAllButtons();
-      centralHokkaido.classList.remove('btn-warning');
-      centralHokkaido.classList.add('btn-success');
+      sapporo.classList.remove('btn-warning');
+      sapporo.classList.add('btn-success');
       searchReset();
-      const checkbox = document.getElementById('search-bar-check');
-      checkbox.checked = false;
     });
 
-    // 道南
-    const southernHokkaido = document.getElementById('southern-hokkaido')
-    southernHokkaido.addEventListener('click', function() {
-      const southernHokkaidoMapOptions = {
-        center: { lat: 42.132789, lng: 140.132470 },
-        zoom: 9,
-      };
+    // 函館
+    const hakodate = document.getElementById('hakodate')
+    hakodate.addEventListener('click', function() {
+      const hakodateMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 42.094612, lng: 140.435961 },
+          zoom: 10,
+        } :
+        {
+          center: { lat: 42.067675, lng: 140.472418 },
+          zoom: 9,
+        };
 
-      map.setCenter(southernHokkaidoMapOptions.center);
-      map.setZoom(southernHokkaidoMapOptions.zoom);
+      map.setCenter(hakodateMapOptions.center);
+      map.setZoom(hakodateMapOptions.zoom);
 
       resetAllButtons();
-      southernHokkaido.classList.remove('btn-warning');
-      southernHokkaido.classList.add('btn-success');
+      hakodate.classList.remove('btn-warning');
+      hakodate.classList.add('btn-success');
       searchReset();
-      const checkbox = document.getElementById('search-bar-check');
-      checkbox.checked = false;
     });
 
-    // 道北
-    const northernHokkaido = document.getElementById('northern-hokkaido')
-    northernHokkaido.addEventListener('click', function() {
-      const northernHokkaidoMapOptions = {
-        center: { lat: 44.424222, lng: 142.475780 },
-        zoom: 8,
-      };
+    // 旭川
+    const asahikawa = document.getElementById('asahikawa')
+    asahikawa.addEventListener('click', function() {
+      const asahikawaMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 43.522167, lng: 142.434513 },
+          zoom: 10,
+        } :
+        {
+          center: { lat: 43.577175, lng: 142.517469 },
+          zoom: 9,
+        };
 
-      map.setCenter(northernHokkaidoMapOptions.center);
-      map.setZoom(northernHokkaidoMapOptions.zoom);
+      map.setCenter(asahikawaMapOptions.center);
+      map.setZoom(asahikawaMapOptions.zoom);
 
       resetAllButtons();
-      northernHokkaido.classList.remove('btn-warning');
-      northernHokkaido.classList.add('btn-success');
+      asahikawa.classList.remove('btn-warning');
+      asahikawa.classList.add('btn-success');
       searchReset();
-      const checkbox = document.getElementById('search-bar-check');
-      checkbox.checked = false;
     });
 
-    // 道東
-    const easternHokkaido = document.getElementById('eastern-hokkaido')
-    easternHokkaido.addEventListener('click', function() {
-      const easternHokkaidoMapOptions = {
-        center: { lat: 43.524780, lng: 144.276112 },
-        zoom: 9,
-      };
+    // 帯広
+    const obihiro = document.getElementById('obihiro')
+    obihiro.addEventListener('click', function() {
+      const obihiroMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 42.730786, lng: 143.099058 },
+          zoom: 10,
+        } :
+        {
+          center: { lat: 42.856161, lng: 143.250370 },
+          zoom: 9,
+        };
 
-      map.setCenter(easternHokkaidoMapOptions.center);
-      map.setZoom(easternHokkaidoMapOptions.zoom);
+      map.setCenter(obihiroMapOptions.center);
+      map.setZoom(obihiroMapOptions.zoom);
 
       resetAllButtons();
-      easternHokkaido.classList.remove('btn-warning');
-      easternHokkaido.classList.add('btn-success');
+      obihiro.classList.remove('btn-warning');
+      obihiro.classList.add('btn-success');
       searchReset();
-      const checkbox = document.getElementById('search-bar-check');
-      checkbox.checked = false;
+    });
+
+    // 稚内
+    const wakkanai = document.getElementById('wakkanai')
+    wakkanai.addEventListener('click', function() {
+      const wakkanaiMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 44.722799, lng: 142.194106 },
+          zoom: 9,
+        } :
+        {
+          center: { lat: 44.722799, lng: 142.194106 },
+          zoom: 8,
+        };
+
+      map.setCenter(wakkanaiMapOptions.center);
+      map.setZoom(wakkanaiMapOptions.zoom);
+
+      resetAllButtons();
+      wakkanai.classList.remove('btn-warning');
+      wakkanai.classList.add('btn-success');
+      searchReset();
+    });
+
+    // 網走・釧路
+    const abassiriKusiro = document.getElementById('abassiri-kusiro')
+    abassiriKusiro.addEventListener('click', function() {
+      const abassiriKusiroMapOptions = (windowWidth >= 440) ?
+        {
+          center: { lat: 43.686360, lng: 144.850476 },
+          zoom: 9,
+        } :
+        {
+          center: { lat: 43.634636, lng: 144.436031 },
+          zoom: 8,
+        };
+
+      map.setCenter(abassiriKusiroMapOptions.center);
+      map.setZoom(abassiriKusiroMapOptions.zoom);
+
+      resetAllButtons();
+      abassiriKusiro.classList.remove('btn-warning');
+      abassiriKusiro.classList.add('btn-success');
+      searchReset();
     });
 
     // 他のボタンの色を戻すための関数（一旦全てのボタンの色を元に戻す）
@@ -272,5 +365,14 @@
     }
 
   }
+
+
+  // 画面のどこを押してもモーダルを閉じる
+  document.addEventListener('click', function(event) {
+    const modal = document.getElementById('post_modal');
+    if (event.target === modal) {
+      modal.close();
+    }
+  });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>&callback=initMap"></script>

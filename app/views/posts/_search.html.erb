@@ -1,4 +1,4 @@
 <%= search_form_for @q, url: url do |f| %>
-  <%= f.search_field :title_or_body_cont, class: 'input input-bordered w-1/2', placeholder: '例：スープカレー', autocomplete: "off" %>
+  <%= f.search_field :title_or_body_cont, class: 'input input-bordered w-2/3 sm:w-1/2', placeholder: 'ここに入力（例：ラーメン）', autocomplete: "off", value: params.dig(:q, :title_or_body_cont) %>
   <%= f.submit '検索', class: 'btn btn-info' %>
 <% end %>

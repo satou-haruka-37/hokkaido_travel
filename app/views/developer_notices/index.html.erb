@@ -13,6 +13,9 @@
     <% else %>
       <p class="p-10">お知らせはありません</p>
     <% end %>
+    <div class="flex items-center">
+      開発者のX（Twitter）：<%= link_to "@lemonade_37", "https://twitter.com/lemonade_37", class: "btn btn-ghost btn-sm" %>
+    </div>
     <% if current_user && current_user.admin? %>
       <div class="flex justify-center">
         <%= link_to "お知らせ作成", new_developer_notice_path, class: "btn mr-2" %>
