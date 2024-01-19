@@ -13,13 +13,13 @@ class PostsController < ApplicationController
     end
 
     @posts = if params[:tag_id].present?
-               tag = Tag.find_by(id: params[:tag_id])
+               tag = Tag.includes(:posts).find_by(id: params[:tag_id])
                tag.present? ? tag.posts : []
              elsif params[:season_id].present?
-               season = Season.find_by(id: params[:season_id])
+               season = Season.includes(:posts).find_by(id: params[:season_id])
                season.present? ? season.posts : []
              else
-               @q.result
+               @q.result.includes(:tags, :seasons)
              end
     @filtering_active = params[:q].present? || params[:tag_id].present? || params[:season_id].present?
   end
