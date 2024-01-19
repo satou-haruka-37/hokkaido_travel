@@ -10,21 +10,8 @@
       <div class="card-body p-10">
         <div class="flex items-center justify-between">
           <div>
-            <% if request.referer.present? %>
-              <% referer_path = URI.parse(request.referer).path %>
-
-              <% if referer_path == mypage_bookmark_posts_path %>
-                <%= link_to "＜ 戻る", mypage_bookmark_posts_path %>
-              <% elsif referer_path == mypage_posts_path %>
-                <%= link_to "＜ 戻る", mypage_posts_path %>
-              <% elsif referer_path == latest_posts_posts_path %>
-                <%= link_to "＜ 戻る", latest_posts_posts_path %>
-              <% else %>
-                <%= link_to "＜ 戻る", posts_path %>
-              <% end %>
-            <% else %>
-              <%= link_to "＜ 戻る", posts_path %>
-            <% end %>
+            <%= link_to "＜ 戻る",
+              request.referer.present? && (URI.parse(request.referer).path == edit_post_path(@post) || URI.parse(request.referer).path == post_path(@post)) ? posts_path : (request.referer || posts_path) %>
           </div>
           <div>
             <% if logged_in? %>
