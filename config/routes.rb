@@ -18,7 +18,12 @@ Rails.application.routes.draw do
     member do
       get 'nearby_posts'
     end
+
+    collection do
+      get 'latest_posts'
+    end
   end
+
   resources :distance_calculators, only: [:index]
   resources :movement_methods, only: [:index]
   resources :clothing_suggestions, only: [:index]

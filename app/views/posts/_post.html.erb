@@ -1,0 +1,28 @@
+<div class="card w-full lg:w-[820px] bg-base-100 shadow-xl mb-5 flex flex-wrap">
+  <div class="card-body w-full">
+    <div class="flex flex-wrap justify-center items-center md:justify-start">
+      <div class="w-44 md:mr-10">
+        <% if post.images.present? %>
+          <% first_image = post.images.first %>
+          <%= image_tag first_image.to_s, class: "aspect-[3/2] object-cover" %>
+        <% end %>
+      </div>
+      <div class="flex flex-col w-auto">
+        <h4 class="card-title my-5">
+          <%= link_to post.title, post_path(post) %>
+        </h4>
+        <p class="mb-1">
+          <%= post.address %>
+        </p>
+        <% if post.body %>
+          <p class="mb-5">
+            <%= truncate(post.body, length: 30) %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-end">
+      <%= post.created_at.strftime('%Y/%m/%d') %>
+    </div>
+  </div>
+</div>
