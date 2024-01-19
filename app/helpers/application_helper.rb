@@ -25,7 +25,7 @@ module ApplicationHelper
         { href: image_url('favicon.ico') },
         { href: image_url('icon.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
         { href: image_url('icon.png'), rel: 'icon', sizes: '36x36', type: 'image/png' }, # 36x36ピクセルのAndroid Touch Icon
-        { href: image_url('icon.png'), rel: 'icon', sizes: '48x48', type: 'image/png' }, # 48x48ピクセルのAndroid Touch Icon
+        { href: image_url('icon.png'), rel: 'icon', sizes: '48x48', type: 'image/png' } # 48x48ピクセルのAndroid Touch Icon
       ],
       og: {
         site_name: site,

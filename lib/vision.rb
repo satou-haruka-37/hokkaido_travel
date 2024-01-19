@@ -1,6 +1,6 @@
-require "base64"
-require "json"
-require "net/https"
+require 'base64'
+require 'json'
+require 'net/https'
 
 module Vision
   class << self
@@ -14,7 +14,7 @@ module Vision
           },
           features: [
             {
-              type: "SAFE_SEARCH_DETECTION"
+              type: 'SAFE_SEARCH_DETECTION'
             }
           ]
         }]
@@ -23,20 +23,18 @@ module Vision
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
       request = Net::HTTP::Post.new(uri.request_uri)
-      request["Content-Type"] = "application/json"
+      request['Content-Type'] = 'application/json'
       response = https.request(request, params)
       result = JSON.parse(response.body)
-      if (error = result["responses"][0]["error"]).present?
-        raise error["message"]
+      raise error['message'] if (error = result['responses'][0]['error']).present?
+
+      result_arr = result['responses'].flatten.map do |parsed_image|
+        parsed_image['safeSearchAnnotation'].values
+      end.flatten
+      if result_arr.include?('LIKELY') || result_arr.include?('VERY_LIKELY')
+        false
       else
-        result_arr = result["responses"].flatten.map do |parsed_image|
-          parsed_image["safeSearchAnnotation"].values
-        end.flatten
-        if result_arr.include?("LIKELY") || result_arr.include?("VERY_LIKELY")
-          false
-        else
-          true
-        end
+        true
       end
     end
   end

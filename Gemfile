@@ -110,6 +110,6 @@ gem 'redcarpet'
 # その他
 gem 'dotenv-rails'
 gem 'faker'
+gem 'meta-tags'
 gem 'rails-i18n'
 gem 'rubocop'
-gem "meta-tags"

@@ -29,12 +29,10 @@ class ApplicationController < ActionController::Base
   end
 
   def modal_name_setting
-    if logged_in?
-      if current_user.created_at == current_user.updated_at
-        @unset_user = true
-        @user = current_user
-      end
-    end
-  end
+    return unless logged_in?
+    return unless current_user.created_at == current_user.updated_at
 
+    @unset_user = true
+    @user = current_user
+  end
 end

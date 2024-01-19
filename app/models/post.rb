@@ -27,9 +27,9 @@ class Post < ApplicationRecord
   end
 
   def validate_hokkaido
-    unless address.include?("北海道")
-      errors.add(:base, "北海道の住所を入力してください")
-    end
+    return if address.include?('北海道')
+
+    errors.add(:base, '北海道の住所を入力してください')
   end
 
   def must_have_tags
