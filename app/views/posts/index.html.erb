@@ -90,7 +90,7 @@
     </div>
   </div>
 
-  <div id="search-reset" class="<%= @filtering_active ? 'w-1/6 sm:w-1/12' : '' %>">
+  <div id="search-reset" class="<%= @filtering_active ? 'w-1/6 sm:w-1/12 ml-1.5 sm:ml-2' : '' %>">
     <% if @filtering_active %>
       <%= link_to '解除', posts_path, class: "btn btn-info w-full h-[62px] rounded-2xl shadow" %>
     <% end %>
@@ -211,10 +211,10 @@
 
       if (windowWidth >= 440) {
         searchBar.classList.add('w-11/12');
-        searchResetButton.classList.add('w-1/12');
+        searchResetButton.classList.add('w-1/12', 'ml-2');
       } else {
         searchBar.classList.add('w-5/6');
-        searchResetButton.classList.add('w-1/6');
+        searchResetButton.classList.add('w-1/6', 'ml-1.5');
       }
       searchResetButton.innerHTML = searchResetButtonContent;
 
