@@ -1,0 +1,25 @@
+<div class="card w-full lg:w-[820px] bg-base-100 shadow-xl mb-5 flex flex-wrap">
+  <div class="card-body w-full">
+    <div class="flex flex-wrap justify-center items-center md:justify-start">
+      <div class="w-56 md:mr-10">
+        <%= image_tag link[:image], class: "aspect-[3/2] object-cover" %>
+      </div>
+      <div class="flex flex-col w-auto sm:w-[350px] lg:w-[480px]">
+        <h4 class="card-title my-5">
+          <%= link[:title] %>
+        </h4>
+        <p class="mb-1 flex flex-wrap">
+          <%= link[:description] %>
+        </p>
+        <% if link[:twitter_id] %>
+          <p class="mb-1">
+            <%= link_to "X(Twitter)：#{link[:twitter_id]}", link[:twitter_link], target: "_blank", class: "btn btn-ghost btn-sm" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-end">
+      <%= link_to "見に行く！", link[:site_link], target: "_blank", class: "btn btn-outline" %>
+    </div>
+  </div>
+</div>
