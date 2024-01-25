@@ -1,0 +1,14 @@
+<div class="flex flex-col p-5">
+  <div class="m-5 flex justify-center">
+    <div class="text-xl font-bold mx-2">観光情報リンク集</div>
+  </div>
+  <div class="my-5 flex justify-center">
+    <p class="hidden sm:block">北海道の観光情報サイトのリンクです。各地域のより詳しい情報を知ることができます！</p>
+    <p class="text-center block sm:hidden">北海道の観光情報サイトのリンクです。<br>各地域のより詳しい情報を知ることができます！</p>
+  </div>
+  <div class="mx-auto mt-5">
+    <% links.each do |link| %>
+      <%= render 'static_pages/link', link: link %>
+    <% end %>
+  </div>
+</div>
