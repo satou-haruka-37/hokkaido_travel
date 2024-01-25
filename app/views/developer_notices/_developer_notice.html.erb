@@ -1,18 +1,10 @@
 <%= link_to developer_notice_path(notice) do %>
   <div class="card w-[280px] sm:w-[400px] md:w-[600px] lg:w-[820px] bg-base-100 shadow-xl px-5 pb-5 mb-4">
     <div class="card-body">
-      <p class="card-title mt-5 text-xl">
+      <p class="card-title my-5 text-xl">
         <%= notice.title %>
       </p>
-      <!-- 大きい画面用 -->
-      <p class="mt-1 hidden lg:block">
-        <%= markdown_to_text(notice.body, 45) %>
-      </p>
-      <!-- 小さい画面用 -->
-      <p class="mt-1 block lg:hidden">
-        <%= markdown_to_text(notice.body, 35) %>
-      </p>
-      <p class="ml-6 flex justify-end">
+      <p class="ml-6">
         <%= notice.created_at.strftime('%Y/%m/%d') %>
       </p>
     </div>
