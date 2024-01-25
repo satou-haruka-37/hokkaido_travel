@@ -7,7 +7,7 @@
           <%= image_tag first_image.to_s, class: "aspect-[3/2] object-cover" %>
         <% end %>
       </div>
-      <div class="flex flex-col w-auto">
+      <div class="flex flex-col w-auto sm:w-[350px] lg:w-[480px]">
         <h4 class="card-title my-5">
           <%= link_to post.title, post_path(post) %>
         </h4>

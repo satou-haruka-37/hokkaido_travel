@@ -13,6 +13,8 @@ class StaticPagesController < ApplicationController
 
   def progressive_web_apps; end
 
+  def links; end
+
   def lets_login
     return unless logged_in?
 
