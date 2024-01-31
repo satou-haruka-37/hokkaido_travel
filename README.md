@@ -57,4 +57,5 @@ RUNTEQに入ってから、道外の人と話すことが多く、北海道で�
 
 # ER図
 [ER図](https://drive.google.com/file/d/1VFlqP7LpmPeLeLxDNjfHq6Y78MS9qXYv/view?usp=sharing)
-![ER図](https://github.com/satou-haruka-37/hokkaido_travel/assets/130155208/d3581c8f-5cd2-4eb0-bdc4-64dea32f331a)
+![ER図](https://github.com/satou-haruka-37/hokkaido_travel/assets/130155208/821816ce-6dc3-4d4c-842a-95d41ad4bdd4)
+
