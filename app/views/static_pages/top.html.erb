@@ -1,9 +1,9 @@
-<div class="image-container">
-  <%= image_tag "top01.webp", class: "fullscreen-image active", id: "image1" %>
-  <%= image_tag "top02.webp", class: "fullscreen-image", id: "image2" %>
-  <%= image_tag "top03.webp", class: "fullscreen-image", id: "image3" %>
-  <%= image_tag "top04.webp", class: "fullscreen-image", id: "image4" %>
-  <%= image_tag "top05.webp", class: "fullscreen-image", id: "image5" %>
+<div class="relative w-full pb-[56.25%] overflow-hidden">
+  <%= image_tag "top01.webp", class: "top-images absolute top-0 left-0 w-full h-full transition-opacity duration-[4s] ease-in-out fullscreen-image opacity-1" %>
+  <%= image_tag "top02.webp", class: "top-images absolute top-0 left-0 w-full h-full transition-opacity duration-[4s] ease-in-out fullscreen-image opacity-0" %>
+  <%= image_tag "top03.webp", class: "top-images absolute top-0 left-0 w-full h-full transition-opacity duration-[4s] ease-in-out fullscreen-image opacity-0" %>
+  <%= image_tag "top04.webp", class: "top-images absolute top-0 left-0 w-full h-full transition-opacity duration-[4s] ease-in-out fullscreen-image opacity-0" %>
+  <%= image_tag "top05.webp", class: "top-images absolute top-0 left-0 w-full h-full transition-opacity duration-[4s] ease-in-out fullscreen-image opacity-0" %>
 </div>
 
 <div class="flex flex-col px-4">
@@ -97,49 +97,22 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const images = [
-      "<%= asset_path('top01.webp') %>",
-      "<%= asset_path('top02.webp') %>",
-      "<%= asset_path('top03.webp') %>",
-      "<%= asset_path('top04.webp') %>",
-      "<%= asset_path('top05.webp') %>",
-    ];
-    let currentIndex = 0;
-    const imageElements = document.querySelectorAll(".fullscreen-image");
-    function crossDissolve() {
-      currentIndex = (currentIndex + 1) % images.length;
-      const nextImagePath = images[currentIndex];
-      const nextImageElement = imageElements[currentIndex];
-      const currentImageElement = imageElements[currentIndex === 0 ? images.length - 1 : currentIndex - 1];
-      nextImageElement.src = nextImagePath;
-      currentImageElement.classList.remove("active");
-      nextImageElement.classList.add("active");
-      setTimeout(function () {
-        crossDissolve();
-      }, 8000);
-    }
-    crossDissolve();
+    setTimeout(function () {
+      let currentIndex = 0;
+      let numberOfImages = 5;
+      const imageElements = document.querySelectorAll(".top-images");
+      function crossDissolve() {
+        currentIndex = (currentIndex + 1) % numberOfImages;
+        const nextImageElement = imageElements[currentIndex];
+        const currentImageElement = imageElements[currentIndex === 0 ? numberOfImages - 1 : currentIndex - 1];
+        currentImageElement.classList.remove("opacity-1");
+        currentImageElement.classList.add("opacity-0");
+        nextImageElement.classList.remove("opacity-0");
+        nextImageElement.classList.add("opacity-1");
+        setTimeout(crossDissolve, 8000);
+      }
+
+      crossDissolve();
+    }, 3000);
   });
 </script>
-
-<style>
-  .image-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    overflow: hidden;
-  }
-  .fullscreen-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: opacity 4s ease-in-out;
-    opacity: 0;
-  }
-  .active {
-    opacity: 1;
-  }
-</style>
