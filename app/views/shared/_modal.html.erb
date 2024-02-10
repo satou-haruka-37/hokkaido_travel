@@ -22,7 +22,7 @@
           </div>
           <div class="flex flex-col mt-5">
             <%= f.label :avatar %>
-            <%= f.file_field :avatar, onchange: "previewAvatar(event)", class: "file-input file-input-bordered file-input-info w-full" %>
+            <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-info w-full", id: "avatar-input" %>
             <span class="text-xs text-right mt-1">ファイル形式：jpeg、jpg、png</span>
           </div>
         </div>
@@ -31,7 +31,7 @@
           <%= f.text_field :name, placeholder: "ニックネームを入力してください", class: "input input-bordered w-full", autocomplete: "off" %>
         </div>
         <div class="flex justify-center mt-5">
-          <%= f.submit id: "profile-submit-button", class: "btn btn-info" %>
+          <%= f.submit id: "modal-submit-button", class: "btn btn-info" %>
         </div>
         <div class="hidden flex justify-center mt-4" id="loading">
           <div class="text-sm">送信中</div>
@@ -49,53 +49,5 @@
 <script>
   window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('modal').showModal();
-  });
-
-  // アバター画像のプレビュー
-  function previewAvatar(event) {
-    let previewAvatar = document.getElementById('preview-avatar');
-    previewAvatar.innerHTML = '';
-
-    let file = event.target.files[0];
-    let reader = new FileReader();
-
-    reader.onload = function(e) {
-      let img = new Image();
-      img.src = e.target.result;
-
-      // 正方形にリサイズ
-      img.onload = function() {
-        let canvas = document.createElement('canvas');
-        let context = canvas.getContext('2d');
-
-        let size = Math.min(img.width, img.height);
-        canvas.width = size;
-        canvas.height = size;
-
-        let offsetX = (img.width - size) / 2;
-        let offsetY = (img.height - size) / 2;
-        context.drawImage(img, offsetX, offsetY, size, size, 0, 0, size, size);
-
-        // 以降、他画像プレビューと同様
-        let imgElement = new Image();
-        imgElement.src = canvas.toDataURL('image/png');
-        imgElement.classList.add("w-32", "h-auto", "rounded-full");
-        previewAvatar.appendChild(imgElement);
-      };
-    };
-
-    reader.readAsDataURL(file);
-  }
-
-
-  // 二重送信防止と送信中のアニメーション
-  const submitButton = document.getElementById('profile-submit-button');
-
-  submitButton.addEventListener('click', function(event) {
-    submitButton.disabled = true;
-    document.getElementById('setup-later').disabled = true;
-    event.preventDefault(); // フォームのデフォルト送信をキャンセル
-    submitButton.form.submit(); // フォームをプログラムから送信
-    document.getElementById('loading').classList.remove('hidden');
   });
 </script>

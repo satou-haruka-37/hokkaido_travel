@@ -26,21 +26,8 @@
     <% if current_user == post.user %>
       <div class="flex flex-wrap justify-end">
         <%= link_to "編集", edit_post_path(post), class: "btn mr-2" %>
-        <%= button_to "削除", post_path(post), method: :delete, form: { onSubmit: "return check()" }, class: "btn" %>
+        <%= button_to "削除", post_path(post), method: :delete, class: "btn", id: "delete-button" %>
       </div>
     <% end %>
   </div>
 </div>
-
-<script>
-  //確認ダイアログ
-  function check(){
-    if(window.confirm('本当に削除しますか？')){
-      return true;
-    }
-    else{
-      window.alert('削除がキャンセルされました');
-      return false;
-    }
-  }
-</script>
