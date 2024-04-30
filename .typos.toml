@@ -1,17 +1,24 @@
-# 指定のディレクトリやファイルではスペルチェックを無効にします
+# スペルチェックを無効にするフォルダやファイルの設定
 [files]
 extend-exclude = [
   "*.svg",
   "node_modules",
   "vendor/**/*",
   "**/*.min.js",
-  "logs/**/*"
+  "logs/**/*",
+  "*.png",
+  "*.jpg",
+  "*.gif",
+  "*.ico",
+  "*.exe",
+  "build/**/*",
+  "dist/**/*"
 ]
+ignore-hidden = true # 隠しファイルを無視
+ignore-vcs = true    # バージョン管理システムのファイルを無視
 
-# 指定の拡張子のファイルではスペルチェックを無効にします
-[files.ignore]
-binary = ["*.png", "*.jpg", "*.gif", "*.ico", "*.exe"]
-
-# ビルドファイルのスペルチェックを無効にします
-[build]
-enabled = false
+# 一般設定
+[default]
+check-filename = true  # ファイル名のスペルチェックを有効
+check-file = true      # ファイル内容のスペルチェックを有効
+locale = "en-us"       # 英語のロケールをアメリカ英語に指定
