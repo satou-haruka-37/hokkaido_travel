@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    return if session[:user_id]
+    return if sesion[:user_id]
 
     redirect_to lets_login_path
   end
