@@ -5,9 +5,13 @@ extend-exclude = [
   "node_modules",
   "vendor/**/*",
   "**/*.min.js",
-  "logs/**/*"
+  "logs/**/*",
+  "*.png",
+  "*.jpg",
+  "*.gif",
+  "*.ico",
+  "*.exe"
 ]
-binary = ["*.png", "*.jpg", "*.gif", "*.ico", "*.exe"]
 
 # ビルドファイルのスペルチェックを無効にします
 [build]
