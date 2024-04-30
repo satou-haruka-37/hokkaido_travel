@@ -1,4 +1,4 @@
-# 指定のディレクトリやファイルではスペルチェックを無効にします
+# スペルチェックを無効にするフォルダやファイルの設定
 [files]
 extend-exclude = [
   "*.svg",
@@ -10,9 +10,15 @@ extend-exclude = [
   "*.jpg",
   "*.gif",
   "*.ico",
-  "*.exe"
+  "*.exe",
+  "build/**/*",
+  "dist/**/*"
 ]
+ignore-hidden = true # 隠しファイルを無視
+ignore-vcs = true    # バージョン管理システムのファイルを無視
 
-# ビルドファイルのスペルチェックを無効にします
-[build]
-enabled = false
+# 一般設定
+[default]
+check-filename = true  # ファイル名のスペルチェックを有効
+check-file = true      # ファイル内容のスペルチェックを有効
+locale = "en-us"       # 英語のロケールをアメリカ英語に指定
