@@ -7,9 +7,6 @@ extend-exclude = [
   "**/*.min.js",
   "logs/**/*"
 ]
-
-# 指定の拡張子のファイルではスペルチェックを無効にします
-[files.ignore]
 binary = ["*.png", "*.jpg", "*.gif", "*.ico", "*.exe"]
 
 # ビルドファイルのスペルチェックを無効にします
