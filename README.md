@@ -53,7 +53,7 @@ RUNTEQに入ってから、道外の人と話すことが多く、北海道で�
 - SNSシェア機能
 
 # 画面遷移図
-[画面遷移図](https://www.figma.com/file/1bu9uJrkJA8C3co6Cy6M6S/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0%3A1&mode=design&t=OwQoE9KWkLR1Z7BS-1)
+[画面遷移図](https://www.figma.com/design/tXgeYEeffOvOWLFiWhgpkl/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?t=F5xboX4glUlRCrb0-1)
 
 # ER図
 [ER図](https://drive.google.com/file/d/1VFlqP7LpmPeLeLxDNjfHq6Y78MS9qXYv/view?usp=sharing)
